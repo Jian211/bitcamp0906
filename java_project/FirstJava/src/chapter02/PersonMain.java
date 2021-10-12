@@ -4,7 +4,7 @@ public class PersonMain {
 	public static void main(String[] args) {
 		Person person = new Person();
 		
-		person.setMember("Áö¸í±Ù");
+		person.setMember("ì§€ëª…ê·¼");
 		person.setPhoneNumber("010-5014-3407");
 		person.setPersonalNumber(9999999999999L);
 		
