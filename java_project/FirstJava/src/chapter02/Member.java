@@ -1,42 +1,37 @@
 package chapter02;
 
 /*
- 	String Å¸ÀÔÀÇ ÀÌ¸§À» ÀúÀåÇÒ ¼ö ÀÖ´Â º¯¼ö nameÀ» Á¤ÀÇ
- 	int Å¸ÀÔÀÇ ³ªÀÌ¸¦ ÀúÀåÇÒ ¼ö ÀÖ´Â º¯¼ö age¸¦ Á¤ÀÇ
- 	double Å¸ÀÔÀÇ Å°¸¦ ÀúÀå ÇÒ ¼ö ÀÖ´Â º¯¼ö height¸¦ Á¤ÀÇ
- 	boolean Å¸ÀÔÀÇ JAVA Ã¥ÀÇ º¸À¯ ¿©ºÎ¸¦ ÀúÀåÇÒ ¼ö ÀÖ´Â º¯¼ö hasBook¸¦ Á¤ÀÇ
- 	ÀÌ¸§°ú ³ªÀÌ,Å°, Ã¥ÀÇ º¸À¯ ¿©ºÎ¸¦ Ãâ·ÂÇØº¾½Ã´Ù.
+ 	String Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ nameï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+ 	int Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ageï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+ 	double Å¸ï¿½ï¿½ï¿½ï¿½ Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ heightï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+ 	boolean Å¸ï¿½ï¿½ï¿½ï¿½ JAVA Ã¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ hasBookï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+ 	ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,Å°, Ã¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½Øºï¿½ï¿½Ã´ï¿½.
   
  */
 
 public class Member {
-	// ÀÎ½ºÅÏ½º º¯¼ö´Â ÀÚµ¿ ÃÊ±âÈ­ 
-	private String name; 		// »ç¿ëÀÚÀÇ ÀÌ¸§
-	private int age;			// »ç¿ëÀÚÀÇ ³ªÀÌ
-	private double height;		// »ç¿ëÀÚÀÇ Å°
-	//private boolean hasBook;	// ÀÚ¹Ù Ã¥ º¸À¯¿©ºÎ
+	private String name; 		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
+	private int age;			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	private double height;		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å°
 	
 	void printData() {
-		System.out.println("ÀÌ¸§: "+name);
-		System.out.println("³ªÀÌ: "+age);
+		System.out.println("ï¿½Ì¸ï¿½: "+name);
+		System.out.println("ï¿½ï¿½ï¿½ï¿½: "+age);
 		System.out.println(" Å°: "+height);
-		//System.out.println("Ã¥º¸À¯: "+hasBook);
+		//System.out.println("Ã¥ï¿½ï¿½ï¿½ï¿½: "+hasBook);
 	}
 	
 	public static void main(String[] args) {
-		// Member Å¬·¡½º·Î ÀÎ½ºÅÏ½º¸¦ »ı¼º > ÀÌ¸§, ³ªÀÌ, Å° ,Ã¥ ¤²
 		Member member = new Member();
 		
-		// ÀÎ½ºÅÏ½ºÀÇ º¯¼ö¸¦ ÂüÁ¶ÇØ¼­ Ãâ·ÂÇØº¸ÀÚ
 		member.printData();
 		
-		// ÀÎ½ºÅÏ½º º¯¼öÀÇ °ªÀ» º¯°æ
-		member.name = "Áö¸í±Ù";
+		member.name = "ï¿½ï¿½ï¿½ï¿½ï¿½";
 		member.age = 29;
 		member.height = 175.0;
 		//member.hasBook = false;
 		
-		System.out.println("\nÀÎ½ºÅÏ½º º¯¼ö¿¡ °ªÀ» º¯°æ\n");
+		System.out.println("\nï¿½Î½ï¿½ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½\n");
 		
 		member.printData();
 	}
