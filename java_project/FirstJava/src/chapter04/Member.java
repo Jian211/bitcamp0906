@@ -19,12 +19,42 @@ public class Member {
 	int age;
 	
 	Member(){};
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getBirthYear() {
+		return birthYear;
+	}
+
+	public void setBirthYear(int birthYear) {
+		this.birthYear = birthYear;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
 	Member(String name, int year) {
-		name = name;
+		this.name = name;
 		birthYear = year;
 		age = ageCal();
 	}
 
+	void printAll() {
+		System.out.println(name);
+		System.out.println(birthYear);
+		System.out.println(age);
+	}
 	void vaccination() {
 		
 		int age = ageCal();
@@ -60,10 +90,11 @@ public class Member {
 	}
 	
 	public static void main(String[] args) {
-		Member member = new Member("손흥민",2000);
+		Member member1 = new Member();
+		Member member2 = new Member("손흥민",2000);
 		
+		member1.printAll();
+		member2.printAll();
 		
-		//member.vaccination(2000);
-		//member.checkup(2000);
 	}
 }
