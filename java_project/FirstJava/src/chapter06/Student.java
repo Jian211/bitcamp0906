@@ -61,7 +61,7 @@ public class Student {
 					s.getName(),
 					s.getKor(),
 					s.getEng(),
-					s.getEng(),
+					s.getMath(),
 					s.total(),
 					s.avg());
 			System.out.println();
