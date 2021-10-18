@@ -4,60 +4,48 @@ import java.util.Scanner;
 
 public class SmartPhone {
 	public static final Scanner sc = new Scanner(System.in);
-	
+	private Contact [] arr;
+	private int cnt;
 	// Contact 클래스의 인스턴스 10개를 저장할 수 있는 배열을 정의
-	Contact [] arr = new Contact[10];
-	
+	public SmartPhone() {
+		arr = new Contact[10];
+		cnt = 0;
+	}
 	
 	// 배열에 인스턴스를 저장
 	// + 비어있는 인덱스에 저장  > 인덱스 추출 메소드 생성
-	void insertData() {
-		if(arr[9] != null) {
+	public void insertData(Contact c) {
+		arr[cnt++] = c;
+	}
+	
+	public void insertData() {
+		if(cnt >= 9) {
 			System.out.println("저장공간이 부족합니다.");
 		} else {
-			Contact temp = new Contact();
 			System.out.println("이름을 입력해주세요.");
-			temp.setName(sc.nextLine());
+			String name = sc.nextLine();
 
 			System.out.println("이메일을 입력해주세요.");
-			temp.setEmail(sc.nextLine());
+			String email = sc.nextLine();
 
 			System.out.println("핸드폰 번호를 입력해주세요.");
-			temp.setPhoneNumber(sc.nextLine());
-
-			System.out.println("생일을 입력해주세요.");
-			temp.setBirthDay(Integer.parseInt(sc.nextLine()));
-
-			System.out.println("주소를 입력해주세요.");
-			temp.setAdress(sc.nextLine());
+			String phoneNumber = sc.nextLine();
 			
-			if(getEmptyIndex() == -1) {
-				arr[0] = temp;
-			} else {
-				arr[getEmptyIndex()-1] = temp;
-			}
+			System.out.println("생일을 입력해주세요.");
+			int birthDay = Integer.parseInt(sc.nextLine());
+			
+			System.out.println("주소를 입력해주세요.");
+			String adress = sc.nextLine();
+
+			System.out.println("그룹을 입력해주세요.");
+			int group = Integer.parseInt(sc.nextLine());
+			
+			insertData(new Contact(name, phoneNumber, email, adress, birthDay, group));
 		}
-	}
-	private void insertDate(int index) {
-
-		System.out.println("이름을 입력해주세요.");
-		arr[index].setName(sc.nextLine());
-
-		System.out.println("이메일을 입력해주세요.");
-		arr[index].setEmail(sc.nextLine());
-
-		System.out.println("핸드폰 번호를 입력해주세요.");
-		arr[index].setPhoneNumber(sc.nextLine());
-
-		System.out.println("생일을 입력해주세요.");
-		arr[index].setBirthDay(Integer.parseInt(sc.nextLine()));
-
-		System.out.println("주소를 입력해주세요.");
-		arr[index].setAdress(sc.nextLine());
 	}
 	
 	public void editData() {
-		if(checkNull()) {
+		if(arr[0] == null) {
 			System.out.println("저장된 데이터가 없습니다.\n새로운데이터를 추가해주세요.");
 		} else {
 			System.out.println("수정하시려는 이름을 입력해주세요.");
@@ -68,7 +56,23 @@ public class SmartPhone {
 			if(index == -1) {
 				System.out.println("아이디의 정보가 없습니다.");
 			} else {
-				insertDate(index);
+				System.out.println("이름을 입력해주세요.");
+				arr[index].setName(sc.nextLine());
+				
+				System.out.println("이메일을 입력해주세요.");
+				arr[index].setEmail(sc.nextLine());
+				
+				System.out.println("핸드폰 번호를 입력해주세요.");
+				arr[index].setPhoneNumber(sc.nextLine());
+				
+				System.out.println("생일을 입력해주세요.");
+				arr[index].setBirthDay(Integer.parseInt(sc.nextLine()));
+				
+				System.out.println("주소를 입력해주세요.");
+				arr[index].setAdress(sc.nextLine());
+				
+				System.out.println("그룹을 입력해주세요.");
+				arr[index].setGroup(Integer.parseInt(sc.nextLine()));
 			}
 		}
 		
@@ -87,25 +91,8 @@ public class SmartPhone {
 		return index;
 	}
 	
-	private int getEmptyIndex() {
-		int index = -1;
-		for (int i = 0; i < arr.length; i++) {
-			if(arr[i] != null) {	
-				index = i;
-			}
-		}
-		return index;
-	}
-	//배열 비었는지 확인
-	private boolean checkNull() {
-		if(arr[0] == null) {
-			return true;
-		}
-		return false;
-	}
-	
 	public void removeData() {
-		if(checkNull()) {
+		if(arr[0] == null) {
 			System.out.println("저장된 데이터가 없습니다.");
 		} else {
 			System.out.println("삭제하시려는 이름을 입력해주세요.");
@@ -116,8 +103,7 @@ public class SmartPhone {
 			if(index == -1) {
 				System.out.println("아이디의 정보가 없습니다.");
 			} else {
-				int lenght = getEmptyIndex() -1;  // 값이 있는 배열의 길이
-				for (int i = index; i < lenght-1; i++) {
+				for (int i = index; i < cnt; i++) {
 					arr[i] = arr[i+1];
 				}
 				System.out.println("삭제되었습니다.");
@@ -127,12 +113,15 @@ public class SmartPhone {
 	}
 	
 	public void showData() {
-		if(checkNull()) {
+		if(arr[0] == null) {
 			System.out.println("저장된 데이터가 없습니다.");
 		} else {
-			for (int i = 0; i < getEmptyIndex(); i++) {
+			System.out.println("=========================");
+			for (int i = 0; i < cnt; i++) {
 				arr[i].print();
+				System.out.println("----------------------");
 			}
+			System.out.println("=========================");
 		}
 	}
 	
