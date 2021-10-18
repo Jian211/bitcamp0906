@@ -1,4 +1,4 @@
-package project1;
+package project02;
 
 public class Contact {
 
