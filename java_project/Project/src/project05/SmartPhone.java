@@ -38,9 +38,12 @@ public class SmartPhone {
 			System.out.println("이름을 입력해주세요.");
 			String name = sc.nextLine();
 			
-			if(blackChk(name)) {
+			while(blackChk(name)) {
 				System.out.println("공백없이 입력해주시기 바랍니다.");
-				return;
+				name = sc.nextLine();
+				if(!blackChk(name)) {
+					break;
+				}
 			}
 			
 			System.out.println("이메일을 입력해주세요.");
@@ -99,9 +102,12 @@ public class SmartPhone {
 		System.out.println("수정하시려는 이름을 입력해주세요.");
 			
 		String name = sc.nextLine();
-		if(blackChk(name)) {
+		while(blackChk(name)) {
 			System.out.println("공백없이 입력해주시기 바랍니다.");
-			return;
+			name = sc.nextLine();
+			if(!blackChk(name)) {
+				break;
+			}
 		}
 		
 		int index = searchIndex(name);
