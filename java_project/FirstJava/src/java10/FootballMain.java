@@ -14,7 +14,7 @@ public class FootballMain {
 	public static void main(String[] args) {
 		System.out.println("1. ===============================");
 		// 1. 축구선수 인스턴스를 저장할 수 있는 List<E> 컬렉션 인스턴스를 생성
-		List<FootballPlayer> fbplayerList = new ArrayList<>();
+		List<FootballPlayer> fbplayerList = new ArrayList<FootballPlayer>();
 
 		// 저장하고 출력하는 프로그램 만들기
 		fbplayerList.add(new FootballPlayer("손흥민",7,"토트넘",28));		
@@ -34,6 +34,9 @@ public class FootballMain {
 		// set<E> 컬렉션을 이용해서 축구선수 인스턴스를 저장하고 출력하는 프로그램을 만들어봅시다.
 		
 		Set<FootballPlayer> set = new HashSet<FootballPlayer>();
+		
+		// 데이터 저장
+		// 중복 체크 : hashCode() -> 같다면 -> equals()
 		
 		set.add(new FootballPlayer("손흥민",7,"토트넘",28));		
 		set.add(new FootballPlayer("황희찬",26,"울버햄튼",24));		
@@ -82,6 +85,10 @@ public class FootballMain {
 		map.put(31, new FootballPlayer("박지성",31,"맨체스터",42));
 
 		System.out.println("map.size() "+map.size());
+		
+		for(Integer i : map.keySet()) {
+			System.out.println(map.get(i));
+		}
 		
 		for(Map.Entry<Integer, FootballPlayer> e : map.entrySet()) {
 			System.out.println("("+e.getKey()+","+e.getValue()+")");

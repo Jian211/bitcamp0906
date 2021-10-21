@@ -25,6 +25,7 @@ public class FootballPlayer implements Comparable<FootballPlayer>{
 	@Override
 	public boolean equals(Object obj) {
 		boolean result = false;
+		
 		FootballPlayer fb = (FootballPlayer) obj;
 		if(this.name.equals(fb.name) 
 				&& this.age == fb.age 
@@ -43,20 +44,17 @@ public class FootballPlayer implements Comparable<FootballPlayer>{
 	@Override
 	public int compareTo(FootballPlayer o) {
 		// 팀 이름순으로 정렬
-		if(team.compareTo(o.team) == 0) {
-			// 이름순으로 정렬
-			if(name.compareTo(o.name) == 0) {
-				// 번호순으로 정렬
-				if(number < o.number) {
-					return 1;
-				}
+		
+		int result = this.team.compareTo(o.team); // 음수 ,양수, 0
+		
+		if(result == 0) {
+			result = this.name.compareTo(o.name);
+			if(result == 0) {
+				result = this.number - o.number;
 			}
-		}else if(team.compareTo(o.team) > 0){
-			return 1;
-		}else if(team.compareTo(o.team) < 0) {
-			return -1;
 		}
-		return 0;
+
+		return result;
 	}
 	
 	
