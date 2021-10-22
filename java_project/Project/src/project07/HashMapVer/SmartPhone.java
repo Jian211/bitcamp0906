@@ -1,88 +1,79 @@
-package project06;
+package project07.HashMapVer;
 
-/*
-	SmartPhone 클래스에 있는 배열의 타입이 추상클래스로 되어도 문제가 없는 것을 확인 
-*/
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Scanner;
+import java.util.Set;
+
 
 public class SmartPhone {
 	public static final Scanner sc = new Scanner(System.in);
 	
-	private Contact [] arr;			//  Contact타입의 인스턴스를 저장하는 배열 선언
-	private int cnt;				//	저장된 Contact타입의 인스턴스 개수, 배열의 index로 사용.
-	
+	private HashMap<Integer, Contact> arr;
+	private int cnt = 0;
 	private String regexName = "[a-zA-Z가-힣]+";										// 유저 이름  규칙정의
 	private String regexPhoneNumber = "[0-9]{2,3}[ -]*[0-9]{3,4}[ -]*[0-9]{4}";		// 유저 핸드폰번호  규칙정의
 	
 	public SmartPhone() {
-		this(10);
-	}
-	
-	public SmartPhone(int size) {
-		arr = new Contact[size];
-		cnt = 0;
+		arr = new HashMap<Integer, Contact>();
 	}
 	
 	// 배열에 요소를 추가하는 메소드 : 참조값을 전달 받아 배열에 추가하는 기능
 	public void insertData(Contact c) {
-		arr[cnt++] = c;
+		arr.put(cnt++, c);
 	}
 	
 	// 사용자로 부터 데이터를 받아 Contact 객체를 생성하고 배열에 참조값을 저장하는 기능
 	public void insertDataInfo() {
-		if(cnt >= 9) {
-			System.out.println("저장공간이 부족합니다.");
-		} else {
-			System.out.println("거래처회사를 생성하시려면 1번, 회사의 데이터를 생성하시려면 2번을 입력하세요.");
-			int userChoice = Integer.parseInt(sc.nextLine());
+		System.out.println("거래처회사를 생성하시려면 1번, 회사의 데이터를 생성하시려면 2번을 입력하세요.");
+		int userChoice = Integer.parseInt(sc.nextLine());
 
-			System.out.println("이름을 입력해주세요.");
-			String name = nameChk(sc.nextLine());
-			
-			System.out.println("이메일을 입력해주세요.");
-			String email = sc.nextLine();
-			
-			System.out.println("핸드폰 번호를 입력해주세요.");
-			String phoneNumber = phoneFormChk(sc.nextLine()); // 번호예외처리
-			
-			if(phoneNumberChk(phoneNumber)) { // 번호중복예외처리
-				return;
-			}
-			
-			System.out.println("생일을 입력해주세요.");
-			int birthDay = Integer.parseInt(sc.nextLine());
-			
-			System.out.println("주소를 입력해주세요.");
-			String adress = sc.nextLine();
-			
-			System.out.println("그룹을 입력해주세요.");
-			String group = sc.nextLine();
-			
-			if(userChoice == 1) {
-				System.out.println("회사를 입력해주세요.");
-				String company = sc.nextLine();
-
-				System.out.println("거래 품목을 입력해주세요.");
-				String item = sc.nextLine();
-				
-				System.out.println("직급을 입력해주세요.");
-				String rank = sc.nextLine();
-				
-				insertData(new CustomerContact(name, phoneNumber, email, adress, birthDay, group, company, item, rank));
-			} else {
-				System.out.println("회사를 입력해주세요.");
-				String company = sc.nextLine();
-
-				System.out.println("부서를 입력해주세요.");
-				String department = sc.nextLine();
-				
-				System.out.println("직급을 입력해주세요.");
-				String rank = sc.nextLine();
-				
-				insertData(new CompanyContact(name, phoneNumber, email, adress, birthDay, group, company, department, rank));
-			}
-			
+		System.out.println("이름을 입력해주세요.");
+		String name = nameChk(sc.nextLine());
+		
+		System.out.println("이메일을 입력해주세요.");
+		String email = sc.nextLine();
+		
+		System.out.println("핸드폰 번호를 입력해주세요.");
+		String phoneNumber = phoneFormChk(sc.nextLine()); // 번호예외처리
+		
+		if(phoneNumberChk(phoneNumber)) { // 번호중복예외처리
+			return;
 		}
+		
+		System.out.println("생일을 입력해주세요.");
+		int birthDay = Integer.parseInt(sc.nextLine());
+		
+		System.out.println("주소를 입력해주세요.");
+		String adress = sc.nextLine();
+		
+		System.out.println("그룹을 입력해주세요.");
+		String group = sc.nextLine();
+		
+		if(userChoice == 1) {
+			System.out.println("회사를 입력해주세요.");
+			String company = sc.nextLine();
+
+			System.out.println("거래 품목을 입력해주세요.");
+			String item = sc.nextLine();
+			
+			System.out.println("직급을 입력해주세요.");
+			String rank = sc.nextLine();
+			
+			insertData(new CustomerContact(name, phoneNumber, email, adress, birthDay, group, company, item, rank));
+		} else {
+			System.out.println("회사를 입력해주세요.");
+			String company = sc.nextLine();
+
+			System.out.println("부서를 입력해주세요.");
+			String department = sc.nextLine();
+			
+			System.out.println("직급을 입력해주세요.");
+			String rank = sc.nextLine();
+			
+			insertData(new CompanyContact(name, phoneNumber, email, adress, birthDay, group, company, department, rank));
+		}
+		
 	}
 	
 	//이름으로 검색 > 데이터 수정 : 수정할 데이터를 받아서 처리
@@ -281,15 +272,21 @@ public class SmartPhone {
 		return false;
 	}
 	
+	
+	// 핸드폰 번호 중복체크
 	public boolean phoneNumberChk(String number) {
-		for (int i = 0; i < cnt; i++) {
-			if(arr[i].getPhoneNumber().equals(number)){
+		boolean result = false;
+		Set<Integer> set = arr.keySet();
+		Iterator<Integer> itr = set.iterator();
+		
+		while(itr.hasNext()) {
+			if(arr.get(itr.next()).getPhoneNumber().equals(number)) {
 				System.out.println("이미 존재하는 번호입니다.");
-				return true;
+				result = true;
+				break;
 			}
 		}
-		
-		return false;
+		return result;
 	}
 	
 }

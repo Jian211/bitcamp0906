@@ -1,5 +1,6 @@
-package project06;
+package project07.ListVer;
 
+import java.util.ArrayList;
 /*
 	SmartPhone 클래스에 있는 배열의 타입이 추상클래스로 되어도 문제가 없는 것을 확인 
 */
@@ -8,8 +9,7 @@ import java.util.Scanner;
 public class SmartPhone {
 	public static final Scanner sc = new Scanner(System.in);
 	
-	private Contact [] arr;			//  Contact타입의 인스턴스를 저장하는 배열 선언
-	private int cnt;				//	저장된 Contact타입의 인스턴스 개수, 배열의 index로 사용.
+	private ArrayList<Contact> arr;
 	
 	private String regexName = "[a-zA-Z가-힣]+";										// 유저 이름  규칙정의
 	private String regexPhoneNumber = "[0-9]{2,3}[ -]*[0-9]{3,4}[ -]*[0-9]{4}";		// 유저 핸드폰번호  규칙정의
@@ -19,91 +19,90 @@ public class SmartPhone {
 	}
 	
 	public SmartPhone(int size) {
-		arr = new Contact[size];
-		cnt = 0;
+		arr = new ArrayList<Contact>();
+		arr.add(new CustomerContact("케인", "01061286457","kain@gmail.com", "KOREA", 19890621, "TOM", "SOCCER", "ATT","TOP"));
+		arr.add(new CustomerContact("알리", "07056849874","alie@gmail.com", "INCHEN", 19901221, "TOM", "SOCCER", "MID","third"));
+		arr.add(new CompanyContact("베르바인", "02164799955","Vbain@gmail.com", "DOKYO", 19950723, "TOM", "SOCCER", "ATT","third"));
+		arr.add(new CompanyContact("탕탕가", "05698745515","tantan@gmail.com", "BUSAN", 19970327, "TOM", "SOCCER", "DEF","second"));
 	}
 	
 	// 배열에 요소를 추가하는 메소드 : 참조값을 전달 받아 배열에 추가하는 기능
 	public void insertData(Contact c) {
-		arr[cnt++] = c;
+		arr.add(c);
 	}
 	
 	// 사용자로 부터 데이터를 받아 Contact 객체를 생성하고 배열에 참조값을 저장하는 기능
 	public void insertDataInfo() {
-		if(cnt >= 9) {
-			System.out.println("저장공간이 부족합니다.");
-		} else {
-			System.out.println("거래처회사를 생성하시려면 1번, 회사의 데이터를 생성하시려면 2번을 입력하세요.");
-			int userChoice = Integer.parseInt(sc.nextLine());
+		System.out.println("거래처회사를 생성하시려면 1번, 회사의 데이터를 생성하시려면 2번을 입력하세요.");
+		int userChoice = Integer.parseInt(sc.nextLine());
 
-			System.out.println("이름을 입력해주세요.");
-			String name = nameChk(sc.nextLine());
-			
-			System.out.println("이메일을 입력해주세요.");
-			String email = sc.nextLine();
-			
-			System.out.println("핸드폰 번호를 입력해주세요.");
-			String phoneNumber = phoneFormChk(sc.nextLine()); // 번호예외처리
-			
-			if(phoneNumberChk(phoneNumber)) { // 번호중복예외처리
-				return;
-			}
-			
-			System.out.println("생일을 입력해주세요.");
-			int birthDay = Integer.parseInt(sc.nextLine());
-			
-			System.out.println("주소를 입력해주세요.");
-			String adress = sc.nextLine();
-			
-			System.out.println("그룹을 입력해주세요.");
-			String group = sc.nextLine();
-			
-			if(userChoice == 1) {
-				System.out.println("회사를 입력해주세요.");
-				String company = sc.nextLine();
-
-				System.out.println("거래 품목을 입력해주세요.");
-				String item = sc.nextLine();
-				
-				System.out.println("직급을 입력해주세요.");
-				String rank = sc.nextLine();
-				
-				insertData(new CustomerContact(name, phoneNumber, email, adress, birthDay, group, company, item, rank));
-			} else {
-				System.out.println("회사를 입력해주세요.");
-				String company = sc.nextLine();
-
-				System.out.println("부서를 입력해주세요.");
-				String department = sc.nextLine();
-				
-				System.out.println("직급을 입력해주세요.");
-				String rank = sc.nextLine();
-				
-				insertData(new CompanyContact(name, phoneNumber, email, adress, birthDay, group, company, department, rank));
-			}
-			
+		System.out.println("이름을 입력해주세요.");
+		String name = nameChk(sc.nextLine());
+		
+		System.out.println("이메일을 입력해주세요.");
+		String email = sc.nextLine();
+		
+		System.out.println("핸드폰 번호를 입력해주세요.\nex 01012345678");
+		String phoneNumber = phoneFormChk(sc.nextLine()); // 번호예외처리
+		
+		if(phoneNumberChk(phoneNumber)) { // 번호중복예외처리
+			System.out.println("중복된 번호가 입력되었습니다. 처음부터 다시입력해주세요.");
+			return;
 		}
+		
+		System.out.println("생일을 입력해주세요.");
+		int birthDay = Integer.parseInt(sc.nextLine());
+		
+		System.out.println("주소를 입력해주세요.");
+		String adress = sc.nextLine();
+		
+		System.out.println("그룹을 입력해주세요.");
+		String group = sc.nextLine();
+		
+		if(userChoice == 1) {
+			System.out.println("회사를 입력해주세요.");
+			String company = sc.nextLine();
+
+			System.out.println("거래 품목을 입력해주세요.");
+			String item = sc.nextLine();
+			
+			System.out.println("직급을 입력해주세요.");
+			String rank = sc.nextLine();
+			
+			insertData(new CustomerContact(name, phoneNumber, email, adress, birthDay, group, company, item, rank));
+		} else {
+			System.out.println("회사를 입력해주세요.");
+			String company = sc.nextLine();
+
+			System.out.println("부서를 입력해주세요.");
+			String department = sc.nextLine();
+			
+			System.out.println("직급을 입력해주세요.");
+			String rank = sc.nextLine();
+			
+			insertData(new CompanyContact(name, phoneNumber, email, adress, birthDay, group, company, department, rank));
+		}
+			
 	}
 	
 	//이름으로 검색 > 데이터 수정 : 수정할 데이터를 받아서 처리
 	public void editDataInfo() {
-		if(arr[0] == null) {
+		if(arr.size() == 0) {
 			System.out.println("저장된 데이터가 없습니다.\n새로운데이터를 추가해주세요.");
 			return;
 		} 
 		
 		System.out.println("수정하시려는 이름을 입력해주세요.");
-
+		
 		String name = nameChk(sc.nextLine());
-		
 		int index = searchIndex(name);
-		
 		if(index < 0 ) {
 			System.out.println("찾으시는 "+name+"의 정보가 존재하지 않습니다.");
 		} else {
 			System.out.println("데이터 수정을 위해 각각의 요소를 입력해주세요.");
-			if(arr[index] instanceof CustomerContact) {
-				CustomerContact temp = (CustomerContact)arr[index];
+			
+			if(arr.get(index) instanceof CustomerContact) {
+				CustomerContact temp = (CustomerContact)arr.get(index);
 				System.out.println("이름을 입력해주세요.");
 				temp.setName(nameChk(sc.nextLine()));
 				
@@ -134,8 +133,11 @@ public class SmartPhone {
 
 				System.out.println("직급을 입력해주세요.");
 				temp.setRank(sc.nextLine());
+				
+				insertData(temp);
+				
 			} else {
-				CompanyContact temp = (CompanyContact)arr[index];
+				CompanyContact temp = (CompanyContact)arr.get(index);
 				System.out.println("이름을 입력해주세요.");
 				temp.setName(sc.nextLine());
 				
@@ -172,18 +174,18 @@ public class SmartPhone {
 	//매개변수(name)로 배열 안에 있는 name들 중 같은 것을 찾아 인덱스 반환
 	private int searchIndex(String name) {
 		int index = -1;
-		for (int i = 0; i < cnt; i++) {
-			if(arr[i].getName().equals(name)){
-				index = i;
+		
+		for(Contact c : arr) {
+			if(c.getName().equals(name)) {
+				index = arr.indexOf(c);
 				break;
 			}
 		}
-		
 		return index;
 	}
 	
 	public void removeDataInfo() {
-		if(arr[0] == null) {
+		if(arr.size() == 0 ) {
 			System.out.println("저장된 데이터가 없습니다.");
 		} else {
 			System.out.println("데이터를 삭제를 시작하겠습니다. ");
@@ -196,33 +198,26 @@ public class SmartPhone {
 			if(index < 0) {
 				System.out.println("삭제하려고하는 "+name + "의 정보가 없습니다.");
 			} else {
-				removeData(index);
+				arr.remove(index);
 				System.out.println(name +"이 삭제되었습니다.");
 			}
 		}
 	}
-	private void removeData(int index) {
-		arr[index] = null;
-		for (int i = index; i < cnt-1; i++) {
-			arr[i] = arr[i+1];
-		}
-		cnt--;
-	}
 	
 	public void showData() {
-		if(arr[0] == null) {
+		if(arr.size() == 0) {
 			System.out.println("저장된 데이터가 없습니다.");
 		} else {
-			System.out.println("=========================");
-			for (int i = 0; i < cnt; i++) {
-				arr[i].print();
+			for(Contact c : arr) {
+				System.out.println("=========================");
+				c.print();
+				System.out.println("=========================");
 			}
-			System.out.println("=========================");
 		}
 	}
 
 	public void searchDataInfo() {
-		if(arr[0] == null) {
+		if(arr.size() == 0) {
 			System.out.println("저장된 데이터가 없습니다.");
 		} else {
 			System.out.println("검색하시려는 이름을 입력해주세요.");
@@ -230,10 +225,10 @@ public class SmartPhone {
 			
 			int index = searchIndex(name);
 			
-			if(index == -1) {
+			if(index < 0) {
 				System.out.println("해당 데이터는 존재하지않습니다.");
 			} else {
-				arr[index].print();
+				arr.get(index).print();
 			}
 		}
 	}
@@ -282,14 +277,14 @@ public class SmartPhone {
 	}
 	
 	public boolean phoneNumberChk(String number) {
-		for (int i = 0; i < cnt; i++) {
-			if(arr[i].getPhoneNumber().equals(number)){
+		boolean result = false;
+		for(Contact cn : arr) {
+			if(cn.getPhoneNumber().equals(number)) {
 				System.out.println("이미 존재하는 번호입니다.");
-				return true;
+				result = true;
 			}
 		}
-		
-		return false;
+		return result;
 	}
 	
 }

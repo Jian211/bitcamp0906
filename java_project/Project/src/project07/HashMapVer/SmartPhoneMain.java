@@ -1,4 +1,4 @@
-package project06;
+package project07.HashMapVer;
 
 public class SmartPhoneMain {
 
