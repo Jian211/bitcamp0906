@@ -85,10 +85,9 @@ public class SmartPhone {
 		System.out.println("수정하시려는 이름을 입력해주세요.");
 
 		String name = nameChk(sc.nextLine());
-		int index = searchIndex(name);
 		
-		if(arr.get(name) == null ) {
-			System.out.println("찾으시는 "+name+"의 정보가 존재하지 않습니다.");
+		if(!arr.get(name).getName().equals(name)) {
+			System.out.println("찾으시는분의 정보가 존재하지 않습니다.");
 		} else {
 			System.out.println("데이터 수정을 위해 각각의 요소를 입력해주세요.");
 				
@@ -128,35 +127,22 @@ public class SmartPhone {
 				
 			} else {
 				System.out.println("회사를 입력해주세요.");
-				temp.setCompany(sc.nextLine());
+				String company = sc.nextLine();
 
 				System.out.println("부서를 입력해주세요.");
-				temp.setDepartment(sc.nextLine());
+				String department = sc.nextLine();
 
 				System.out.println("직급을 입력해주세요.");
-				temp.setRank(sc.nextLine());
+				String rank = sc.nextLine();
 				
-				insertData(temp);
+				arr.replace(name, new CustomerContact(name1, phoneNumber, email, address, birth, group, company, department, rank));
 			}
 		}
 		
-	}
-	
-	//매개변수(name)로 배열 안에 있는 name들 중 같은 것을 찾아 인덱스 반환
-	private int searchIndex(String name) {
-		int index = -1;
-		for (int i = 0; i < cnt; i++) {
-			if(arr[i].getName().equals(name)){
-				index = i;
-				break;
-			}
-		}
-		
-		return index;
 	}
 	
 	public void removeDataInfo() {
-		if(arr[0] == null) {
+		if(arr.isEmpty()) {
 			System.out.println("저장된 데이터가 없습니다.");
 		} else {
 			System.out.println("데이터를 삭제를 시작하겠습니다. ");
@@ -164,49 +150,39 @@ public class SmartPhone {
 
 			String name = sc.nextLine();
 			
-			int index = searchIndex(name);
-			
-			if(index < 0) {
+			if(!arr.get(name).getName().equals(name)) {
 				System.out.println("삭제하려고하는 "+name + "의 정보가 없습니다.");
 			} else {
-				removeData(index);
+				arr.remove(name);
 				System.out.println(name +"이 삭제되었습니다.");
 			}
 		}
 	}
-	private void removeData(int index) {
-		arr[index] = null;
-		for (int i = index; i < cnt-1; i++) {
-			arr[i] = arr[i+1];
-		}
-		cnt--;
-	}
 	
 	public void showData() {
-		if(arr[0] == null) {
+		if(arr.isEmpty()) {
 			System.out.println("저장된 데이터가 없습니다.");
 		} else {
 			System.out.println("=========================");
-			for (int i = 0; i < cnt; i++) {
-				arr[i].print();
+			Iterator<String> itr = arr.keySet().iterator();
+			while(itr.hasNext()) {
+				arr.get(itr.next()).print();
 			}
 			System.out.println("=========================");
 		}
 	}
 
 	public void searchDataInfo() {
-		if(arr[0] == null) {
+		if(arr.isEmpty()) {
 			System.out.println("저장된 데이터가 없습니다.");
 		} else {
 			System.out.println("검색하시려는 이름을 입력해주세요.");
 			String name = sc.nextLine();
 			
-			int index = searchIndex(name);
-			
-			if(index == -1) {
+			if(arr.get(name) == null) {
 				System.out.println("해당 데이터는 존재하지않습니다.");
 			} else {
-				arr[index].print();
+				arr.get(name).print();
 			}
 		}
 	}
@@ -258,8 +234,7 @@ public class SmartPhone {
 	// 핸드폰 번호 중복체크
 	public boolean phoneNumberChk(String number) {
 		boolean result = false;
-		Set<Integer> set = arr.keySet();
-		Iterator<Integer> itr = set.iterator();
+		Iterator<String> itr = arr.keySet().iterator();
 		
 		while(itr.hasNext()) {
 			if(arr.get(itr.next()).getPhoneNumber().equals(number)) {
