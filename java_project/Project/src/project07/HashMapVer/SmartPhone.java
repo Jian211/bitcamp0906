@@ -9,18 +9,17 @@ import java.util.Set;
 public class SmartPhone {
 	public static final Scanner sc = new Scanner(System.in);
 	
-	private HashMap<Integer, Contact> arr;
-	private int cnt = 0;
+	private HashMap<String, Contact> arr;
 	private String regexName = "[a-zA-Z가-힣]+";										// 유저 이름  규칙정의
 	private String regexPhoneNumber = "[0-9]{2,3}[ -]*[0-9]{3,4}[ -]*[0-9]{4}";		// 유저 핸드폰번호  규칙정의
 	
 	public SmartPhone() {
-		arr = new HashMap<Integer, Contact>();
+		arr = new HashMap<String, Contact>();
 	}
 	
 	// 배열에 요소를 추가하는 메소드 : 참조값을 전달 받아 배열에 추가하는 기능
 	public void insertData(Contact c) {
-		arr.put(cnt++, c);
+		arr.put(c.getName(), c);
 	}
 	
 	// 사용자로 부터 데이터를 받아 Contact 객체를 생성하고 배열에 참조값을 저장하는 기능
@@ -34,7 +33,7 @@ public class SmartPhone {
 		System.out.println("이메일을 입력해주세요.");
 		String email = sc.nextLine();
 		
-		System.out.println("핸드폰 번호를 입력해주세요.");
+		System.out.println("핸드폰 번호를 입력해주세요.\nex > 01050143407");
 		String phoneNumber = phoneFormChk(sc.nextLine()); // 번호예외처리
 		
 		if(phoneNumberChk(phoneNumber)) { // 번호중복예외처리
@@ -78,7 +77,7 @@ public class SmartPhone {
 	
 	//이름으로 검색 > 데이터 수정 : 수정할 데이터를 받아서 처리
 	public void editDataInfo() {
-		if(arr[0] == null) {
+		if(arr.isEmpty()) {
 			System.out.println("저장된 데이터가 없습니다.\n새로운데이터를 추가해주세요.");
 			return;
 		} 
@@ -86,65 +85,48 @@ public class SmartPhone {
 		System.out.println("수정하시려는 이름을 입력해주세요.");
 
 		String name = nameChk(sc.nextLine());
-		
 		int index = searchIndex(name);
 		
-		if(index < 0 ) {
+		if(arr.get(name) == null ) {
 			System.out.println("찾으시는 "+name+"의 정보가 존재하지 않습니다.");
 		} else {
 			System.out.println("데이터 수정을 위해 각각의 요소를 입력해주세요.");
-			if(arr[index] instanceof CustomerContact) {
-				CustomerContact temp = (CustomerContact)arr[index];
-				System.out.println("이름을 입력해주세요.");
-				temp.setName(nameChk(sc.nextLine()));
 				
-				System.out.println("이메일을 입력해주세요.");
-				temp.setEmail(sc.nextLine());
-				
-				System.out.println("핸드폰 번호를 입력해주세요.\nex : 000-0000-0000");
-				String phoneNumber = phoneFormChk(sc.nextLine()); // 번호예외처리
-				if(phoneNumberChk(phoneNumber)) { 				  // 번호중복예외처리
-					return;
-				}
-				temp.setPhoneNumber(phoneNumber);
-				
-				System.out.println("생일을 입력해주세요.");
-				temp.setBirthDay(Integer.parseInt(sc.nextLine()));
-				
-				System.out.println("주소를 입력해주세요.");
-				temp.setAdress(sc.nextLine());
-				
-				System.out.println("그룹을 입력해주세요.");
-				temp.setGroup(sc.nextLine());
+			System.out.println("이름을 입력해주세요.");
+			String name1 = nameChk(sc.nextLine());
+			
+			System.out.println("이메일을 입력해주세요.");
+			String email = sc.nextLine();
+			
+			System.out.println("핸드폰 번호를 입력해주세요.\nex : 000-0000-0000");
+			String phoneNumber = phoneFormChk(sc.nextLine()); // 번호예외처리
+			if(phoneNumberChk(phoneNumber)) { 				  // 번호중복예외처리
+				return;
+			}
+			
+			System.out.println("생일을 입력해주세요.");
+			int birth = Integer.parseInt(sc.nextLine());
+			
+			System.out.println("주소를 입력해주세요.");
+			String address = sc.nextLine();
+			
+			System.out.println("그룹을 입력해주세요.");
+			String group = sc.nextLine();
+			
+			if(arr.get(name) instanceof CustomerContact) {
 				
 				System.out.println("회사를 입력해주세요.");
-				temp.setCompany(sc.nextLine());
+				String company = sc.nextLine();
 
 				System.out.println("거래 품목을 입력해주세요.");
-				temp.setItem(sc.nextLine());
+				String item = sc.nextLine();
 
 				System.out.println("직급을 입력해주세요.");
-				temp.setRank(sc.nextLine());
+				String rank = sc.nextLine();
+
+				arr.replace(name, new CustomerContact(name1, phoneNumber, email, address, birth, group, company, item, rank));
+				
 			} else {
-				CompanyContact temp = (CompanyContact)arr[index];
-				System.out.println("이름을 입력해주세요.");
-				temp.setName(sc.nextLine());
-				
-				System.out.println("이메일을 입력해주세요.");
-				temp.setEmail(sc.nextLine());
-				
-				System.out.println("핸드폰 번호를 입력해주세요.");
-				temp.setPhoneNumber(sc.nextLine());
-				
-				System.out.println("생일을 입력해주세요.");
-				temp.setBirthDay(Integer.parseInt(sc.nextLine()));
-				
-				System.out.println("주소를 입력해주세요.");
-				temp.setAdress(sc.nextLine());
-				
-				System.out.println("그룹을 입력해주세요.");
-				temp.setGroup(sc.nextLine());
-				
 				System.out.println("회사를 입력해주세요.");
 				temp.setCompany(sc.nextLine());
 
