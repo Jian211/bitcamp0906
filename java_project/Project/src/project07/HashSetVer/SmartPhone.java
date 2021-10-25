@@ -178,6 +178,7 @@ public class SmartPhone {
 		while(itr.hasNext()) {
 			if(itr.next().getName().equals(name)) {
 				itr.remove();
+				break;
 			}
 		}
 	}
@@ -218,6 +219,7 @@ public class SmartPhone {
 			Contact temp = itr.next();
 			if(temp.getName().equals(name)) {
 				temp.print();
+				break;
 			}
 		}
 	}
@@ -293,5 +295,6 @@ public class SmartPhone {
 		}
 		return result;
 	}
+	
 	
 }

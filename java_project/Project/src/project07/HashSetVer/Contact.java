@@ -25,6 +25,23 @@ public abstract class Contact implements ShowData{
 		this.group = group;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		boolean result = false;
+		if(obj != null && obj instanceof Contact) {
+			Contact c = (Contact) obj;
+			if(this.getName().equals(c.getName())){
+				result = true;
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public int hashCode() {
+		return this.name.charAt(0)%10;
+	}
+	
 	// 기본 정보를 출력
 	public void print() {
 		System.out.println("이름 : "+ name);

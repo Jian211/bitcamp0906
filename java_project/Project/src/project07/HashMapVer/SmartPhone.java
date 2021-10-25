@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 
 public class SmartPhone {
@@ -203,7 +204,7 @@ public class SmartPhone {
 	}
 	
 	private String nameChk(String name) {
-		boolean chk = name.matches(regexName); // 한영체크
+		boolean chk = Pattern.matches(regexName, name);
 		chk = !blankChk(name); // 공백체크
 
 		while(!chk) {

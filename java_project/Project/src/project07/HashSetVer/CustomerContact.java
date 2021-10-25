@@ -65,21 +65,6 @@ public class CustomerContact extends Contact{
 		
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		boolean result = false;
-		if(obj instanceof CustomerContact) {
-			CustomerContact c = (CustomerContact) obj;
-			if(this.getName().equals(c.getName())){
-				result = true;
-			}
-		}
-		return result;
-	}
-
-	@Override
-	public int hashCode() {
-		return this.getBirthDay()/3;
-	}
+	
 	
 }

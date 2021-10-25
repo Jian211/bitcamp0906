@@ -5,6 +5,7 @@ public class SmartPhoneMain {
 	public static void main(String[] args) throws Exception{
 		SmartPhone sp = new SmartPhone();
 		boolean coin = true;
+		
 		while(coin) {
 			try {
 				showMenu();
@@ -39,8 +40,8 @@ public class SmartPhoneMain {
 				default:
 					break;
 				}
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
+			} catch (NumberFormatException e) {
+				System.out.println("정상적인 메뉴 번호가 입력되지 않았습니다.");
 			} finally {
 				coin = true;
 			}
