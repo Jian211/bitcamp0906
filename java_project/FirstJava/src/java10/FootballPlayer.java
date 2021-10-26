@@ -1,7 +1,9 @@
 package java10;
 
+import java.io.Serializable;
+
 // 축구 클래스 생성
-public class FootballPlayer implements Comparable<FootballPlayer>{
+public class FootballPlayer implements Comparable<FootballPlayer>, Serializable{
 	String name;
 	int number;
 	String team;
