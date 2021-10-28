@@ -2,16 +2,23 @@ package project09;
 
 public class SmartPhoneMain {
 
-	public static void main(String[] args) throws Exception{
+	public static void main(String[] args) throws Exception {
 		SmartPhone sp = new SmartPhone();
+		Thread tr = new Thread(sp);
+		tr.start();	// 자동으로 run()을 실행
+		
 		boolean coin = true;
 		
 		if(!sp.existsFolder()) { 	// 폴더가 존재하는지 체크 
 			sp.makeFolder();		// 없으면 생성
 		}
-
+		// 파일 셋팅하는 쓰레드 처리
+		
+		
+		
 		while(coin) {
 			try {
+				tr.join();
 				showMenu();
 				
 				int menuNum = Integer.parseInt(SmartPhone.sc.nextLine());

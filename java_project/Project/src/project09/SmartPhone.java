@@ -13,7 +13,7 @@ import java.util.Calendar;
 */
 import java.util.Scanner;
 
-public class SmartPhone {
+public class SmartPhone implements Runnable{
 	public static final Scanner sc = new Scanner(System.in);
 	private ArrayList<Contact> arr;
 	private File contactFile;
@@ -25,11 +25,101 @@ public class SmartPhone {
 	private String regexPhoneNumber = "[0-9]{2,3}[ -]*[0-9]{3,4}[ -]*[0-9]{4}";		// 유저 핸드폰번호  규칙정의
 	
 	
-	public SmartPhone() throws ClassNotFoundException, IOException {
+	public SmartPhone() throws Exception {
 		contactFile = new File(route,fileName);	// 파일 경로  및 폴더 이름.
 		cal = Calendar.getInstance();
-		arr = importData();
+		arr = importData(); 
+		
+		System.out.println("[생성자] 파일경로, 캘린더 설정완료 ");
 	}
+	
+	//////////////////////////////////////////////////////////////////////// 
+	/* [ Thread ]  project 9  */
+	
+	
+	
+	@Override   // main 메소드가 시작될 때, 동시에 데이터를 셋팅하는 멀티태스킹 실행 메소드.
+	public void run() {
+		
+		System.out.println("런~~");
+	}
+
+	
+	
+	////////////////////////////////////////////////////////////////////////
+	/* [ file load & save ]  project 8 + 9  */
+	
+	
+	public String getDateinfo() {				// 파일 이름 저장 형식
+		// 파일 이름 형식  년월일시분초contactData 
+		String year = String.valueOf(cal.get(Calendar.YEAR));
+		String month = String.valueOf(cal.get(Calendar.MONTH)+1);
+		String date = String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
+		String hour = String.valueOf(cal.get(Calendar.HOUR));
+		String min = String.valueOf(cal.get(Calendar.MINUTE));
+		String second = String.valueOf(cal.get(Calendar.SECOND));
+		return year+"_"+month+"_"+date+"_"+hour+"_"+min+"_"+second; 
+	}
+	
+	// <역 직렬화> 날짜 순으로 정렬된 contact폴더 속, 최근 데이터(마지막) 가지고 오기
+	public ArrayList<Contact> importData() throws IOException, ClassNotFoundException {
+		System.out.println("파일은 있는데 읽지 못하는 오류가 있음.");
+		FileInputStream fis = new FileInputStream(fileName+"\\"+getLastSavedFile());
+		System.out.println("[선택된 파일 명]"+fileName+"\\"+getLastSavedFile());
+		
+		ObjectInputStream in = new ObjectInputStream(fis);
+		System.out.println(in);
+		//synchronized (this) {	// 동기화 했지만 잘 모르겠다.. *#$*@(%@*$(!*#$)!@*)$
+		ArrayList<Contact> temp = new ArrayList<Contact>();
+			while(true) {
+				try {
+					temp.add((Contact)in.readObject());
+				} catch (Exception e) {
+					break; // 더이상 파일이 없다는 것
+				}
+			}
+			in.close();
+		//}
+		return temp;
+	}
+	
+	public void exportData() throws IOException {	// 현재 리스트에 있는 데이터 저장하기 ( 직렬화  )
+		//synchronized (this) {			// 동기화 했지만 잘 모르겠다.. *#$*@(%@*$(!*#$)!@*)$
+			String fileNameForm = fileName+"\\"+ getDateinfo()+"contact.ser";	// 형식된 파일명 저장하기.
+			FileOutputStream fos = new FileOutputStream(fileNameForm);
+			ObjectOutputStream out = new ObjectOutputStream(fos);				// 파일 저장하기위한 생성자.
+			
+			for( Contact c : arr ) {	// 현재의 리스트 받아오기 
+				out.writeObject(c);		// 폴더에 저장.
+			}
+			out.close();
+		//}
+		System.out.println("[export 완료]");
+	}
+
+	public String getLastSavedFile() {		// contact 폴더에서 최근파일(마지막 파일)가지고오기
+		String [] arr = contactFile.list();
+		return arr[arr.length-1];
+	}
+	
+	public boolean existsFolder() {   	// contact 폴더 존재여부
+		boolean result = false;
+		if(contactFile.exists()) {	 	
+			result = true;
+		}
+		return result;
+	}
+
+	public void makeFolder() {			// contact 폴더 생성
+		contactFile.mkdir();
+		System.out.println("[내가보기]  파일경로 : "+contactFile);
+		System.out.println("[내가보기]  "+"폴더 생성이 완료되었습니다.");
+	}
+	
+	
+	////////////////////////////////////////////////////////////////////////
+	
+	
 	
 	// 배열에 요소를 추가하는 메소드 : 참조값을 전달 받아 배열에 추가하는 기능
 	public void insertData(Contact c) {
@@ -293,73 +383,5 @@ public class SmartPhone {
 	}
 	
 	
-	// contact 폴더 생성  > 그 안에 customer와 company폴더 2개 생성할 것. 모두가 있을 시에 생성 안해도 가능
-	
-	public String getDateinfo() {
-		// 파일 이름 형식  년월일시분초contactData 
-		String year = String.valueOf(cal.get(Calendar.YEAR));
-		String month = String.valueOf(cal.get(Calendar.MONTH)+1);
-		String date = String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
-		String hour = String.valueOf(cal.get(Calendar.HOUR));
-		String min = String.valueOf(cal.get(Calendar.MINUTE));
-		String second = String.valueOf(cal.get(Calendar.SECOND));
-		return year+"_"+month+"_"+date+"_"+hour+"_"+min+"_"+second; 
-	}
-	
-	// 역 직렬화  마지막 데이터 가지고 오기
-	public ArrayList<Contact> importData() throws IOException, ClassNotFoundException {
-		FileInputStream fis = new FileInputStream(fileName+"\\"+getLastSavedFile());
-		ObjectInputStream in = new ObjectInputStream(fis);
-		
-		ArrayList<Contact> temp = new ArrayList<Contact>();
-		while(true) {
-			try {
-				temp.add((Contact)in.readObject());
-			} catch (Exception e) {
-				break; // 더이상 파일이 없다는 것
-			}
-		}
-		in.close();
-		
-		return temp;
-	}
-	
-	
-	// 현재 리스트에 있는 데이터 저장하기 ( 직렬화  ) 
-	public void exportData() throws IOException {
-		String fileNameForm = getDateinfo()+"contact.ser";
-		FileOutputStream fos = new FileOutputStream(fileName+"\\"+fileNameForm);
-		ObjectOutputStream out = new ObjectOutputStream(fos);
-
-		for( Contact c : arr ) {	// 현재의 리스트 데이터 받아오기 
-			System.out.println(c.getName());
-			out.writeObject(c);
-		}
-		out.close();
-		
-		System.out.println("리스트에 있는 데이터 저장이 완료되었습니다.");
-	}
-
-	// contact 폴더가 있는지 확인 
-	public boolean existsFolder() {   
-		boolean result = false;
-		if(contactFile.exists()) {	 
-			result = true;
-		}
-		return result;
-	}
-
-	// contact 폴더에서 마지막 파일 가지고오기
-	public String getLastSavedFile() {
-		String [] arr = contactFile.list();
-		return arr[arr.length-1];
-	}
-	
-	// contact 폴더 생성
-	public void makeFolder() {
-		contactFile.mkdir();
-		System.out.println("[내가보기]  파일경로 : "+contactFile);
-		System.out.println("[내가보기]  "+"폴더 생성이 완료되었습니다.");
-	}
 	
 }
