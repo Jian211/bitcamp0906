@@ -46,6 +46,7 @@ public class SmartPhoneMain {
 					sp.showData();
 					break;
 				case 6:
+					// 쓰레드 (동기화처리를 해야하는데 )
 					System.out.println("파일 저장.");
 					sp.exportData();
 					break;
