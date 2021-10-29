@@ -78,7 +78,7 @@
  select ename, sal, comm
  from emp
  where comm is not null
- order by comm desc;
+ order by sal desc, comm desc;
 ​
 
 -- 12. 이름의 세번째 문자가 R인 사원의 이름을 표시하시오.
