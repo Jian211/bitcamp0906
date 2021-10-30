@@ -105,10 +105,10 @@ select deptno,
                       30, 'SALES',
                       40, 'OPERATIONS'
        ) as dname,
-       decode(deptno, 10, 'NEW YORK',
-                      20, 'DALLAS',
-                      30, 'CHICAGO',
-                      40, 'BOSTON'
+       decode(deptno, 10, '지역 명',
+                      20, '지역 명',
+                      30, '지역 명',
+                      40, '지역 명'
        ) as location,
        count(deptno),
        round(avg(sal))
@@ -120,15 +120,18 @@ order by deptno
 -- 31. 업무를 표시한 다음 해당 업무에 대해,
 -- 부서 번호별 급여 및 부서 10,20,30의 급여 총액을 각각 출력하시오.
 -- 별칭은 각 job, dno, 부서 10, 부서 20, 부서 30, 총액으로 지정하시오.
+select * from emp;
 
-select job,deptno as dno, sal,
-    decode( deptno, 10, sum(sal),
-                  20, sum(sal),
-                  30, sum(sal) 
-    ) as "총액"
+select 
+    job,
+    decode(deptno,
+        10, sal,
+        20, sal,
+        30, sal
+    ) as "급여",
+    sum(sal) as "총액"
 from emp
 group by job, deptno, sal
-
 ;
 
 
