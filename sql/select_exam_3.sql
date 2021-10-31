@@ -120,19 +120,15 @@ order by deptno
 -- 31. 업무를 표시한 다음 해당 업무에 대해,
 -- 부서 번호별 급여 및 부서 10,20,30의 급여 총액을 각각 출력하시오.
 -- 별칭은 각 job, dno, 부서 10, 부서 20, 부서 30, 총액으로 지정하시오.
-select * from emp;
-
 select 
-    job,
-    decode(deptno,
-        10, sal,
-        20, sal,
-        30, sal
-    ) as "급여",
+    job, -- 업무를 표시 
+    deptno as DNO,
+    decode(deptno,10,sum(sal)) as "부서 10",
+    decode(deptno,20,sum(sal)) as "부서 20",
+    decode(deptno,30,sum(sal)) as "부서 30",
     sum(sal) as "총액"
 from emp
-group by job, deptno, sal
-;
+group by job ,deptno; -- 해당 업무에 따른,
 
 
 
