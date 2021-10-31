@@ -1,121 +1,32 @@
 package project09;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Calendar;
-/*
-	SmartPhone 클래스에 있는 배열의 타입이 추상클래스로 되어도 문제가 없는 것을 확인 
-*/
 import java.util.Scanner;
 
-public class SmartPhone implements Runnable{
+public class SmartPhone {
 	public static final Scanner sc = new Scanner(System.in);
 	private ArrayList<Contact> arr;
-	private File contactFile;
-	private Calendar cal;
+	private FileController fileController;
 	
-	private String fileName = "contact";
-	private String route = "C:\\Users\\Jian\\Documents\\bitcamp0906\\java_project\\Project";	// 저장 라우트 설정
 	private String regexName = "[a-zA-Z가-힣]+";										// 유저 이름  규칙정의
 	private String regexPhoneNumber = "[0-9]{2,3}[ -]*[0-9]{3,4}[ -]*[0-9]{4}";		// 유저 핸드폰번호  규칙정의
 	
 	
-	public SmartPhone() throws Exception {
-		contactFile = new File(route,fileName);	// 파일 경로  및 폴더 이름.
-		cal = Calendar.getInstance();
-		arr = importData(); 
-		
-		System.out.println("[생성자] 파일경로, 캘린더 설정완료 ");
+	public SmartPhone() throws Exception, IOException{
+		fileController = new FileController();
+		//arr = fileController.importData(); 
 	}
 	
-	//////////////////////////////////////////////////////////////////////// 
-	/* [ Thread ]  project 9  */
+	// [ file load & save ]  project 8 + 9   /////////////////////////////////
 	
-	
-	
-	@Override   // main 메소드가 시작될 때, 동시에 데이터를 셋팅하는 멀티태스킹 실행 메소드.
-	public void run() {
-		
-		System.out.println("런~~");
-	}
-
-	
-	
-	////////////////////////////////////////////////////////////////////////
-	/* [ file load & save ]  project 8 + 9  */
-	
-	
-	public String getDateinfo() {				// 파일 이름 저장 형식
-		// 파일 이름 형식  년월일시분초contactData 
-		String year = String.valueOf(cal.get(Calendar.YEAR));
-		String month = String.valueOf(cal.get(Calendar.MONTH)+1);
-		String date = String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
-		String hour = String.valueOf(cal.get(Calendar.HOUR));
-		String min = String.valueOf(cal.get(Calendar.MINUTE));
-		String second = String.valueOf(cal.get(Calendar.SECOND));
-		return year+"_"+month+"_"+date+"_"+hour+"_"+min+"_"+second; 
+	public void handleImportData() {
+		arr = fileController.importData();
 	}
 	
-	// <역 직렬화> 날짜 순으로 정렬된 contact폴더 속, 최근 데이터(마지막) 가지고 오기
-	public ArrayList<Contact> importData() throws IOException, ClassNotFoundException {
-		System.out.println("파일은 있는데 읽지 못하는 오류가 있음.");
-		FileInputStream fis = new FileInputStream(fileName+"\\"+getLastSavedFile());
-		System.out.println("[선택된 파일 명]"+fileName+"\\"+getLastSavedFile());
-		
-		ObjectInputStream in = new ObjectInputStream(fis);
-		System.out.println(in);
-		//synchronized (this) {	// 동기화 했지만 잘 모르겠다.. *#$*@(%@*$(!*#$)!@*)$
-		ArrayList<Contact> temp = new ArrayList<Contact>();
-			while(true) {
-				try {
-					temp.add((Contact)in.readObject());
-				} catch (Exception e) {
-					break; // 더이상 파일이 없다는 것
-				}
-			}
-			in.close();
-		//}
-		return temp;
+	public void handleExportData(){  		// save date in "Contact" file
+		fileController.exportData(arr);
 	}
-	
-	public void exportData() throws IOException {	// 현재 리스트에 있는 데이터 저장하기 ( 직렬화  )
-		//synchronized (this) {			// 동기화 했지만 잘 모르겠다.. *#$*@(%@*$(!*#$)!@*)$
-			String fileNameForm = fileName+"\\"+ getDateinfo()+"contact.ser";	// 형식된 파일명 저장하기.
-			FileOutputStream fos = new FileOutputStream(fileNameForm);
-			ObjectOutputStream out = new ObjectOutputStream(fos);				// 파일 저장하기위한 생성자.
-			
-			for( Contact c : arr ) {	// 현재의 리스트 받아오기 
-				out.writeObject(c);		// 폴더에 저장.
-			}
-			out.close();
-		//}
-		System.out.println("[export 완료]");
-	}
-
-	public String getLastSavedFile() {		// contact 폴더에서 최근파일(마지막 파일)가지고오기
-		String [] arr = contactFile.list();
-		return arr[arr.length-1];
-	}
-	
-	public boolean existsFolder() {   	// contact 폴더 존재여부
-		boolean result = false;
-		if(contactFile.exists()) {	 	
-			result = true;
-		}
-		return result;
-	}
-
-	public void makeFolder() {			// contact 폴더 생성
-		contactFile.mkdir();
-		System.out.println("[내가보기]  파일경로 : "+contactFile);
-		System.out.println("[내가보기]  "+"폴더 생성이 완료되었습니다.");
-	}
-	
 	
 	////////////////////////////////////////////////////////////////////////
 	

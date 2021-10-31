@@ -4,21 +4,17 @@ public class SmartPhoneMain {
 
 	public static void main(String[] args) throws Exception {
 		SmartPhone sp = new SmartPhone();
-		Thread tr = new Thread(sp);
-		tr.start();	// 자동으로 run()을 실행
-		
+		FileController fc = new FileController();
 		boolean coin = true;
-		
-		if(!sp.existsFolder()) { 	// 폴더가 존재하는지 체크 
-			sp.makeFolder();		// 없으면 생성
+
+		if(!fc.existsFolder()) { 	// 폴더가 존재하는지 체크 
+			fc.makeFolder();		// 없으면 생성
+		} else {					// 폴더가 있으면 파일 속에 있는 최근 저장데이터 setting
+			sp.handleImportData();
 		}
-		// 파일 셋팅하는 쓰레드 처리
-		
-		
 		
 		while(coin) {
 			try {
-				tr.join();
 				showMenu();
 				
 				int menuNum = Integer.parseInt(SmartPhone.sc.nextLine());
@@ -48,11 +44,11 @@ public class SmartPhoneMain {
 				case 6:
 					// 쓰레드 (동기화처리를 해야하는데 )
 					System.out.println("파일 저장.");
-					sp.exportData();
+					sp.handleExportData();
 					break;
 				case 7:
 					System.out.println("파일 불러오기.");
-					sp.importData();
+					sp.handleImportData();
 					break;
 				case 8:
 					System.out.println("종료.");
