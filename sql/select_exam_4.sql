@@ -88,3 +88,4 @@ select m.ename mng, m.hiredate mngHireDate, s.ename emp, s.hiredate empHireDate
 from emp s, emp m
 where m.mgr = s.empno
 and s.hiredate < m.hiredate;
+
