@@ -84,8 +84,9 @@ from emp;
 select job,
     min(sal)
 from emp
+where mgr is not null
 group by job
-having min(sal) > 2000
+having min(sal) >= 2000
 order by min(sal) desc;
 
 -- 29. 각 부서에 대해 부서번호, 사원 수, 부서 내의 모든 사원의 평균 급여를 출력하시오.
@@ -123,13 +124,13 @@ order by deptno
 select 
     job, -- 업무를 표시 
     deptno as DNO,
-    decode(deptno,10,sum(sal)) as "부서 10",
-    decode(deptno,20,sum(sal)) as "부서 20",
-    decode(deptno,30,sum(sal)) as "부서 30",
+    nvl(decode(deptno,10,sum(sal)),0) as "부서 10",
+    nvl(decode(deptno,20,sum(sal)),0) as "부서 20",
+    nvl(decode(deptno,30,sum(sal)),0) as "부서 30",
     sum(sal) as "총액"
 from emp
-group by job ,deptno; -- 해당 업무에 따른,
-
+group by job ,deptno -- 해당 업무에 따른,
+order by deptno;
 
 
 
