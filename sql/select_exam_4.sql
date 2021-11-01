@@ -67,30 +67,24 @@ order by employee.deptno;
 
 -- 40. SELF JOIN을 사용, 지정된 사원( SCOTT )
 --     지정한 사원의 이름, 부서번호, 지정한 사원과 동일한 부서에서 근무하는 사원 출력
--- 지정한 사원이름을 어떻게 뽑지?
--- 동일한 부서에서 근무하는 사원 출력 
 
 select s.ename as "지정된 사원",e.ename, e.deptno
-from (select ename,deptno from emp where ename = 'SCOTT') s, emp e
-where s.deptno = e.deptno;
+from emp s, emp e
+where s.deptno = e.deptno
+and s.ename = 'SCOTT';
 
 
 -- 41. self join을 사용하여 ward 사원보다 늦게 입사한 사원의 이름과 입사일을 출력
-select ename, hiredate from emp where ename = 'WARD';  -- WARD 사원 
-
 select e.ename, e.hiredate
-from emp e, 
-    ( select ename, hiredate from emp where ename = 'WARD') s
-where s.hiredate > e.hiredate;
+from emp e,emp w
+where e.hiredate > w.hiredate
+and w.ename = 'WARD';
 
 
--- 42. self join을 사용하여 관리자보다 먼저 입사한 모든 사원의 이름 및 입사일을
+-- 42. self join을 사용하여 
+--      관리자보다 먼저 입사한 모든 사원의 이름 및 입사일을
 --      관리자의 이름 및 입사일과 함께 출력하시오
-select job, hiredate from emp where job = 'MANAGER'; -- 관리자 정보
-
-select e.ename, e.hiredate, e.job
-from emp e,(select job, hiredate from emp where job = 'MANAGER') manager
-where manager.hiredate >= e.hiredate
-order by e.job;
-
-
+select m.ename mng, m.hiredate mngHireDate, s.ename emp, s.hiredate empHireDate
+from emp s, emp m
+where m.mgr = s.empno
+and s.hiredate < m.hiredate;
