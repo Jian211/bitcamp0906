@@ -1,50 +1,78 @@
 -- [실습] join & sub query
 
 -- 1. 마당서점의 고객이 요구하는 다음 질문에 대해 SQL문을 작성하시오.
+--------------------------------------------------------------------------------
 -- (5) 박지성이 구매한 도서의 출판사 수.
 
---       박지성의 custid 와 orders의 custid 비교  bookid가 필요
-select o.bookid
-from customer c, orders o
-where c.custid = o.custid
-and c.name = '박지성';
+--  join
 
---      orders의 bookid와 book의 bookid비교 
-select 
-    count(publisher)
-from
-    book b,
-    (select o.bookid
-    from customer c, orders o
-    where c.custid = o.custid
-    and c.name = '박지성') o
-where
-    b.bookid = o.bookid;
-    
+    select  DISTINCT o.bookid    --  박지성이 구매한 책들
+    from    customer c, orders o
+    where   c.custid = o.custid
+    and     c.name = '박지성';
+
+    select  count(publisher)    --  출판사 의 수
+    from    book b,
+            (select o.bookid
+            from customer c, orders o
+            where c.custid = o.custid
+            and c.name = '박지성') o
+    where   b.bookid = o.bookid;
+
+--  sub query
+    select  count( DISTINCT publisher )
+    from    book
+    where   bookid in ( select DISTINCT o.bookid
+                        from customer c, orders o
+                        where c.custid = o.custid
+                        and c.name = '박지성');
+                
+--------------------------------------------------------------------------------
 -- (6) 박지성이 구매한 도서의 이름, 가격, 정가와 판매 가격의 차이
 
+--  1. 박지성이 구매한 책의 id 구하기.
+    select bookid, saleprice
+    from orders
+    where custid = ( select custid
+                     from customer    
+                     where name = '박지성'
+                    )   
+    ;
 
-    -- 1.구매한 도서 가격과, 책아이디 추출   > sub query 용도
-    select o.bookid, o.saleprice
-    from customer c, orders o
-    where c.custid = o.custid 
-    and c.name = '박지성';
-    
-    
-    -- 2. 이름과 가격차 뽑기
-    select b.bookname, b.price - o.saleprice as pricegap
-    from 
-        book b,
-        (select o.bookid, o.saleprice
-        from customer c, orders o
-        where c.custid = o.custid 
-        and c.name = '박지성') o
-    where 
-        b.bookid = o.bookid;
-  
-        
+--  도서의 이름, 가격, 정가와 판매 가격의 차이
+    select  bookname, price - o.saleprice as pricegap
+    from    book b,
+            (select bookid, saleprice
+             from orders
+             where custid = ( select custid
+                              from customer    
+                              where name = '박지성')
+            ) o   
+    where   b.bookid = o.bookid; 
+
+--------------------------------------------------------------------------------
 -- (7) 박지성이 구매하지 않은 도서의 이름
-    select * from book;
+    
+    --  1. 박지성이 구매한 책의 id 구하기.
+    select                      --  북아이디를 찾다. 
+        bookid
+    from                        --  오더 테이블과 고객테이블에서   
+        orders o, customer c    
+    where                       --  각 테이블의 id가 같고
+        o.custid = c.custid
+    and                         --  이름이 박지성이며
+        c.name = '박지성';
+   
+    --  2.  책 테이블과 비교해서 구매하지 않은 도서 찾기
+    select  distinct bookname
+    from    book,(select    bookid
+                  from      orders o, customer c    
+                  where     o.custid = c.custid
+                  and       c.name = '박지성') o
+    where   book.bookid not in( o.bookid );
+    
+    
+    
     
     -- 박지성이 구매한 책 id 추출
     select o.bookid

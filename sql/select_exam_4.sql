@@ -10,6 +10,9 @@ from emp e, dept d
 where e.deptno = d.deptno 
 and e.ename = 'SCOTT';
 
+-- ansi 이용
+
+
 
 -- 33. INNER JOIN과 on 연산자를 사용
 -- 사원이름과 함께 그 사원이 소속된 부서이름과 지역명을 출력하시오.
@@ -36,6 +39,7 @@ where e.ename like '%A%'
 order by e.ename;
 
 
+
 -- 37. join을 이용하여 newyork에 근무하는 모든 사원의 이름, 업무, 부서번호 및 부서명출력
 
 select e.ename, d.dname, e.job, e.deptno, d.loc
@@ -49,7 +53,7 @@ select * from emp;
 
 select employee.ename as " 사원이름",
        employee.deptno as "사원번호",
-       nvl(manager.mgr,'0') as "관리자 번호"
+       manager.ename as "관리자 번호"
 from emp employee, emp manager
 where employee.ename = manager.ename;
 
@@ -68,10 +72,11 @@ order by employee.deptno;
 -- 40. SELF JOIN을 사용, 지정된 사원( SCOTT )
 --     지정한 사원의 이름, 부서번호, 지정한 사원과 동일한 부서에서 근무하는 사원 출력
 
-select s.ename as "지정된 사원",e.ename, e.deptno
-from emp s, emp e
-where s.deptno = e.deptno
-and s.ename = 'SCOTT';
+select e.ename as "지정된 사원",s.ename, e.deptno
+from emp e, emp s
+where e.ename = 'SCOTT'
+and e.deptno = s.deptno
+and s.ename != 'SCOTT';
 
 
 -- 41. self join을 사용하여 ward 사원보다 늦게 입사한 사원의 이름과 입사일을 출력
