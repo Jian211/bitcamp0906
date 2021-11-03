@@ -43,3 +43,14 @@ create table phoneInfo_com(
 drop table phoneInfo_basic;
 drop table phoneInfo_com;
 drop table phoneInfo_univ; 
+
+
+
+
+-- 생성된 테이블에 데이터를 삽입
+-- phoneinfo_basic table
+insert into phoneinfo_basic values (1,'손흥민', 01028784911,'ddlmake@naver.com','lundon', sysdate );
+insert into phoneinfo_basic values (2,'황희찬', 01050428894,'ddlmake1@naver.com','woves', sysdate );
+select * from phoneinfo_basic;
+
+
