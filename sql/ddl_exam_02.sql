@@ -1,44 +1,91 @@
--- 2021. 11.04  DDL_exam
+-- PhoneBook DDL : 테이블 정의서 를 참고 해서 DDL 작성한다.
 
-desc phoneInfo_basic;
+drop table phoneinfo_univ;
+drop table phoneinfo_com;
+drop table phoneInfo_basic;
 
-insert into phoneInfo_basic     
-values( 0001 ,'손흥민', '01058325211', 'tot@gamil.com', 'lundon', sysdate );
-insert into phoneInfo_basic     
-values( 0002 ,'이강인', '01025216548', 'mayo@gamil.com', 'london', sysdate );
+
+CREATE table phoneInfo_basic (
+    idx number(6) constraint pi_basic_idx_PK primary key,
+    fr_name VARCHAR2(20) not null,
+    fr_phonenumber varchar2(20) not null,
+    fr_email varchar2(20) ,
+    fr_address varchar2(20),
+    fr_regdate date default sysdate
+);
+
+--  phoneinfo_basic 테이블 pk -> idx에 입력할 일련번호 시퀀스 생성
+create sequence pib_idx_seq
+    start with   1
+    minvalue     1
+    maxvalue     999999
+    increment by 1;
+    
+
+
+-- insert : CREATE
+
+desc phoneinfo_basic;
+
+insert into phoneinfo_basic --()
+    values (pib_idx_seq.nextval, '손흥민', '010-0000-0000', 'son@gmail.com', 'LONDON', sysdate);
+insert into phoneinfo_basic --()
+    values (pib_idx_seq.nextval, '이강인', '010-9999-9999', 'lee@gmail.com', 'LONDON', sysdate);
+    
+
 
 
 -- select
---  이름으로 검색
-select * from phoneinfo_basic
-where  fr_name like '%흥%';
+select * from phoneinfo_basic;
 
---  전화번호 검색
-select * from phoneinfo_basic
-where fr_phonenumber like '%010%';
+select * from phoneinfo_basic where fr_name like '%손%';            --  이름으로 검색
 
---  시스템 내부에서 관리자가 검색
---  예) 리스트 > 상세보기
-select * from phoneinfo_basic where idx = 0002;
+select * from phoneinfo_basic where fr_phonenumber like '%999%';    --  전화번호 검색
+
+-- 시스템 내부에서 관리자가 검색 
+-- 예) 리스트 -> 상세보기
+select * from phoneinfo_basic where idx=1;
 
 
+-- update
+-- 시스템 배부에서 변경 페이지를 이용한 데이터 수정
+update phoneinfo_basic
+set fr_name='SON', fr_phonenumber='010-7777-5555', fr_email='son@naver.com', fr_address='서울'
+where  idx = 1
+;
 
 
-update  phoneInfo_basic
-set     fr_name = 'son', fr_phonenumber = '010-7777-5555', fr_email = 'son@kakao.com', fr_address = '서울'
-where   idx = 0001;
+-- delete
+delete from phoneinfo_basic where idx=1;
 
 
 
-delete  phoneinfo_basic
-where   idx = 0001;
+create table phoneinfo_univ (
+    idx number(6),
+    fr_u_major VARCHAR2(20) default 'N' not null,
+    fr_u_year number(1) default 1  not null, --check (fr_u_year between 1 and 4),
+    fr_ref number(6) not null,
+    constraint pi_univ_idx_PK primary key (idx),
+    constraint chk check (fr_u_year between 1 and 4), -- 테이블 레벨에서 check  제약 설정 
+    constraint pi_univ_ref_FK FOREIGN KEY (fr_ref) REFERENCES phoneInfo_basic (idx)
+);
 
---  친구 정보를 입력 : 기본정보 + 학교정보
-insert into phoneinfo_basic --()
-        values (3, '황희찬', '010-3333-1111', 'hh@gmail.com', 'LONDON', sysdate);
-insert into phoneinfo_univ values(1,'축구',1,2);
+create sequence piu_idx_seq maxvalue 999999;
 
-select * from phoneinfo_univ;   --  이 테이블만으로는 의미가 없다. 
+-- insert
+
+-- 친구 정보를 입력 : 기본 정보 + 학교 정보
+
+insert into phoneinfo_basic     -- 기본 정보 입력
+    values (pib_idx_seq.nextval, '황희찬', '010-3333-1111', 'hh@gmail.com', 'LONDON', sysdate);
+
+insert into phoneinfo_univ      -- 학교 정보 입력    
+    values(piu_idx_seq.nextval, '축구', 1, PIB_IDX_SEQ.currval);
+    
+
+-- select
+
+select * from phoneinfo_univ; -- 이 테이블의 데이터만으로는 의미가 없다!!!
 
 select *
 from phoneinfo_basic pb, phoneinfo_univ pu
@@ -50,124 +97,92 @@ from phoneinfo_basic pb, phoneinfo_univ pu
 where pb.idx = pu.fr_ref
 ;
 
---  기본정보만 입력된 데이터도 출력 : outer join
-select pb.fr_name,
-       pb.fr_phonenumber,
-       nvl(pu.fr_u_major,'입력정보없음') major,
-       nvl(pu.fr_u_year,0) year,
-       to_char(pb.fr_regdate, 'YYYY.MM.DD HH24:mm') regdate
+-- 기본 정보만 입력된 데이터도 출력 : outer JOIN
+select pb.fr_name, 
+        pb.fr_phonenumber, 
+        nvl(pu.fr_u_major, '입력정보없음') major, 
+        nvl(pu.fr_u_year, 0) year, 
+        to_char(pb.fr_regdate, 'YYYY.MM.DD HH24:mm') regdate
 from phoneinfo_basic pb, phoneinfo_univ pu
-where pb.idx = pu.idx(+);   -- outer join
+where pb.idx = pu.fr_ref(+)
+;
 
---  update
-update  phoneinfo_univ
-set     fr_u_major = '야구',
-        fr_u_year = 4
-where   idx = 1;
+-- update
+update phoneinfo_univ
+set fr_u_major='야구', fr_u_year=4
+where idx=1
+;
 
-select * from phoneinfo_univ;
 
---  delete
---  자식 테이블의 데이터를 먼저 삭제 
-delete from phoneinfo_univ where idx = 1;
---  부모 테이블의 데이터를 삭제
-delete from phoneinfo_basic where idx = 3;
-
-select * from phoneinfo_univ;
+-- delete
+-- 자식 테이블의 데이터를 먼저 삭제
+delete from phoneinfo_univ where idx=1;
+-- 부모 테이블의 데이터를 삭제
+delete from phoneinfo_basic where idx=3;
 
 
 
---  insert
+
+
+
+
+
+
+create table phoneinfo_com (
+    idx number(6) constraint pi_com_idx_PK primary key,
+    fr_c_company VARCHAR2(20) default 'N' not null,
+    fr_ref number(6) not null constraint pi_com_ref_FK REFERENCES phoneinfo_basic (idx)
+);
+
+create sequence pic_idx_seq maxvalue 999999;
+
+-- insert
 select idx from phoneinfo_basic;
 insert into phoneinfo_basic
-    values(4, '황의조', '010-2222-1111', 'h@gamil.com', 'seoul', sysdate);
-
-select * from phoneinfo_com;
+        values (pib_idx_seq.nextval, '황의조', '010-2222-1111', 'h@gmail.com', 'SEOUL', sysdate);
+desc phoneinfo_com;
 insert into phoneinfo_com
-    values(1, 'NAVER', 4);
-
---  회사 친구 입력 : 기본 정보 입력 -> 회사정보 입력
-
---  select
-select  pb.fr_name, 
-        pb.fr_phonenumber, 
-        pb.fr_email, 
-        nvl(pc.fr_c_company,'입력데이터 없음') company , 
-        to_char(pb.fr_regdate, 'yyyy.mm.dd HH24:mi') regdate
-from    phoneinfo_basic pb, phoneinfo_com pc
-where   pb.idx = pc.idx(+);
-
---  update
-update  phoneinfo_com
-set     fr_c_company = '쿠팡'
-where   idx = 1;
+        values (pic_idx_seq.nextval, 'NAVER', pib_idx_seq.currval);
+        
+-- 회사 친구 입력 : 기본 정복 입력 -> 회사정보 입력
 
 
---  delete
+-- select
+ select pb.fr_name, pb.fr_phonenumber, pb.fr_email, 
+        nvl(pc.fr_c_company, '입력 데이터 없음') company, 
+        to_char(pb.fr_regdate, 'yyyy.MM.DD HH24:mi') regdate
+ from phoneinfo_basic pb, phoneinfo_com pc
+ where pb.idx=pc.fr_ref(+)
+ ;
 
--- 자식테이블 행 먼저 삭제
-delete from phoneinfo_com where idx = 1;
 
--- 부모테이블 행 삭제
-delete from phoneinfo_basic where idx = 4;
-    
+-- update
+update phoneinfo_com
+set fr_c_company='쿠팡'
+where idx=1
+;
 
-select * from phoneinfo_basic;
------------------------------------------------------------
 
---  전체 데이터 리스트 출력   :   테이블 3개 JOin
-select pb.fr_name, pb.fr_phonenumber, pu.fr_u_major,pc.fr_c_company
+-- delete
+-- 자식 테이블 행 먼저 삭제
+delete from phoneinfo_com where idx=1;
+-- 부모 테이블 행 삭제
+delete from phoneinfo_basic where idx=4;
+
+
+---------------------------------------------------
+-- 전체 데이터 리스트 출력 : 테이블 세개 JOIN
+select pb.fr_name, pb.fr_phonenumber, pu.fr_u_major, pc.fr_c_company
 from phoneinfo_basic pb, phoneinfo_com pc, phoneinfo_univ pu
-where pb.idx = pc.fr_ref(+) 
-and   pb.idx = pu.fr_ref(+);
+where pb.idx=pc.fr_ref(+) and pb.idx=pu.fr_ref(+) and pb.fr_name='손흥민'
+;
 
+select * from phoneinfo_view where fr_name='손흥민'  ;
 
---  view 생성
+-- view 생성
 create or replace view phoneinfo_view
 as
-select pb.fr_name, pb.fr_phonenumber, pu.fr_u_major,pc.fr_c_company
+select pb.fr_name, pb.fr_phonenumber, pu.fr_u_major, pc.fr_c_company
 from phoneinfo_basic pb, phoneinfo_com pc, phoneinfo_univ pu
-where pb.idx = pc.fr_ref(+) 
-and   pb.idx = pu.fr_ref(+);
-
-select * from phoneinfo_view
-where fr_name = 'son';
-
-
--- DDL 과 DCL, view 사용해보기 
-
-desc phoneinfo_basic;
-
---  연습용 setting
-    create table phone_test01 as (select * from phoneinfo_basic);
-    create table phone_test02 as (select * from phoneinfo_com);
-    create table phone_test03 as (select * from phoneinfo_univ);
-
-    insert into phone_test01 values (5,'최우석','010-7584-3912','bale@coupang.com','인천',sysdate);
-    insert into phone_test02 values (2,'coupang',5);    
-    insert into phone_test03 values (2,'회사원',1,5);
-    
-    select * from phone_test01;
-    select * from phone_test02;
-    select * from phone_test03;
-    
---  새로들어온 사원 최우석의 관한 정보를 전부 출력해라.
-    select  * 
-    from    phone_test01 p1,phone_test02 p2,phone_test03 p3
-    where   p1.idx = p2.fr_ref
-    and     p1.idx = p3.fr_ref
-    and     p1.fr_name = '최우석';
-    
-
---  핸드폰 번호, 지역을 제외한 모든 정보를 담은 view 테이블을 생성하라
-    create table test04
-    as (select * from phone_test01 where 1=0);
-    
-    select * from
-    
-    create or replace view test05
-    as  (select  * from phone_test01); 
-    
-    select * from test05;
-
-
+where pb.idx=pc.fr_ref(+) and pb.idx=pu.fr_ref(+)
+;
