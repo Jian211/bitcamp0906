@@ -46,11 +46,13 @@ public class EmpMain {
 			else System.out.println("SON 선수가 삭제되지 않았습니다.");
 			System.out.println();
 			
-			
 			// 모든 사원정보를 출력하되 부서정보를 함께 출력하는 프로그램을 작성
 			// 이부분이 어렵다.
+			// sql join으로 합치는건 가능하지만  그 view를 가지고와서 list로 어떻게 받을지 
+			// interface를 설정해서 마크 형식으로 클래스를 만든다음 
+			// implement로 클래스 추가한 후, 그걸로 list를 만들어야하ㅑ나. 훔,,
 			
-			conn.commit();		// DB에 저장  - DCL
+			//conn.commit();		// DB에 저장  - DCL
 			
 			
 		} catch (SQLException e) {
