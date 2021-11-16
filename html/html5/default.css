@@ -1,0 +1,21 @@
+.hi {
+    background-color: black;
+}
+
+ul{
+    overflow: hidden;
+}
+
+li {
+    border-radius: 10px;
+    background-color: skyblue;
+    padding: 20px;
+    margin: 5px;
+    list-style: none;
+    float: left;
+}
+
+ol > li {
+    clear:both;
+}
+
