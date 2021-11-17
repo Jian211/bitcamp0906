@@ -1,0 +1,47 @@
+body{
+    margin:  0;
+    padding : 0;
+}
+
+#main{
+    border : 1px soild red;
+    background-color: yellow;
+    margin: 0;
+    padding: 0;
+}
+
+
+#a {
+    display: inline-block;
+    width: 30%;
+    height: 100%;
+    margin: 0;
+    border : 1px solid red;
+}
+#a div{
+    margin-top:  20px;
+    padding: 0 40px;
+    text-align: center;
+    background-color: yellowgreen;
+}
+
+#a div img{
+    width: 100%;
+}
+
+
+#b{
+    background-color: green;
+    
+    border:  1px solid red;
+    display: inline-block;
+    align-items: flex-start;
+}
+
+#b div{
+    padding : 10px 90px;
+    height: 100%;
+    
+}
+
+

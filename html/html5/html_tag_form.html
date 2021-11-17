@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>FORM TAG</title>
+</head>
+<body>
+    <hr>
+    <form id="test1" action="#" method="get">
+        <input type="number" name="" id=""> asdasd
+
+        <input type="month" name="month" id="">
+        <hr>
+        <input type="date" name="date" id="">
+        <input type="datetime" name="datetime" id="">
+        <input type="datetime-local" name="datetime-local" id="">
+        <hr>
+        <input type="color"> as
+        <hr>
+        <!-- radio -->
+        <input type="radio" name="program" value="JS"> JS
+        <input type="radio" name="program"> JAVA
+
+        <hr>
+        <input type="checkbox" name="lang" id="" value="ko"> 한글 <br>
+        <input type="checkbox" name="lang" id="" value="en"> 영어 <br>
+        <hr>
+        <input type="text" id="userId" name="userName">
+        <input type="password" id="userPw" name="">
+        <hr>
+        <input type="submit" value="제출하기">
+    </form>
+</body>
+</html>
+<script>
+    let test = document.getElementById("test1");
+    test.addEventListener("submit",eventHandler);
+
+    function eventHandler(event){
+        console.log(event.name);
+    }
+
+
+</script>

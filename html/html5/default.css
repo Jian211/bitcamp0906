@@ -1,21 +1,55 @@
-.hi {
-    background-color: black;
+body {
+    margin: 0;
+    padding: 0;
 }
 
-ul{
-    overflow: hidden;
+header {
+    background-color: rgb(255, 255, 255);
 }
 
-li {
-    border-radius: 10px;
-    background-color: skyblue;
+
+header p {
+    text-align: center;
+    font-size: 60px;
+    font-weight: 900;
+    margin: 0;
     padding: 20px;
-    margin: 5px;
-    list-style: none;
-    float: left;
+    color :rgb(12, 52, 128);
 }
 
-ol > li {
-    clear:both;
+.bb{
+    width: 70%;
+    background-color: white;
+    height: 1000px;
+    margin : 5px;
+}
+.aa {
+    display: flex;
+    align-items: center;
 }
 
+
+.cc{
+    width: 30%;
+    background-color:rgb(12, 52, 128);
+    height: 1000px;
+}
+input {
+    margin: 20px 5px 0  10px;
+    padding: 10px;
+}
+form {
+    color: white;
+    font-size: large;
+    margin-left: 20px;
+    font-weight: bold;
+}
+label {
+    display: inline-block;
+    width: 100px;
+    padding : 10px;
+}
+
+img {
+    width: 290px;
+}
