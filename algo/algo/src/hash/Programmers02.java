@@ -1,6 +1,7 @@
 package hash;
 
-import java.util.HashMap;
+import java.util.Arrays;
+import java.util.HashSet;
 
 /*
 
@@ -25,8 +26,6 @@ class Solution1 {
 	public boolean solution(String[] phone_book) {
 		boolean answer = true;
 		
-		HashMap<Integer, String> hm = new HashMap<Integer, String>();
-		for(String s : )
 		
 		return answer;
 	}
@@ -35,11 +34,13 @@ public class Programmers02 {
 	public static void main(String[] args) {
 		Solution1 so = new Solution1();
 
+		
 		String [] phone_book = {"119", "97674223", "11 95524421"};  // false 		어떤 번호가 접두어에 있다면 false
 		//String [] phone_book = {"123","456","789"};				   // true;
 		//String [] phone_book = {"12","123","1235","567","88"};     // false;
-		so.solution(phone_book);
-		//System.out.println(so.solution(phone_book));
+		//String [] phone_book =  {"119", "114", "112", "123223123", "1231231234"};     // true;
+		System.out.println(so.solution(phone_book));
+
 	}
 
 }
@@ -65,5 +66,18 @@ public class Programmers02 {
 			answer = false;
 		}
 
+
+		boolean answer = true;
+		
+		String [] a = new String[phone_book.length];
+
+		for (int i = 0; i < a.length; i++) {
+			a[i] = phone_book[i].replace(" ", "");
+		}
+		
+		Arrays.sort(a);
+		
+		answer = !a[0].equals(a[1].substring(0, a[0].length()));
+		return answer;
 
 */

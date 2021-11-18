@@ -3,45 +3,43 @@ body{
     padding : 0;
 }
 
-#main{
-    border : 1px soild red;
-    background-color: yellow;
-    margin: 0;
-    padding: 0;
+.login{
+    width: 500px;
+    height: 1000px;
+    background-color: black;
+    opacity: 80%;
 }
 
-
-#a {
-    display: inline-block;
-    width: 30%;
+.login-form {
     height: 100%;
-    margin: 0;
-    border : 1px solid red;
-}
-#a div{
-    margin-top:  20px;
-    padding: 0 40px;
+    margin:  40px 80px;
     text-align: center;
-    background-color: yellowgreen;
 }
 
-#a div img{
+.login-form_logo{
+    color : white;
+    font-size: xx-large;
+    font-weight: bolder;
+    padding: 80px;
+}
+
+.login-form div:nth-child(2){
+    display: flex;
+}
+.login-form label {
+    color: white;
+}
+
+.login-form input{
+    padding : 20px 40px;
     width: 100%;
+    margin : 20px 0;
+    display: block;
+    border-radius: 10px;
 }
 
-
-#b{
-    background-color: green;
-    
-    border:  1px solid red;
-    display: inline-block;
-    align-items: flex-start;
+.login-form button{
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
 }
-
-#b div{
-    padding : 10px 90px;
-    height: 100%;
-    
-}
-
-
