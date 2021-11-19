@@ -1,0 +1,72 @@
+/* 웬폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: font-family: 'Noto Sans KR', sans-serif;
+}
+
+body{
+    background-color: #eee;
+}
+
+#main_wrap{
+    background-color: white;
+    width: 758px;
+    height: 100%;
+    border-radius: 5px;
+    margin: 20px auto;
+    box-shadow: 200px 100px 40px gray;
+    padding : 20px;
+}
+
+header {
+    margin : 20px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+}
+
+nav ul{
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    padding: 10px;
+}
+
+nav div{
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+}
+
+nav div input:first-child{
+    border-radius: 10px 0 0 10px ;
+    padding : 6px 10px;
+}
+
+nav div input:last-child{
+    padding : 5px 10px;
+    border-radius: 0 10px 10px 0;
+    margin-left: -1px;
+}
+
+nav div input {
+    border : 1px solid gray;
+}
+
+section * {
+    width: 70%;
+    margin : 5px;
+}
+
+section p {
+    line-height: 160%;
+}
