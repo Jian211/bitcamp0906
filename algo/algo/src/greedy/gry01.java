@@ -1,6 +1,6 @@
-package free;
+package greedy;
 
-public class Main {
+public class gry01 {
 	public static void main(String[] args) {
 		int n = 1260;
 		int cnt = 0;
@@ -12,6 +12,5 @@ public class Main {
 			n %= coinTypes[i];
 		}
 		System.out.println(cnt);
-		
 	}
 }
