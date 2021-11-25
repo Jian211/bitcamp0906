@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        window.onload = function() {
+            var html = document.body.innerHTML;
+            var text = document.body.innerText;
+        
+            var list = '<ul>'
+            list += '   <li>HTML 5</li>'
+            list += '   <li>CSS 3</li>'
+            list += '   <li>JS</li>'
+            list += '</ul>'
+
+            document.body.innerHTML = list;
+        };
+
+        var name = '손흥민';
+        var name = '이강인';
+
+        console.log(name)
+
+        var numberStr = String(123);
+        console.log('numberStr', numberStr,typeof(numberStr))
+
+    </script>
+</head>
+<body>
+    <h1>안녕하세요</h1>
+</body>
+</html>

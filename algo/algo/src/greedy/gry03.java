@@ -13,30 +13,50 @@ public class gry03 {
 #   예를 들어 02984라는 문자열로 만들 수 있는 가장 큰수는((((0+2)*9)*8)*4) 입니다
  
  */
-	private static int test(String a) {
-		// 0과 1은 곱하면 손해 값이 0이거나 혹은 1이면 무조껀 더하기 
-		int result = 0;
-		int i = 1;
-		int fir = a.charAt(i - 1) - 48;
-		
-		while( i < a.length()) {
-			int sec = a.charAt(i) - 48;
-			
-			if(sec > 1) {		// 이러면 0과 1은 아니다.  그러면 곱해도 된다는 뜻
-				fir = fir * sec;
-			} else {
-				fir = fir + sec;
-			}
-			i++;
-			result += fir;
-		}
-		return result;
-	}
-
 	public static void main(String[] args) {
 		String a = "02984";
-		String b = "12984";
+		String b = "567";
+		
 		System.out.println(test(a));
 		System.out.println(test(b));
 	}
+
+	private static int test(String a) {
+		int result = a.charAt(0) - 48;
+
+		for (int i = 1; i < a.length(); i++) {
+			if(result <= 1 || a.charAt(i) - 48 <= 1) {
+				result += a.charAt(i) - 48;
+			} else {
+				result *= a.charAt(i) - 48;
+			}
+		}
+		return result;
+	}
 }
+/*
+	private static int test(String a) {
+		int num = a.charAt(0) - 48;
+		a = a.substring(1);
+
+		return test01(a, num);
+	}
+
+	private static int test01 (String a, int num) {
+		int nextNum = num;
+
+		if(num < 2) {
+			nextNum = (a.charAt(0) - 48) + num;
+		} else {
+			nextNum = (a.charAt(0) - 48) * num;
+		}
+		a = a.substring(1);
+
+		if(a.length() == 0) {
+			return nextNum;
+		}
+		
+		return test01(a, nextNum);
+	
+	}
+ */
