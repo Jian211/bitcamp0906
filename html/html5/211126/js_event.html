@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin  : 0;
+            padding : 0;
+        }
+
+        h1{
+            background-color: aquamarine;
+            padding:  100px;
+        }
+        input[type = submit] {
+            padding :10px;
+            font-size: 3em;
+        }
+
+        form {
+            margin: 20px;
+        }
+
+    </style>
+    <script>
+        //  이벤트 적용 : 캐스팅 > 이벤트 속성에 이벤트 핸들러를 할당!
+        //  h1 캐스팅
+        window.onload = function(){
+            var btn1 =  document.getElementById('btn1');  //document.querySelector("#btn1");
+
+            //  이벤트 속성에 핸들러 할당
+            btn1.onclick = function(){
+                console.log(this);
+                btn1.onclick = null;
+            };
+
+            document.getElementById('btn2').onclick = function(){
+                this.style.backgroundColor = "black";
+                this.style.color = "aquamarine";
+                //  이벤트 강제 실행 
+                btn1.onclick();
+            }
+
+
+        //     var form = document.querySelector("#form");  // getElementById("form");
+        //     form.onsubmit = function(){
+        //         // uid 캐스팅 > 공백 문자 확인 후,  공백이면 다시입력 return
+        //         var uid = document.getElementById("uid");
+        //         var pw = document.querySelector("#pw");
+
+        //         if( uid.value.length < 1 ){
+        //             console.log("아이디써라이자식아");
+                    
+        //             uid.focus();     // 입력 포커스를 uid 입력 폼으로 이동 
+                    
+        //             return false;
+        //         }
+
+        //         if( pw.value.length==0){
+        //             console.log("비밀번호쓰라!");
+        //             pw.focus();
+        //             return false;
+        //         }
+            
+        //     }
+            }
+
+        function inlineClick(){
+            concole.log("aaaa")
+        }
+
+        function submitProc(){
+            // uid 캐스팅 > 공백 문자 확인 후,  공백이면 다시입력 return
+            var uid = document.getElementById("uid");
+            var pw = document.querySelector("#pw");
+
+            if( uid.value.length < 1 ){
+                console.log("아이디써라이자식아");
+                
+                uid.focus();     // 입력 포커스를 uid 입력 폼으로 이동 
+                
+                return false;
+            }
+
+            if( pw.value.length==0){
+                console.log("비밀번호쓰라!");
+                pw.focus();
+                return false;
+            }
+        
+        }
+
+    </script>
+
+</head>
+<body>
+
+    <div>
+        <div>
+            <h1>
+                <p id="p1" style="border: 1px solid red; padding: 20px;">CLICK</p>
+            </h1>
+        </div>
+    </div>
+
+
+    <hr>
+
+
+    <form id="form" onsubmit="return submitProc()">
+
+        아이디 <input type="text" id="uid" name="uid"> 
+        <br>
+        비밀번호 <input type="password" id="pw" name="pw">
+        <br>
+
+        <input type="submit" value="ㄴㄴㄴㄴ">
+
+
+    </form>
+
+    <hr>
+    <h1 id="btn1">Click</h1>
+    <h1 id="btn2">Click</h1>
+    <h1 onclick ="inlineClick();" >click</h1>
+</body>
+</html>
