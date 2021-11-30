@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" 
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" 
+        crossorigin="anonymous">
+    </script>
+    <style>
+        .title{
+            background-color: aquamarine;
+        }
+    </style>
+    <script>
+         // $ -> Jquery
+        // $() : jQuery 객체 생성 메소드
+        // $(선택자 또는 객체) -> jQuery 객체로 변환
+        // $(document).ready(fn()) : onload 속성에 핸들러 적용과 같다
+        $(document).ready(function (){
+            // console.log("hi");
+            // $('h1').html('안녕하세요');
+            // $('.hello').html('헬로세요');
+            // $('#halo').html('할로세요');
+            
+            // 문서객체 생성
+           // const backgroundColor = $('*').css('color','red'); 
+        
+            const uid = $('#userId').val(); // input tag의 value를 갖고오는 getter
+
+            // $('input[type=text]').val('두개가 변해!');         // 매개변수에 String 값을 넣으면 set하겠다는 의미
+            $('input:text').val('두개가 변해!');         // 매개변수에 String 값을 넣으면 set하겠다는 의미
+
+
+            setTimeout(function(){
+                const vals = $('select>option:selected').val();
+                console.log(vals);
+                
+                const chkVal = $('input:radio:checked').val();
+                console.log(chkVal);
+
+            },3000);
+
+            $('table tr:odd').css('background-color','skyblue');
+            $('table tr:even').css('background-color','pink');
+            $('table tr:first').css('background-color','yellow');
+            $('table tr:last').css('background-color','gray');
+
+
+            const links = [
+                { name : "네이버",
+                    url : 'https://naver.com'
+                },
+                { name  : "다음",
+                    url : 'https://daum.net'
+                },
+                { name  : "카카오",
+                    url : 'https://kakao.com'
+                }
+            ];
+
+            
+            let newHtml = "";
+            $(links).each((index,item) => {
+                console.log(item);
+            });
+
+            $.each(links,function(index, item){
+                console.log(index, item);
+                
+                newHtml += '<a href="'+item.url+'">'+item.name+'</a>\n';
+            });
+
+            $('#linkbox').html(newHtml);         // setter
+            const get = $('#linkbox').html();    // getter 문자로 반환됌
+            
+            // $('h1').addClass("title");
+            $('h1.header1').addClass("title");
+
+            $('h1').each(function(index,item){
+                // item.innerText = "ddss"; 
+                $(item).html("ddss");   // 위와 같다.
+                
+            } );
+
+            $('h3:odd').css({
+                backgroundColor : 'black',
+                color : 'pink'
+            });
+            
+            $('h3').filter(':even').css({
+                backgroundColor : 'pink',
+                color : 'black'
+            });
+            
+            $('h3').filter(function(index){
+                return index % 3 == 0;
+            }).css({
+                backgroundColor : 'pink',
+                color : 'black'
+            });
+
+
+            $('h2').css('background','orange').filter(':even').css('background','yellow').end()
+            .filter(':odd').css('background','pink');
+            
+
+            // eq는 파라미터로 받은 인덱스의 객체를 전달
+            $('h4').eq(2).css('background','pink');     
+            
+            // first는 첫번째 객체를 전달받음
+            $('h4').first().css('background','tomato');
+            
+            // last는 마지막 객체를 전달받음
+            $('h4').last().css('background','yellowgreen');
+
+            
+            $('h1').css('background','gray').add('h2').css('background','yellow');
+
+
+        });
+
+        
+
+    </script>
+    <title>Document</title>
+    
+</head>
+<body>
+
+    <h4>header - 1</h4>
+    <h4>header - 2</h4>
+    <h4>header - 3</h4>
+    <h4>header - 4</h4>
+    <h4>header - 5</h4>
+
+    <hr>
+
+    <h2>header1</h2>
+    <h2>header2</h2>
+    <h2>header34</h2>
+    <h2>header6</h2>
+    <h2>header5</h2>
+
+    <hr>
+
+    <h3>header1</h3>
+    <h3>header2</h3>
+    <h3>header34</h3>
+    <h3>header5</h3>
+    <h3>header6</h3>
+
+    <hr>
+
+    <h1 class="header1">1</h1>
+    <h1 class="header1">2</h1>
+    <h1 class="header1">3</h1>
+    <h1 class="header1">4</h1>
+    <h1 class="header1">5</h1>
+    <h1 class="header1">6</h1>
+
+    <hr>
+
+    <div id="linkbox">
+
+    </div>
+
+    <hr>
+
+    <table  border="1">
+        <tr>
+            <th>thead1</th>
+            <th>thead2</th>
+        </tr>
+        <tr>
+            <td>1 - 1</td>
+            <td>1 - 2</td>
+        </tr>
+        <tr>
+            <td>2 - 1</td>
+            <td>2 - 2</td>
+        </tr>
+        <tr>
+            <td>3 - 1</td>
+            <td>3 - 2</td>
+        </tr>
+        <tr>
+            <td>4 - 1</td>
+            <td>4 - 2</td>
+        </tr>
+        <tr>
+            <td>t - 1</td>
+            <td>t - 2</td>
+        </tr>
+    </table>
+
+    <hr>
+
+    남자 <input type="radio" name="gender" id="men" value="1">
+    여자 <input type="radio" name="gender" id="women" value="2">
+
+    <hr>
+    <select name="test1" id="test1">
+        <option value="html5">html5</option>
+        <option value="css">css</option>
+        <option value="javascript">javascript</option>
+    </select>
+
+    <hr>
+
+    <input type="text" name="text" id="userId" value="test">
+    <input type="text" name="text" id="userId" value="test">
+
+    <hr>
+    <h1 >안녕</h1>
+    <h1 class="hello">hello</h1>
+    <h1 id="halo">halo</h1>
+</body>
+</html>

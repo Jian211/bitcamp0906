@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" 
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" 
+        crossorigin="anonymous">
+    </script>
+    <style>
+        div.card{
+            border : 1px solid red;
+            border-radius: 10px;
+            padding : 10px;
+            width: 250px;
+        }
+    </style>
+    <script>
+        var xml = "";
+
+        xml += '<links>\n';
+        xml += '    <link>\n';
+        xml += '        <name>네이버</name>\n';
+        xml += '        <url>https://www.naver.com</url>\n';
+        xml += '    </link>\n';
+        xml += '    <link>\n';
+        xml += '        <name>다음</name>\n';
+        xml += '        <url>https://www.daum.net</url>\n';
+        xml += '    </link>\n';
+        xml += '    <link>\n';
+        xml += '        <name>KAKAO</name>\n';
+        xml += '        <url>https://www.kakao.com</url>\n';
+        xml += '    </link>\n';
+        xml += '</links>\n';
+
+        console.log(xml);
+        // 문자열 XML 형식 > xml 문서객체로 변환
+        // $.parseXML(문자열);
+        var xmlDoc = $.parseXML(xml);
+        console.log(xmlDoc);
+
+        // xmlDoc문서를 jQuery 객체로 만들면
+        // find('엘리먼트이름')메소드를 이용해서 엘리먼트 요소객체를 찾을 수 있다.
+
+        // xml 문서에서 데이터를 추출 -> 데이터를 이용해서 html을 만든다.
+
+        // 이 과정을 "파싱"이라고 한다.
+
+        var html ='';
+
+        $(xmlDoc).find('link').each(function(index){
+            var name = $(this).find('name').text();
+            var url = $(this).find('url').text();
+            console.log(name, url);
+        
+            html += '<div>';
+            html += 'as';
+            html += '</div>';
+        });
+
+        $('body').html(html);
+
+    </script>
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>

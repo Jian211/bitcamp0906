@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" 
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" 
+        crossorigin="anonymous">
+    </script>
+    <style>
+        .title{
+            font-size: 200%;
+            font-weight: bold;
+        }
+        
+        .subtitle{
+            font-size: 150%;
+            font-weight: 400;
+            font-style: italic;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+
+            $('h3').addClass('subtitle');
+
+            $('.title').removeClass('title');
+
+
+            var a = $('#img').attr('src');  // getter : src 속성 값을 반환
+            console.log(a);
+
+            var aTag = $('a');
+            var b = $('a').attr('href');
+            console.log(b);
+            aTag.html(b);
+
+            // attr() : setter 
+            // $('#img1').attr('src','../test02/img02.jpg').attr('width','300');
+            $('#img1').attr({
+                src : '../test02/img02.jpg',
+                width : 300,
+                height : function(){
+                    return 200; 
+                }
+            })
+
+            $('img').attr('height',function(index){
+                return 200 + (index * 100);
+            });
+
+            // 특정 속성 삭제
+            $('img').removeAttr('height');
+
+            // 속성 값 추출
+            console.log($('img').css('color'));
+
+            // css() : setter 
+            // css('속성이름', 값 )
+            // $('h1').css('background-color','blue').css('color','pink');
+            var colors = ['skyblue','tomato','pink','gray'];
+
+            $('h1').css({
+                backgroundColor: "whitesmoke",
+                color : function(index){
+                    return colors[index];
+                }
+            });
+
+            /////////////////////////////////////
+            //  html(), text()
+            console.log($('#hello').html());
+            console.log($('#hello').text());
+
+            // html('html String'), text('문자열')
+            $('#hello').html('<h1>HALO!</h1>');
+            $('#hello').text('<h1>HALO!</h1>');
+
+        });
+
+
+    </script>
+    <title>Document</title>
+    
+</head>
+<body>
+
+    <div id="hello">
+        <h2>MELLON</h2>
+        <p>맛있는메론</p>
+    </div>
+
+
+    <hr>
+
+    <h1>HELLO1</h1>
+    <h1>HELLO2</h1>
+    <h1>HELLO3</h1>
+    <h1>HELLO4</h1>
+
+    <img id="img1">
+
+    <a href="https://www.naver.com"></a>
+
+    <img src="../test02/img01.jpg" width="400" id="img" alt="">
+
+
+    <div class="title">안녕하세요</div>
+    <h3>반갑습니다.</h3>
+</body>
+</html>

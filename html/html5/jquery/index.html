@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" 
+    integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" 
+    crossorigin="anonymous">
+    </script>
+    <script>
+
+        let arr = ['a','b','c','d','e'];
+
+        $(document).ready(function(){
+            const message = "HELLO";
+            $('<h1></h1>').html(message).appendTo('body');
+
+            const h1 = $('h1');
+            h1.css({
+                backgroundColor : 'pink',
+                color : 'black'
+            });
+
+            $.each(arr,function(index){
+                
+                $('<h1></h1>').html(this).appendTo('body');
+            });
+
+            var xml = "";
+
+            xml += '<links>\n';
+            xml += '    <link>\n';
+            xml += '        <name>네이버</name>\n';
+            xml += '        <url>https://www.naver.com</url>\n';
+            xml += '    </link>\n';
+            xml += '    <link>\n';
+            xml += '        <name>다음</name>\n';
+            xml += '        <url>https://www.daum.net</url>\n';
+            xml += '    </link>\n';
+            xml += '    <link>\n';
+            xml += '        <name>KAKAO</name>\n';
+            xml += '        <url>https://www.kakao.com</url>\n';
+            xml += '    </link>\n';
+            xml += '</links>\n';
+
+            const xmlDoc = $.parseXML(xml); // html 형식으로 변환해준다 !!! String 문자열을 
+        
+            let test = $('<div></div>');
+            $(xmlDoc).find('link').each(function(index){
+                var a = $(this).find('name').text();
+                var b = $(this).find('url').text();
+                
+                $('<p></p>').html(a).appendTo(test); 
+                $('<p></p>').html(b).appendTo(test); 
+            })    
+
+            $('body').html(test);
+        });
+
+    </script>
+    
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,14 @@
+<links>
+    <link>
+        <name>네이버</name>
+        <url>https://www.naver.com</url>
+    </links>
+    <link>
+        <name>다음</name>
+        <url>https://www.daum.net</url>
+    </link>
+    <link>
+        <name>카카오</name>
+        <url>https://www.kakao.com</url>
+    </link>
+</links>
