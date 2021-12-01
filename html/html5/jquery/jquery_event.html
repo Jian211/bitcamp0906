@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" 
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" 
+        crossorigin="anonymous">
+    </script>
+    <style>
+        h1,div{
+            border : 1px solid gray;
+            width: 300px;
+            padding : 20px;
+        }
+
+        h1:hover{
+            cursor: pointer;
+        }
+
+        .mouse{
+            color:greenyellow;
+        }
+    </style>
+
+    <title>Document</title>
+    
+</head>
+<body>
+
+    <input type="checkbox" name="" id="all-check">
+    <label for="all-check">전제동의</label>
+
+    <div id="checkItem">
+        <input type="checkbox" value="A" name="" id="item1">
+        <label for="item1">A type</label><br>
+        <input type="checkbox" value="B" name="" id="item2">
+        <label for="item2">B type</label><br>
+        <input type="checkbox" value="C" name="" id="item3">
+        <label for="item3">C type</label><br>
+        <input type="checkbox" value="D" name="" id="item4">
+        <label for=""item4>D type</label><br>
+        <input type="checkbox" value="E" name="" id="item5">
+        <label for="item5">E type</label>
+    </div>
+
+    <hr>
+    
+    <form action="" id="myForm">
+        아이디 <input type="text" name="" id="uid"><br>
+        비밀번호 <input type="password" name="" id="upw"><br>
+
+
+        <input type="submit" value="제출">
+
+    </form>
+
+    <textarea name="" id="memo" cols="30" rows="10"></textarea>
+    <span>0</span>/150
+
+    <div id="wrap">
+        <h5 class="h5">HEADER</h5>
+    </div>
+    <hr>
+    <a href="https://www.naver.com">NAVER</a>
+
+    <h3>Click : </h3>
+    <div>
+        <h2>header - 0</h2>
+        <p>paragraph - 0</p>
+    </div>
+    <div>
+        <h2>header - 1</h2>
+        <p>paragraph - 1</p>
+    </div>
+    <div>
+        <h2>header - 2</h2>
+        <p>paragraph - 2</p>
+    </div>
+
+
+
+    <h1>click - 0</h1>
+    <h1>click - 1</h1>
+    <h1>click - 2</h1>
+
+    <hr>
+
+
+
+    <script>
+        $('#all-check').on('change',function(){
+            if(this.checked){
+                // checkItem 안에 있는 checkBox
+                $('#checkItem > input:checkbox').prop('checked', true);
+            }else{
+                $('#checkItem > input:checkbox').prop('checked', false);
+            }
+        });
+
+        $('#myForm').submit(function(e){
+            e.preventDefault(); // 이벤트 금지 
+        
+            var uid = $('#uid').val();
+            var upw = $('#upw').val();
+
+            console.log(uid,upw);
+        });
+
+        $('#memo').on('keyup',function(){
+            const cnt = $(this).val().length;
+            const remain = 150 - Number(cnt);
+
+            if(remain < 0 ){  
+                var str = $(this).val().substr(0, 150);
+                $(this).val(str);
+                cnt = 150;
+            };
+
+            $('span').text(cnt);
+        });
+
+        // $('#memo').keyup(function(){
+        //     var cnt = $(this).val().length;
+        //     var remain = 150 - Number(cnt);
+        //     console.log(remain)
+        // });
+
+        $('#wrap').on('click','.h5',function(){
+            var length = $('h5').length;
+            var targetHtml = $(this).html();
+
+            // $('#wrap').append('<h5 class="h5">'+length+' - '+ targetHtml+'</h5>');
+            $('<h5>'+length+' - '+ targetHtml+'</h5>').attr('onclick="function(){console.log("dd")}"').appendTo('#wrap');
+        });
+
+        // $('h5').click(function(){
+        //     var length = $('h5').length;
+        //     var targetHtml = $(this).html();
+
+        //     $('#wrap').append('<h5>'+length+' - '+targetHtml+'</h5>');
+        // });
+
+        // 이벤트 제거
+        $('a').click(function(e){
+            e.preventDefault(); //  기본이벤트를 제거해준다.
+            // e.stopPropagation();
+            // var ev = e || window.event;
+            // return false;
+        });
+
+        $('h1').on('click',function(){
+            // this : 클릭 이벤트가 발생한 객체를 가르킨다!
+            $(this).html(function(index,html){
+                return html + '+';  // html형식의 문자열
+            });
+        });
+
+        // $('H1').ON({
+        //     MOUSEENTER : FUNCTION(){
+        //         $(THIS).ADDCLASS('MOUSE');
+        //     },
+        //     MOUSELEAVE : FUNCTION(){
+        //         $(THIS).REMOVECLASS('MOUSE');
+        //     },
+        // });
+
+        $('h1').hover(function(){
+            $(this).addClass('mouse');
+        }, function(){
+            $(this).removeClass('mouse');
+
+            // $(this).off();  //  이벤트 연결삭제
+            $(this).off('mouseleave');
+
+        });  // 근데 내생각에는 그냥css처리가 나을듯하다.
+        
+        // $('div').click(function(e){
+        //     //  event가 발생한 div는  -> this
+        //     //  $('h1',this) -> 이벤트가 발생한 엘리먼트(div) 속에 위치한 h1 
+        //     var h2Str = $('h2',this).text();
+        //     var pStr = $('p',this).text();
+
+        //     console.log(h2Str, pStr);
+        //     console.log(e);
+        // });
+
+        $('h3').click(function(){
+            $(this).html(function(index, html){
+                return html + '+';
+            });
+        });
+        
+        // trigger : event를 자동 발생
+        setInterval(() => {
+            // $('h3').trigger('click');
+            
+        }, 1000);
+        
+        
+     
+
+    </script>
+</body>
+</html>

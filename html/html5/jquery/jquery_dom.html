@@ -11,7 +11,9 @@
     <style>
     </style>
     <script>
-        $(document).ready(function(){
+        $(document).ready(setting);
+        
+        function setting(){
             // 동적 태그 ( 엘리먼트 ) 생성 
             $('<h2></h2>').html('다움에 만나요!!!').appendTo('body');
             $('<h2>닫시만나요</h2>').appendTo('body');
@@ -19,18 +21,82 @@
         
             $('h1').remove();
             $('p').empty(); // p속에 있는 내용만 지움 
-        });
+    
+            $('<h1></h1>'); // h1태그로 엘리먼트 객체 생성
+            $('<h1></h1>').html('hello~');  
+            $('<h1>hello~</h1>').appendTo('body');
+    
+            $('#target').text('sssss');
 
-        function hi (){
-            alert("hi");
-        }  
 
+            imgVal = {
+                src : '../test02/img01.jpg',
+                width : 200
+            };
+
+            $('<img>').attr(imgVal).appendTo('#target');
+        
+            $('<img>', imgVal).appendTo('#target');
+            
+            // 대상객체 .append(동적객체) : 
+            // $('#target').append('<h1>append사용한 것</h1>').append('<p>append사용한 것+체이닝</p>');
+            $('#target').append('<h1>append사용한 것</h1>','<p>append사용한 것 체이닝이 필요없음!</p>');
+            
+
+            var h4 = '<h4>prepend H4</h4>';
+            var h5 = '<h5>prepend H5</h5>';
+            var h6 = '<h6>prepend H6</h6>';
+
+            $('#target').prepend(h4,h5,h6); // 셀렉터 앞에서부터 생성된다. 
+
+            
+            // 배열 생성
+            var links = [
+                {
+                    name : '네이버',
+                    url  : 'https://www.naver.com'
+                },
+                {
+                    name : '다음',
+                    url  : 'https://www.daum.net'
+                },
+                {
+                    name : 'KAKAO',
+                    url  : 'https://www.kakao.com'
+                }
+            ];
+
+            // $.each(links,function(index){
+            //     let html = '<li>' + this.name + '=' + this.url +'</li>'
+            //     $('#link').append(html);
+            // });
+
+            for(let i=0 ; i < links.length ; i++){
+                $('#link').append('<li></li>');
+            }
+
+            $('#link > li').append(function(index){
+                return '<a href="'+links[index].url+'">'+links[index].name+'</a>';
+            });
+
+        }
 
     </script>
     <title>Document</title>
     
 </head>
 <body>
+
+    <ul id="link">
+
+    </ul>
+
+    <div id="target">
+        <h1>HI</h1>
+    </div>
+    
+    <hr>
+
     <h1>HELLO</h1>
     <p>WELCOME</p>
 </body>
