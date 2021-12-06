@@ -33,6 +33,9 @@ local.properties
 # Java annotation processor (APT)
 .factorypath
 
+#Server path
+Servers/
+
 # PDT-specific (PHP Development Tools)
 .buildpath
 
