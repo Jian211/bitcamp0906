@@ -24,9 +24,9 @@
 	
 	<h3>host : <%= request.getHeader("host") %></h3>
 	<%
-		Enumeration headers = request.getHeaderNames();
+		Enumeration<String> headers = request.getHeaderNames();
 		while(headers.hasMoreElements()){
-			String headerName = (String)headers.nextElement();
+			String headerName = headers.nextElement();
 			String value = request.getHeader(headerName);
 			out.println("<h4>"+headerName+"="+value+"</h4>");
 		}
