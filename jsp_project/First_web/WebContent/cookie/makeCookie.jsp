@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="util.CookieBox"%>
 <%
 
 	// 쿠키 저장
@@ -13,7 +14,9 @@
 	
 	response.addCookie(cookie1);
 	response.addCookie(cookie2);
-
+	
+	response.addCookie(CookieBox.createCookie("uid", "cool"));
+	response.addCookie(CookieBox.createCookie("chk", "HOT", 10));
 
 %>
 
