@@ -21,7 +21,6 @@
 	list.add("JSP");
 	request.setAttribute("list", list);
 	
-	
 	Map<String, String> map = new HashMap<String, String>();
 	map.put("name", "손흥민");
 	map.put("team", "토트넘");
@@ -32,6 +31,7 @@
 	request.setAttribute("member", member);
 	
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,8 +50,7 @@
 
 	배열 요소 출력 : ${arr[0]} / ${arr[1]} / ${arr[2]}  / ${arr[3]} <br>
 	List 요소 출력 : ${list[0]} / ${list[1]} / ${list[2]} / ${list[3]} / ${list[4]} <br>
-	Map 요소 출력 : ${player.name} / ${player.team} / ${player.no} / ${player.address} 
-	<br>
+	Map 요소 출력 : ${player.name} / ${player.team} / ${player.no} / ${player.address} <br>
 	일반 객체인 경우 메소드 호출 : <br>
 	<%= ((Member)request.getAttribute("member")).getName() %> <br>
 	<%= ((Member)request.getAttribute("member")).getHello() %>  <br>
@@ -75,6 +74,7 @@
 
 	<%= request.getContextPath() %> <br>
 	<%= ((HttpServletRequest)pageContext.getRequest()).getContextPath()%><br>
+	
 	${pageContext.request.contextPath} <br>
 	${pageContext.request.requestURL} <br>
 	${pageContext.request.requestURI}

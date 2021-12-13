@@ -3,7 +3,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	List<Member> members = new ArrayList<>();
 	members.add(new Member(null,20));
@@ -24,7 +24,23 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<c:forTokens items="지명근,010-5015-3333" delims="," var="sel">
+		${sel}
+	</c:forTokens>
+	
+	
+	<hr>
 
+	<c:forEach var="member" items="${members}" varStatus="stat">
+		<hr>
+			<h6>${stat.index}</h6>
+			<h6>${stat.count}</h6>
+			<h6>${member.name}</h6>
+			<h6>${member.age}</h6>
+		<hr>
+	</c:forEach>
+
+	<hr>
 	<h1>회원 리스트 출력</h1>
 	<hr>
 	
