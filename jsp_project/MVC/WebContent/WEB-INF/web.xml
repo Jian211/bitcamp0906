@@ -7,25 +7,30 @@
   </welcome-file-list>
   
 <!--    서블릿 등록   : 서블릿 이름, 서블릿 클래스(full name) 이름 -->
-  <servlet>
-  	<servlet-name>SimpleController</servlet-name>
- 	<servlet-class>controller.SimpleController</servlet-class>
-  </servlet>	
+<!--   <servlet> -->
+<!--   	<servlet-name>SimpleController</servlet-name> -->
+<!--  	<servlet-class>controller.SimpleController</servlet-class> -->
+<!--   </servlet>	 -->
 
 <!--    	서블릿 맵핑 : 경로설정 > 서블릿 이름, 맵핑 경로  -->
-  <servlet-mapping>
-  		<servlet-name>SimpleController</servlet-name>
-  		<url-pattern>/simple</url-pattern>
-  </servlet-mapping>
+<!--   <servlet-mapping> -->
+<!--   		<servlet-name>SimpleController</servlet-name> -->
+<!--   		<url-pattern>/simple</url-pattern> -->
+<!--   </servlet-mapping> -->
   
-<!-- 	<servlet> -->
-<!-- 		<servlet-name>FrontController</servlet-name> -->
-<!-- 		<servlet-class>controller.FrontController</servlet-class> -->
-<!-- 	</servlet> -->
+	<servlet>
+		<servlet-name>FrontController</servlet-name>
+		<servlet-class>controller.FrontController</servlet-class>
+		<init-param>
+			<param-name>configPath</param-name>
+			<param-value>/WEB-INF/command.propertise</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
   
-<!--   	<servlet-mapping> -->
-<!--   		<servlet-name>FrontController</servlet-name> -->
-<!--   		<url-pattern>*.do</url-pattern> -->
-<!--   	</servlet-mapping> -->
+  	<servlet-mapping>
+  		<servlet-name>FrontController</servlet-name>
+  		<url-pattern>*.do</url-pattern>
+  	</servlet-mapping>
   
 </web-app>

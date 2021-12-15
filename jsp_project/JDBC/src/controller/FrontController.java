@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import service.BadCommandimpl;
-import service.Command;
+import dept.service.BadCommandImpl;
+import dept.service.Command;
 
 public class FrontController extends HttpServlet{
 
@@ -26,7 +26,6 @@ public class FrontController extends HttpServlet{
 	public void init(ServletConfig config) throws ServletException {
 		// web.xml 설정이 필요함
 		System.out.println("서블릿이 생성 될 때 한번 실행합니다. -> 초기화 처리합니다.");
-		
 		
 		// 목적을 확인할 것
 		// 설정 파일에 init-param  설정된 경로 가져오기.
@@ -92,7 +91,7 @@ public class FrontController extends HttpServlet{
 		
 		Command command = commans.get(commandURI);			
 		if(command == null) {
-			command = new BadCommandimpl();
+			command = new BadCommandImpl();
 		}
 
 		String viewPage = command.getPage(req, res);

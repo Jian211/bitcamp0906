@@ -1,0 +1,8 @@
+# 요청경로=실행클래스 이름  (key)=(value)
+/date.do=service.DateCommandimpl
+/greeting.do=service.GreetingCommandimpl
+/member/loginForm.do=service.LoginFormCommandImpl
+/member/login.do=service.LoginCommandImpl
+/member/mypage.do=service.MyPageCommandImpl
+
+#설정 파일에 등록 > Command 클래스 생성 > view(JSP) 생성
