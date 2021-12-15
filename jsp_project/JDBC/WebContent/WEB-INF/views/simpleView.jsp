@@ -7,10 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>부서관리 프로그램 / 사원관리 프로그램</h1>
-	<h3>
-		<a href="">부서관리 프로그램</a>
-		<a href="">사원관리 프로그램</a>
-	</h3>
+	<h1>SimpleView.jsp에서 view 생성됨!!!</h1>
+	<hr>
+	<h1>
+		${result}
+	</h1>
+
 </body>
 </html>

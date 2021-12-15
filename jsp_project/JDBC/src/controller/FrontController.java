@@ -24,23 +24,21 @@ public class FrontController extends HttpServlet{
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
-		// web.xml 설정이 필요함
 		System.out.println("서블릿이 생성 될 때 한번 실행합니다. -> 초기화 처리합니다.");
-		
-		// 목적을 확인할 것
-		// 설정 파일에 init-param  설정된 경로 가져오기.
+
 		String configFile = config.getInitParameter("configPath");
 		
 		// 시스템 경로 파일의 실제경로
 		String configPath = config.getServletContext().getRealPath(configFile);
 		
 		Properties prop = new Properties();
-		FileInputStream fis = null;	// 프로그램 기준으로 외부의 파일을 갖고온다.
+		FileInputStream fis = null;						// 프로그램 기준으로 외부의 파일을 갖고온다.
+		
 		try {
 			fis = new FileInputStream(configPath);
 			
-			prop.load(fis);	// 파일 -> 객체 Properties
-			fis.close();    // stream클래스는 close메소드를 실행 해줘야한다.
+			prop.load(fis);								// 파일 -> 객체 Properties
+			fis.close();   								// stream클래스는 close메소드를 실행 해줘야한다.
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -53,17 +51,11 @@ public class FrontController extends HttpServlet{
 		while(itr.hasNext()) {
 			String command = (String)itr.next();
 			String commandClassName = prop.getProperty(command);	// Value 얻기
-			System.out.println(commandClassName);
 			
 			try {
-				// Command interface를 상속한 클래스를 담는다. < 
 				Command commandObj = (Command)Class.forName(commandClassName).newInstance();
-				// commandObj 이거에 궁금함이 생겼다.
 				
-				
-				// commands Map에 <요청, 객체> 저장
 				commans.put(command, commandObj);
-				
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (InstantiationException e) {
@@ -89,12 +81,20 @@ public class FrontController extends HttpServlet{
 	private void doProcess(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		String commandURI = req.getRequestURI();
 		
-		Command command = commans.get(commandURI);			
+		if(commandURI.startsWith(req.getContextPath())) {
+			commandURI = commandURI.substring(req.getContextPath().length());
+		}
+		
+		Command command = commans.get(commandURI);	
+		// command = dept.service.DeptListCommandImpl 이게 들어갈텐데
+		// dept.service.DeptListCommandImpl 값이 자동으로  DeptListCommandImpl 클래스를 실행시키는건가?
+		
+		
 		if(command == null) {
 			command = new BadCommandImpl();
 		}
 
-		String viewPage = command.getPage(req, res);
+		String viewPage = command.getPage(req, res);	// 이게 실행 시켜주는거였다. 아 이해 되따
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher(viewPage);
 		dispatcher.forward(req, res);

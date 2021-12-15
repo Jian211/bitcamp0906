@@ -10,7 +10,6 @@ public class DriverLoader extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		String driver = config.getInitParameter("driver");	// param-value값이 들어온다  -> com.mysql.cj.jdbc.Driver
 		
-		// DB드라이버 로드 
 		try {
 			Class.forName(driver);
 			System.out.println("mysql 드라이버 로드 성공!!");
@@ -18,9 +17,6 @@ public class DriverLoader extends HttpServlet {
 			e.printStackTrace();
 			System.out.println("mysql 드라이버 로드 실패 ㅠㅠ");
 		}
-	
-	
 	}
-
 	
 }
