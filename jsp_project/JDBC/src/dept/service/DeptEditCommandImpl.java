@@ -62,7 +62,6 @@ public class DeptEditCommandImpl implements Command {
 				conn = ConnectionProvider.getConnection();
 				
 				Dept dept = new Dept(Integer.parseInt(deptno), dname, loc);
-				
 				dcnt = DeptDao.getInstance().editDept(conn,dept);
 				
 			} catch (SQLException e) {

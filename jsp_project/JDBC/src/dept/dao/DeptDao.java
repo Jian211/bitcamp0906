@@ -61,10 +61,11 @@ public class DeptDao {
 
 
 	public int insertDept(Connection conn, Dept dept) {
+		System.out.println("설먀 여기로오냐?");
 		int resultCnt = 0; // 결과를 반환한다.
 		
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO dept(`deptno`,`dname`,`loc`) VALUES (?,?,?);";
+		String sql = "INSERT INTO dept(deptno,dname,loc) VALUES (?,?,?)";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -78,7 +79,6 @@ public class DeptDao {
 		} finally {
 			JdbcUtil.close(pstmt);
 		}
-				
 				
 		return resultCnt;
 	}
@@ -118,7 +118,6 @@ public class DeptDao {
 		
 		PreparedStatement pstmt = null;
 		String sql = "UPDATE dept SET dname = ?,loc = ? WHERE deptno = ?";
-		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dept.getDname());
@@ -134,6 +133,28 @@ public class DeptDao {
 		}
 		
 		return dcnt;
+	}
+
+
+	public int deleteDept(Connection conn, int deptno) {
+		int resultCnt = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = "DELETE FROM project.dept WHERE deptno = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, deptno);
+			
+			resultCnt = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
+		
+		return resultCnt;
 	}
 	
 	

@@ -36,7 +36,7 @@
 		<h3>부서 정보 수정</h3>
 		<hr>
 		
-		<form action="reg.do" method="post">
+		<form action="#" method="post">
 			<table>
 				<tr>
 					<td>부서 번호</td>

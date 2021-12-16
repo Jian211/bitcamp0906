@@ -25,11 +25,21 @@
 	#content > table td, #content > table th {
 		border : 1px solid #aaa;
 	}
-	
 
 </style>
 <title>부서관리 프로그램</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css">
+<script>
+function deleteDept(deptno){
+	if(confirm('삭제하시겠습니까?')){
+		// 삭제처리 할 수 있는 링크 url
+		// http://localhost:8080/jdbc/dept/delete.do?deptno=?
+		alert("삭제");
+		location.href = 'delete.do?deptno='+deptno;
+	}
+}
+</script>
+
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/frame/header.jsp" %>
@@ -55,7 +65,7 @@
 						<td>
 							<a href="edit.do?deptno=${dept.deptno}">수정</a> 
 							|
-							 삭제
+							<a href="javascript:deleteDept(${dept.deptno})">삭제</a>
 						 </td>
 					</tr>
 				</c:forEach>

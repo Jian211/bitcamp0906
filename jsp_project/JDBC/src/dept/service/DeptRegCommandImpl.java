@@ -13,8 +13,6 @@ import jdbc.ConnectionProvider;
 import jdbc.util.JdbcUtil;
 
 public class DeptRegCommandImpl implements Command {
-
-	
 	@Override
 	public String getPage(HttpServletRequest req, HttpServletResponse res) {
 		
