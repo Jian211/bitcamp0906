@@ -6,3 +6,5 @@ SELECT `dept`.`deptno`,
     `dept`.`dname`,
     `dept`.`loc`
 FROM `project`.`dept`;
+
+-- 부서 데이터 입력 sql

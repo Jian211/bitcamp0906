@@ -1,11 +1,13 @@
 package dept.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
 
 import dept.domain.Dept;
 import jdbc.util.JdbcUtil;
@@ -18,9 +20,7 @@ public class DeptDao {
 			//	2. 클래스 내부에서 인스턴스를 생성, 참조변수는 private, static
 			//	3. 참조값을 제공하는 메소드가 필요! -> public static
 	
-	private DeptDao(){
-		
-	}
+	private DeptDao(){}
 	
 	private static DeptDao dao = new DeptDao();
 	public static DeptDao getInstance() {
@@ -58,8 +58,83 @@ public class DeptDao {
 		
 		return list;
 	}
-	
-	
+
+
+	public int insertDept(Connection conn, Dept dept) {
+		int resultCnt = 0; // 결과를 반환한다.
+		
+		PreparedStatement pstmt = null;
+		String sql = "INSERT INTO dept(`deptno`,`dname`,`loc`) VALUES (?,?,?);";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dept.getDeptno());
+			pstmt.setString(2, dept.getDname());
+			pstmt.setString(3, dept.getLoc());
+			
+			resultCnt = pstmt.executeUpdate();	// executeUpdate는 성공여부를 int로 반환
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
+				
+				
+		return resultCnt;
+	}
+
+
+	public Dept selectByDeptno(Connection conn, String deptno) {
+		Dept dept = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select * from project.dept where deptno=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(deptno));
+			
+			rs = pstmt.executeQuery();
+		
+			if(rs.next()) {
+				dept = new Dept(rs.getInt(1), rs.getString(2), rs.getString(3));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+		
+		return dept;
+	}
+
+
+	public int editDept(Connection conn, Dept dept) {
+		
+		int dcnt = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE dept SET dname = ?,loc = ? WHERE deptno = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dept.getDname());
+			pstmt.setString(2, dept.getLoc());
+			pstmt.setInt(3, dept.getDeptno());
+			
+			dcnt = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
+		
+		return dcnt;
+	}
 	
 	
 }
