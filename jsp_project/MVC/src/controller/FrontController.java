@@ -60,7 +60,7 @@ public class FrontController extends HttpServlet{
 				// Command interface를 상속한 클래스를 담는다. < 
 				Command commandObj = (Command)Class.forName(commandClassName).newInstance();
 				// commandObj 이거에 궁금함이 생겼다.
-				
+				System.out.println("commandObj : "+commandObj);
 				
 				// commands Map에 <요청, 객체> 저장
 				commans.put(command, commandObj);
@@ -89,7 +89,12 @@ public class FrontController extends HttpServlet{
 	
 	private void doProcess(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		String commandURI = req.getRequestURI();
+
+		if(commandURI.startsWith(req.getContextPath())) {
+			commandURI = commandURI.substring(req.getContextPath().length());
+		}
 		
+		System.out.println("commandURI : "+commandURI);
 		Command command = commans.get(commandURI);			
 		if(command == null) {
 			command = new BadCommandimpl();

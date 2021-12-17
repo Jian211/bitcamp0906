@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mysql.cj.jdbc.SuspendableXAConnection;
+
 import dept.service.BadCommandImpl;
 import dept.service.Command;
 
@@ -25,7 +27,7 @@ public class FrontController extends HttpServlet{
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		System.out.println("서블릿이 생성 될 때 한번 실행합니다. -> 초기화 처리합니다.");
-
+		
 		String configFile = config.getInitParameter("configPath");
 		
 		// 시스템 경로 파일의 실제경로
@@ -86,9 +88,6 @@ public class FrontController extends HttpServlet{
 		}
 		
 		Command command = commans.get(commandURI);	
-		// command = dept.service.DeptListCommandImpl 이게 들어갈텐데
-		// dept.service.DeptListCommandImpl 값이 자동으로  DeptListCommandImpl 클래스를 실행시키는건가?
-		
 		
 		if(command == null) {
 			command = new BadCommandImpl();

@@ -21,7 +21,6 @@ public class DeptDao {
 			//	3. 참조값을 제공하는 메소드가 필요! -> public static
 	
 	private DeptDao(){}
-	
 	private static DeptDao dao = new DeptDao();
 	public static DeptDao getInstance() {
 		return dao;

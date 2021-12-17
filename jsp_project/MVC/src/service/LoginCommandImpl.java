@@ -12,12 +12,7 @@ public class LoginCommandImpl implements Command {
 
 	@Override
 	public String getPage(HttpServletRequest req, HttpServletResponse res) {
-		
-		// 로그인 처리 
-		// id == pw ? 로그인 성공! => 결과 boolean loginChk 속성으로 저장
-		// 사용자 입력 데이터 받기 
-		
-		// post 요청 시 한글 처리  로그인 경우는 한글로 입력되는 일이 없지만 다음 사용될 것을 대비해 알아둘 것
+
 		try {
 			req.setCharacterEncoding("UTF-8");
 		} catch (UnsupportedEncodingException e) {
@@ -25,7 +20,7 @@ public class LoginCommandImpl implements Command {
 		}
 		
 		String uid = req.getParameter("uid");
-		String upw = req.getParameter("upw");
+		String upw = req.getParameter("uiw");
 		
 		boolean loginChk = false;
 		

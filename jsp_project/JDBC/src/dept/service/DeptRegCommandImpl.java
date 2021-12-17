@@ -19,20 +19,17 @@ public class DeptRegCommandImpl implements Command {
 		String viewPage = null;
 
 		if(req.getMethod().equals("GET")) {
-			System.out.println(req.getMethod());		// 전송방식 확인
 			viewPage = "/WEB-INF/views/dept/regform.jsp";
 
 			
 		} else if(req.getMethod().equals("POST")){
-			System.out.println(req.getMethod());		// 전송방식 확인
 			
-			
-			// post 방식에서 한글 처리
+		/*	// post 방식에서 한글 처리
 			try {
 				req.setCharacterEncoding("utf-8");
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
-			}
+			}*/
 			
 			// 사용자가 입력한 데이터를 갖고 
 			String deptno = req.getParameter("deptno");

@@ -31,7 +31,6 @@ public class DeptEditCommandImpl implements Command {
 				conn = ConnectionProvider.getConnection();
 				dept = DeptDao.getInstance().selectByDeptno(conn,deptno);
 			
-				System.out.println("edit : " + dept);
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -44,12 +43,12 @@ public class DeptEditCommandImpl implements Command {
 			viewPage = "/WEB-INF/views/dept/editform.jsp";
 			
 		} else if(req.getMethod().equals("POST")) {
-			try {
-				req.setCharacterEncoding("utf-8");
-				
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
+//			try {
+//				req.setCharacterEncoding("utf-8");
+//				
+//			} catch (UnsupportedEncodingException e) {
+//				e.printStackTrace();
+//			}
 			
 			// 수정하고자 하는 데이터를 받는다. 
 			String deptno = req.getParameter("deptno");
