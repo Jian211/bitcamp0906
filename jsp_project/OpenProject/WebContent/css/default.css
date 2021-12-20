@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+*{
+	margin : 0;
+	padding : 0;
+}
+
+header {
+	padding : 20px;
+}
+
+header > h1 {
+	font-style: italic;	
+}
+
+nav {
+	padding : 5px;
+	border-top: 1px solid #aaa;
+	border-bottom: 1px solid #aaa;
+}
+
+nav > ul {
+	list-style: none;
+	overflow: hidden;
+}
+
+nav > il > li {
+	float: left;
+	padding: 0 15px;
+}
+
+nav + div {
+	padding : 30px;
+}
+
+nav + div > h3 {
+	border : 0;
+	border-top: 1px solid #aaa;
+}
