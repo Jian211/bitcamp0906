@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:if test="${not loginChk}">
-<script>
-	alert("로그인이 필요한 페이지 입니다.");
-	location.href = "${pageContext.request.contextPath}/member/login.do";
-</script>
-</c:if>
-<c:if test="${loginChk}">
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,10 +41,10 @@
 				<td>사진</td>
 				<td><img src="${pageContext.request.contextPath}/uploadfile/${member.photo}"></td>
 			</tr>
-			<tr>
-				<td>가입일</td>
-				<td>${member.regdate}</td>
-			</tr>
+<!-- 			<tr> -->
+<!-- 				<td>가입일</td> -->
+<%-- 				<td>${member.regdate}</td> --%>
+<!-- 			</tr> --> 문제잇음
 		</table>
 		
 	</div>
@@ -60,4 +54,3 @@
 	<%@ include file="/WEB-INF/views/frame/footerSet.jsp" %>
 </body>
 </html>
-</c:if>

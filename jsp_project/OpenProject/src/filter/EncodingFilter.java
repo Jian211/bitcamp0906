@@ -37,7 +37,7 @@ public class EncodingFilter implements Filter {
 		this.encoding = filterConfig.getInitParameter("encoding");
 		System.out.println("encoding : "+encoding);
 		if(encoding == null) {
-			this.encoding = "UTF-8";
+			this.encoding = "utf-8";
 		}
 		
 	}
