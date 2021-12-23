@@ -208,6 +208,26 @@ public class MemberDao {
 		
 		return resultCnt;
 	}
+
+	public int deleteMemberByIdx(Connection conn, int idx) throws SQLException {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = "delete from member where idx = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
+		
+		
+		return result;
+	}
 	
 	
 	

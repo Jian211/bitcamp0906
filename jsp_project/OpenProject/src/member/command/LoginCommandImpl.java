@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.Command;
 import member.domain.Member;
 import member.service.LoginService;
 
@@ -12,7 +13,6 @@ public class LoginCommandImpl implements Command {
 
 	@Override
 	public String getPage(HttpServletRequest req, HttpServletResponse res) {
-		
 		String view = null;
 		
 		if(req.getMethod().equals("GET")) {

@@ -83,7 +83,7 @@
 						<td>${member.regDate}</td>
 						<td>
 							<a href="edit.do?idx=${member.idx}">수정</a>
-							<a href="delete.do?idx=${member.idx}">삭제</a>
+							<a href="javasript:delMember(${member.idx})">삭제</a>
 						</td>
 					</tr>
 				</c:forEach>
@@ -101,5 +101,13 @@
 
 	<!--  js 추가	-->
 	<%@ include file="/WEB-INF/views/frame/footerSet.jsp" %>
+	
+	<script>
+		function delMember(idx){
+			if(confirm("해당 회원 정보를 삭제하시겠습니까?")){
+				location.href = 'delete.do?idx='+idx;
+			};
+		}
+	</script>
 </body>
 </html>
