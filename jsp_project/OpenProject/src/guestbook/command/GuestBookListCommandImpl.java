@@ -11,7 +11,6 @@ public class GuestBookListCommandImpl implements Command {
 
 	@Override
 	public String getPage(HttpServletRequest req, HttpServletResponse res) {
-		String viewPage = "";
 		
 		String pageNumber = req.getParameter("pNum");
 		int pageNum = 1;

@@ -107,7 +107,7 @@
 			</div>
 			<div class="guestBook_page-nav">
 				<c:forEach begin="1" var="cnt" end="${listView.pageTotalCount}"> 
-					<a href="guestbook.do?pNum=${cnt}">${cnt}</a>
+					<a href="list.do?pNum=${cnt}">${cnt}</a>
 				</c:forEach>
 			</div>
 		</div>
