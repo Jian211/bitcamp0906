@@ -32,8 +32,12 @@
 					</div>
 				</div>
 			</div>
+			<div class="questBook_content-form">
+				
+			</div>
+			<div class="questBook_reply-form">
 			
-			
+			</div>
 		</div>
 		
 	</div>

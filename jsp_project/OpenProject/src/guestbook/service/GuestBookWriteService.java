@@ -14,14 +14,14 @@ import jdbc.ConnectionProvider;
 import jdbc.util.JdbcUtil;
 import member.domain.LoginInfo;
 
-public class GuestBookListService {
+public class GuestBookWriteService {
 
-	private GuestBookListService () {};
-	private static GuestBookListService service = new GuestBookListService();
-	public static GuestBookListService getInstance() { return service; }
+	private GuestBookWriteService () {};
+	private static GuestBookWriteService service = new GuestBookWriteService();
+	public static GuestBookWriteService getInstance() { return service; }
 	
 	
-	public int insertGuestBookWrite(HttpServletRequest req, HttpServletResponse res) {
+	public int insertGuestBook(HttpServletRequest req, HttpServletResponse res) {
 		int result = 0;
 		Connection conn = null;
 		

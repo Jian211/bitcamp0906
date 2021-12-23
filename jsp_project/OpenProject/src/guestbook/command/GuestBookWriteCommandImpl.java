@@ -4,9 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import command.Command;
-import guestbook.service.GuestBookListService;
+import guestbook.service.GuestBookWriteService;
 
-public class GuestBookListCommandImpl implements Command {
+public class GuestBookWriteCommandImpl implements Command {
 
 	@Override
 	public String getPage(HttpServletRequest req, HttpServletResponse res) {
@@ -20,7 +20,7 @@ public class GuestBookListCommandImpl implements Command {
 		} else if(req.getMethod().equals("POST")) {
 			String msg = "";
 			
-			int result = GuestBookListService.getInstance().insertGuestBookWrite(req,res);
+			int result = GuestBookWriteService.getInstance().insertGuestBook(req,res);
 
 			
 			if(result > 0) {
