@@ -28,12 +28,12 @@ public class GuestBookWriteService {
 		try {
 			conn = ConnectionProvider.getConnection();
 
-			int idx = selectById(((LoginInfo) req.getSession().getAttribute("loginInfo")).getUserId(),conn);
+			int memberidx = selectById(((LoginInfo) req.getSession().getAttribute("loginInfo")).getUserId(),conn);
 			String subject = req.getParameter("subject");
 			String content = req.getParameter("content");
 
 			
-			result = GuestBookDao.getInstance().insertGuestBook(conn, new GuestBook(idx, subject, content));
+			result = GuestBookDao.getInstance().insertGuestBook(conn, new GuestBook(subject, content, memberidx));
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -46,7 +46,7 @@ public class GuestBookWriteService {
 	};
 	
 	public int selectById(String id,Connection conn) throws SQLException {
-		int idx = -1;
+		int memberidx = -1;
 		
 		String sql = "select * from project.member where userid=?;";
 		PreparedStatement pstmt = null;
@@ -58,13 +58,13 @@ public class GuestBookWriteService {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				idx = rs.getInt(1);	// idx 값 받아오기
+				memberidx = rs.getInt(1);	// memberidx 값 받아오기
 			}
 		} finally {
 			JdbcUtil.close(pstmt);
 		}
 
-		return idx;
+		return memberidx;
 	}
 
 	
