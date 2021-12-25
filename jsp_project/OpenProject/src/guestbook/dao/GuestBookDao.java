@@ -18,6 +18,7 @@ public class GuestBookDao {
 	public static GuestBookDao getInstance() { return dao; }
 	
 	
+	//  게시판 등록
 	public int insertGuestBook(Connection conn, GuestBook guestBook) throws SQLException {
 		int result = 0;
 		
@@ -38,10 +39,11 @@ public class GuestBookDao {
 		return result;
 	}
 
+	// 
 	public int selectById(String id,Connection conn) throws SQLException {
 		int memberidx = -1;
 		
-		String sql = "select * from project.member where userid=?;";
+		String sql = "select * from member where userid=?;";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
@@ -60,7 +62,7 @@ public class GuestBookDao {
 		return memberidx;
 	}
 	
-	
+	//  게시판의 총 갯수를 구하는 메소드
 	public int selectTotalCount(Connection conn) throws SQLException {
 		int totalCount = 0;
 		
@@ -84,6 +86,7 @@ public class GuestBookDao {
 		return totalCount;
 	}
 
+	//	선택한 행의 갯수만큼 게시판의 데이터를 GET
 	public List<GuestBook> selectList(Connection conn, int index, int COUNT_PER_PAGE) throws SQLException {
 		List<GuestBook> list = new ArrayList<GuestBook>();
 		
@@ -121,6 +124,21 @@ public class GuestBookDao {
 		}
 		
 		return list;
+	}
+
+	// idx값 기준으로 게시판을 삭제 -> throw로 분기
+	public void deleteGuestBookByIdx(Connection conn, int idx) throws SQLException {
+		String sql ="delete from guestbook where idx = ?";
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.executeUpdate();
+			
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
 	};
 	
 	
