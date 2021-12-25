@@ -28,7 +28,7 @@ public class GuestBookWriteService {
 		try {
 			conn = ConnectionProvider.getConnection();
 
-			int memberidx = selectById(((LoginInfo) req.getSession().getAttribute("loginInfo")).getUserId(),conn);
+			int memberidx = GuestBookDao.getInstance().selectById(((LoginInfo) req.getSession().getAttribute("loginInfo")).getUserId(),conn);
 			String subject = req.getParameter("subject");
 			String content = req.getParameter("content");
 
@@ -45,27 +45,7 @@ public class GuestBookWriteService {
 		
 	};
 	
-	public int selectById(String id,Connection conn) throws SQLException {
-		int memberidx = -1;
-		
-		String sql = "select * from project.member where userid=?;";
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				memberidx = rs.getInt(1);	// memberidx 값 받아오기
-			}
-		} finally {
-			JdbcUtil.close(pstmt);
-		}
-
-		return memberidx;
-	}
+	
 
 	
 	

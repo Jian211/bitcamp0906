@@ -38,6 +38,29 @@ public class GuestBookDao {
 		return result;
 	}
 
+	public int selectById(String id,Connection conn) throws SQLException {
+		int memberidx = -1;
+		
+		String sql = "select * from project.member where userid=?;";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				memberidx = rs.getInt(1);	// memberidx 값 받아오기
+			}
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
+
+		return memberidx;
+	}
+	
+	
 	public int selectTotalCount(Connection conn) throws SQLException {
 		int totalCount = 0;
 		
@@ -66,7 +89,13 @@ public class GuestBookDao {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from project.guestbook limit ?,?;";
+		String sql = "select guestbook.idx, "
+						 + " guestbook.subject,"
+						 + " guestbook.content,"
+						 + " guestbook.regdate, "
+						 + " member.username\r\n" + 
+				"from guestBook join member on guestBook.memberidx = member.idx"
+				+ " limit ?,?;";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -82,10 +111,8 @@ public class GuestBookDao {
 						rs.getString("subject"),
 						rs.getString("content"),
 						rs.getString("regdate"),
-						rs.getInt("memberidx"),
-						selectByMemberidx(conn,rs.getInt("memberidx"))	// 이렇게 해도되는지 질문
+						rs.getString("username")
 						));
-						
 			}
 			
 		} finally {
@@ -95,29 +122,6 @@ public class GuestBookDao {
 		
 		return list;
 	};
-	
-	public String selectByMemberidx(Connection conn,int memberidx) throws SQLException {
-		String username = null;
-		
-		String sql = "select username from member where idx= ?;";
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, memberidx);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				username = rs.getString(1);
-			}
-			
-		} finally {
-			JdbcUtil.close(pstmt);
-		}
-		
-		return username;
-	}
 	
 	
 	

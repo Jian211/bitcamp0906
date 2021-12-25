@@ -12,6 +12,8 @@ public class GuestBookListCommandImpl implements Command {
 	@Override
 	public String getPage(HttpServletRequest req, HttpServletResponse res) {
 		
+		
+		// 유저가 클릭한 페이지 확인 
 		String pageNumber = req.getParameter("pNum");
 		int pageNum = 1;
 		
@@ -25,11 +27,7 @@ public class GuestBookListCommandImpl implements Command {
 		}
 		
 		GuestBookListView listView = GuestBookListSerivce.getInstance().getList(pageNum);
-		
-//		if(listView.getList() == null) {
-//			listView = null;
-//		}
-		
+
 		req.setAttribute("listView", listView);
 		
 		return "/WEB-INF/views/guestbook/guestbookList.jsp";

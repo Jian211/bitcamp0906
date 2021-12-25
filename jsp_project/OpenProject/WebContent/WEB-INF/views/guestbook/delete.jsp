@@ -3,5 +3,5 @@
 
 <script>
 	alert("${msg}");
-	location.href = "${pageContext.request.contextPath}/guestbook/list.do";
+	location.href = "list.do";
 </script>

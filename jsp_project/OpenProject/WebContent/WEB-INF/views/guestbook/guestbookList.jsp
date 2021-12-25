@@ -5,61 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<style>
-	.guestBook-container {
-		border: 1px solid #aaa;
-		margin : 0;
-		padding : 0;	
-		max-width: 800px;
-	}
-	.guestBook_title{
-		display: flex;
-		justify-content: space-between;
-		align-content: center;
-	}
-	.guestBook_title a{
-		text-decoration: none;
-		border-radius: 5px;
-		padding: 10px;
-		background-color: aqua;
-	}
-	
-	.guestBook_header{
-		text-align: center;
-		border : 2px solid #aaa;
-		padding : 10px 0;
-	}
-	.guestBook_header span{
-		padding : 20px;
-	}
-	.guestBook-body_titles{
-		display :flex;
-		justify-content: space-between;
-	}
-	.guestBook-body_titles span{
-		width: 250px;
-		padding : 10px 0;
-		border : 1px solid #aaa;
-		text-align: center;
-	}
-	.guestBook_page-nav{
-		display: flex;
-		justify-content: center;
-	}
-	.guestBook_page-nav a{
-		display : block;
-		margin : 10px 10px;
-		padding: 10px;
-		border: 2px solid gray;
-		border-radius: 5px;
-		text-decoration: none;
-	}
-	.guestBook_page-nav a:hover {
-		background-color: pink;
-	}
-}
-
-</style>
+<link rel="stylesheet" href="../css/guestBook/guestBookStyle.css">
 <title>Guest Book List </title>
 <%@ include file="/WEB-INF/views/frame/pageSet.jsp" %>
 
@@ -74,9 +20,6 @@
 	<!--  네비 끝	-->
 	
 	<!--  content 시작	-->
-	<c:if test="${empty listView}">
-		<h1> 게시글이 없습니다! </h1>
-	</c:if>
 	<c:if test="${not empty listView}">
 		<div class="guestBook-container">
 			<div class="guestBook_title">
@@ -91,17 +34,17 @@
 				<div class="guestBook-body_titles">
 					<span>idx</span>
 					<span>제목</span>
-					<span>내용</span>
+				<!-- <span>내용</span> -->
 					<span>작성 일시</span>
 					<span>작성자</span>
 				</div>
-				<c:forEach items="${listView.list}" var="guestbook">
+				<c:forEach items="${listView.list}" var="guestbookInfo">
 					<div class="guestBook-body_titles">
-						<span>${guestbook.idx}</span>
-						<span>${guestbook.subject}</span>
-						<span>${guestbook.content}</span>
-						<span>${guestbook.regdate}</span>
-						<span>${guestbook.writer}</span>
+						<span>${guestbookInfo.idx}</span>
+						<span><a href="listView.do?listView=${guestbookInfo}">${guestbookInfo.subject}</a></span>
+				<%-- 	<span>${guestbookInfo.content}</span> --%>
+						<span>${guestbookInfo.regdate}</span>
+						<span>${guestbookInfo.writer}</span>
 					</div>
 				</c:forEach>
 			</div>
@@ -116,5 +59,6 @@
 
 	<!--  js 추가	-->
 	<%@ include file="/WEB-INF/views/frame/footerSet.jsp" %>
+	
 </body>
 </html>

@@ -25,8 +25,10 @@ public class GuestBookWriteCommandImpl implements Command {
 			
 			if(result > 0) {
 				msg = "글이 등록 되었습니다.";
-				viewPage = "/WEB-INF/views/guestbook/guestbookList.jsp";
+				System.out.println("등록됬ㄸ");
+				viewPage = "/WEB-INF/views/guestbook/guestbook.jsp";
  			} else {
+ 				System.out.println("안됬ㄸ");
  				msg = "글 등록이 실패 되었습니다.";
  				viewPage = "/WEB-INF/views/guestbook/guestbookform.jsp";
  			}
