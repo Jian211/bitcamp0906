@@ -1,9 +1,10 @@
 @charset "UTF-8";
 
+
 .guestBook-container {
 	border: 1px solid #aaa;
-	margin : 0;
-	padding : 0;	
+	border-radius : 20px;
+	padding : 20px;	
 	max-width: 800px;
 }
 .guestBook_title{
@@ -35,6 +36,12 @@
 	padding : 10px 0;
 	border : 1px solid #aaa;
 	text-align: center;
+}
+
+.guestBook-body_titles img{
+	width: 20px;
+	border-radius: 50%;
+	
 }
 .guestBook_page-nav{
 	display: flex;

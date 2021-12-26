@@ -11,45 +11,47 @@
 
 </head>
 <body>
-	<!--  헤더 시작	 -->
-	<%@ include file="/WEB-INF/views/frame/header.jsp" %>
-	<!--  헤더 끝	-->
 
 	<!--  네비 시작	-->
 	<%@ include file="/WEB-INF/views/frame/nav.jsp" %>
 	<!--  네비 끝	-->
 	
 	<!--  content 시작	-->
-	<div class="listView-container">
-		<div class="listView_subtitle">
-			<h2> ${guestBook.subject}</h2>	
-			<h2 hidden="">${guestBook.idx}</h2>
-		</div>
-		<div class="listView_userInfo">
-			<img alt="#" src="#"> 
-			<h3>${guestBook.writer}</h3>
-			<h3>${guestBook.regdate}</h3>
-			<c:if test="${guestBook.writer eq loginInfo.userName}">
-				<h3 class="userInfo-deleteAndEdit"><a href="edit.do?guestBook=${guestBook}">수정</a></h3>
-				<h3 class="userInfo-deleteAndEdit"><a href="javascript:deleteList(${guestBook.idx})">삭제</a></h3>
-			</c:if>
-		</div>
-		<div class="listView_content-form">
-			<h3>${guestBook.content}</h3>
-		</div>
-		<hr>
-		<div class="listView_reply-container">
-			<div>
-				<h2>?개의 댓글</h2>
-				<form method="get">
-					<input type="text" placeholder="댓글을 작성하세요.">
-					<input type="submit" value="댓글 작성">
-				</form>
+	<div class="main-contanier">
+		<!--  헤더 시작	 -->
+		<%@ include file="/WEB-INF/views/frame/header.jsp" %>
+		<!--  헤더 끝	-->
+		<div class="listView-container">
+			<div class="listView_subtitle">
+				<h2> ${guestBook.subject}</h2>	
+				<h2 hidden="">${guestBook.idx}</h2>
 			</div>
-			<div>
-				댓글들의 정보 
+			<div class="listView_userInfo">
+				<img style="width: 30px; border-radius: 50%;" src="${pageContext.request.contextPath}/uploadfile/${guestBook.photo}"> 
+				<h3>${guestBook.writer}</h3>
+				<h3>${guestBook.regdate}</h3>
+				<c:if test="${guestBook.writer eq loginInfo.userName}">
+					<h3 class="userInfo-deleteAndEdit"><a href="edit.do?guestBook=${guestBook}">수정</a></h3>
+					<h3 class="userInfo-deleteAndEdit"><a href="javascript:deleteList(${guestBook.idx})">삭제</a></h3>
+				</c:if>
 			</div>
-			
+			<div class="listView_content-form">
+				<h3>${guestBook.content}</h3>
+			</div>
+			<hr>
+			<div class="listView_reply-container">
+				<div>
+					<h2>?개의 댓글</h2>
+					<form method="get">
+						<input type="text" placeholder="댓글을 작성하세요.">
+						<input type="submit" value="댓글 작성">
+					</form>
+				</div>
+				<div>
+					댓글들의 정보 
+				</div>
+				
+			</div>
 		</div>
 	</div>
 

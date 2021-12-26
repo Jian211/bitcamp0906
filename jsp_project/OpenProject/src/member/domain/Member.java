@@ -25,7 +25,7 @@ public class Member {
 		this.pw = pw;
 		this.username = username;
 		this.regDate = regDate;
-		this.setPhoto(photo);
+		this.photo = photo;
 	}
 
 	public LoginInfo getLoginInfo() {

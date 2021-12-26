@@ -82,9 +82,8 @@ public class MemberRegService {
 						// file
 						if(item.getFieldName().equals("photo") && item.getSize() > 0) {
 							// 웹 저장경로 
-							String uploadURI = "/uploadfile";
 							// 시스템 경로 
-							String saveDir = req.getSession().getServletContext().getRealPath(uploadURI);
+							String saveDir = req.getSession().getServletContext().getRealPath("/uploadfile");
 							// 새로운 파일 이름은 중복이 되지 않는 숫자로 생성
 							String newFileName = String.valueOf(System.nanoTime());
 						

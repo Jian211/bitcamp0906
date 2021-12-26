@@ -7,51 +7,20 @@
 <meta charset="UTF-8">
 <title>User List</title>
 <%@ include file="/WEB-INF/views/frame/pageSet.jsp" %>
-<style>
-
-	#content > div {
-		padding : 15px;
-	}
-	
-	#content > table {
-		border : 0;
-		border-collapse: collapse;
-	}
-	
-	#content > table td, #content> table th{
-		border: 1px solid #aaa;
-		padding: 10px;
-		
-		text-align: center;
-	}
-	
-	#listInfo {
-		border : 1px solid #aaa;
-		width : 900px;
-	}
-	
-	#paging {
-		overflow: hidden;
-	}
-	
-	#paging > a {
-		
-	}
-
-</style>
 
 </head>
 <body>
-	<!--  헤더 시작	 -->
-	<%@ include file="/WEB-INF/views/frame/header.jsp" %>
-	<!--  헤더 끝	-->
 
 	<!--  네비 시작	-->
 	<%@ include file="/WEB-INF/views/frame/nav.jsp" %>
 	<!--  네비 끝	-->
 	
 	<!--  content 시작	-->
-	<div id="content">
+	<div class="main-contanier">
+		<!--  헤더 시작	 -->
+		<%@ include file="/WEB-INF/views/frame/header.jsp" %>
+		<!--  헤더 끝	-->
+	
 		<h3>회원 리스트</h3>
 		<hr>
 		<div id="listInfo">

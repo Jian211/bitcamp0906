@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+*{
+	margin : 0;
+	padding : 0;
+}
+
+
+body{
+	display: flex;	
+}
+
+nav {
+	width: 260px;
+	height : 100vh;
+	background-color: buttonhighlight;
+	
+}
+nav li {
+	padding : 20px;
+}
+
+nav li:hover{
+	background-color: white;
+}
+nav a {
+	text-decoration: none;
+	font-size: 20px;
+	font-weight: bolder;
+}
+
+.main-contanier {
+	width : 100vw;
+	padding: 30px;
+}
+
+.main-contanier header {
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 30px;
+	
+}

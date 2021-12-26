@@ -12,16 +12,17 @@
 
 </head>
 <body>
-	<!--  헤더 시작	 -->
-	<%@ include file="/WEB-INF/views/frame/header.jsp" %>
-	<!--  헤더 끝	-->
 
 	<!--  네비 시작	-->
 	<%@ include file="/WEB-INF/views/frame/nav.jsp" %>
 	<!--  네비 끝	-->
 	
 	<!--  content 시작	-->
-	<div>
+	<div class="main-contanier"> 
+		<!--  헤더 시작	 -->
+		<%@ include file="/WEB-INF/views/frame/header.jsp" %>
+		<!--  헤더 끝	-->
+
 		<h3>회원가입</h3>
 		<hr>
 		<table>
@@ -41,10 +42,10 @@
 				<td>사진</td>
 				<td><img src="${pageContext.request.contextPath}/uploadfile/${member.photo}"></td>
 			</tr>
-<!-- 			<tr> -->
-<!-- 				<td>가입일</td> -->
-<%-- 				<td>${member.regdate}</td> --%>
-<!-- 			</tr> --> 문제잇음
+			<tr>
+				<td>가입일</td>
+				<td>${member.regDate}</td>
+			</tr>
 		</table>
 		
 	</div>

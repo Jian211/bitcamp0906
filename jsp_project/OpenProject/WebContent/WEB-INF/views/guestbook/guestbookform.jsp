@@ -11,16 +11,16 @@
 
 </head>
 <body>
-	<!--  헤더 시작	 -->
-	<%@ include file="/WEB-INF/views/frame/header.jsp" %>
-	<!--  헤더 끝	-->
-
 	<!--  네비 시작	-->
 	<%@ include file="/WEB-INF/views/frame/nav.jsp" %>
 	<!--  네비 끝	-->
 	
 	<!--  content 시작	-->
-	<div>
+	<div class="main-contanier">
+		<!--  헤더 시작	 -->
+		<%@ include file="/WEB-INF/views/frame/header.jsp" %>
+		<!--  헤더 끝	-->
+
 		<h3>게시글</h3>
 		<hr>
 		<form method="post">

@@ -96,8 +96,9 @@ public class GuestBookDao {
 						 + " guestbook.subject,"
 						 + " guestbook.content,"
 						 + " guestbook.regdate, "
-						 + " member.username\r\n" + 
-				"from guestBook join member on guestBook.memberidx = member.idx"
+						 + " member.username," 
+						 + " member.photo from guestBook join member on guestBook.memberidx = member.idx"
+						 + " order by guestbook.idx desc"
 				+ " limit ?,?;";
 		
 		try {
@@ -114,7 +115,8 @@ public class GuestBookDao {
 						rs.getString("subject"),
 						rs.getString("content"),
 						rs.getString("regdate"),
-						rs.getString("username")
+						rs.getString("username"),
+						rs.getString("photo")
 						));
 			}
 			

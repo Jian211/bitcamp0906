@@ -6,21 +6,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <%@ include file="/WEB-INF/views/frame/pageSet.jsp" %>
 
 </head>
 <body>
-	<!--  헤더 시작	 -->
-	<%@ include file="/WEB-INF/views/frame/header.jsp" %>
-	<!--  헤더 끝	-->
-
 	<!--  네비 시작	-->
 	<%@ include file="/WEB-INF/views/frame/nav.jsp" %>
 	<!--  네비 끝	-->
-	
+
 	<!--  content 시작	-->
-	<div id="content">
+	<div class="main-contanier">
+		<!--  헤더 시작	 -->
+		<%@ include file="/WEB-INF/views/frame/header.jsp" %>
+		<!--  헤더 끝	-->
+		
 		<h3>회원가입</h3>
 		<hr>
 		<h3>

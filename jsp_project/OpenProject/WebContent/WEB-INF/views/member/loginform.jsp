@@ -8,29 +8,20 @@
 
 <%@ include file="/WEB-INF/views/frame/pageSet.jsp"%>
 
-<style>
-#content>form>table td {
-	padding: 5px;
-}
-#content>form input {
-	padding: 5px;
-}
-</style>
-
-
 </head>
 <body>
-
-	<!-- 해더 시작 -->
-	<%@ include file="/WEB-INF/views/frame/header.jsp"%>
-	<!-- 해더 끝 -->
-
 	<!-- 네비게이션 시작 -->
 	<%@ include file="/WEB-INF/views/frame/nav.jsp"%>
 	<!-- 네비게이션 끝 -->
 
+
+
 	<!-- content 시작 -->
-	<div id="content">
+	<div class="main-contanier">
+		<!-- 해더 시작 -->
+		<%@ include file="/WEB-INF/views/frame/header.jsp"%>
+		<!-- 해더 끝 -->
+	
 		<h3>로그인</h3>
 		<hr>
 		<!-- form 경로와 처리 경로가 동일 -> method 로 구분 -->

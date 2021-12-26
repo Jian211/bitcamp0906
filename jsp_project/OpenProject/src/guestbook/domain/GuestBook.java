@@ -7,7 +7,8 @@ public class GuestBook {
 	private String regdate;
 	private String writer; 	// join으로  memberidx 값을  writer로 가지고 왔다
 	private int memberidx;
-	
+	private String photo;
+
 	// jsp쪽에서 파라미터로 넘어온 String 형식으로 나열된 배열을 분해하여 생성하는 생성자 
 	public GuestBook(String listView) {
 		int fir = listView.indexOf("[")+1;
@@ -24,6 +25,8 @@ public class GuestBook {
 		this.content = list[2];
 		this.regdate = list[3];
 		this.writer = list[4];
+		this.memberidx = Integer.parseInt(list[5]);
+		this.photo = list[6];
 	};
 	
 	//글 등록 전용 생성자 1
@@ -41,12 +44,13 @@ public class GuestBook {
 	}
 	
 	// List전용 생성자
-	public GuestBook(int idx, String subject, String content, String regdate, String writer) {
+	public GuestBook(int idx, String subject, String content, String regdate, String writer,String photo) {
 		this.idx = idx;
 		this.subject = subject;
 		this.content = content;
 		this.regdate = regdate;
 		this.writer = writer;
+		this.photo = photo;
 	}
 
 	
@@ -98,11 +102,22 @@ public class GuestBook {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
+	
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
 	@Override
 	public String toString() {
 		return "GuestBook [idx=" + idx + ", subject=" + subject + ", content=" + content + ", regdate=" + regdate
-				+ ", writer=" + writer + "]";
+				+ ", writer=" + writer + ", memberidx=" + memberidx + ", photo=" + photo + "]";
 	}
+
+
 
 	
 	
