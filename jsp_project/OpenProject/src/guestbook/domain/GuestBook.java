@@ -26,11 +26,18 @@ public class GuestBook {
 		this.writer = list[4];
 	};
 	
-	//글 등록 전용 생성자
+	//글 등록 전용 생성자 1
 	public GuestBook(String subject, String content, int memberidx) {
 		this.subject = subject;
 		this.content = content;
 		this.memberidx = memberidx;
+	}
+	
+	//글 수정 전용 생성자
+	public GuestBook(String[] editedGuestBook) {
+		this.subject = editedGuestBook[0];
+		this.idx = Integer.parseInt(editedGuestBook[1]);
+		this.content = editedGuestBook[2];
 	}
 	
 	// List전용 생성자
@@ -43,6 +50,7 @@ public class GuestBook {
 	}
 
 	
+
 	public int getIdx() {
 		return idx;
 	}

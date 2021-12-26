@@ -139,7 +139,28 @@ public class GuestBookDao {
 		} finally {
 			JdbcUtil.close(pstmt);
 		}
+	}
+
+
+	// 수정된 게시글 데이터를 DB에 삽입
+	public void editByGuestBook(Connection conn, GuestBook guestBook) throws SQLException {
+		String sql = "UPDATE guestbook SET subject = ?, content = ? WHERE idx = ?";
+		PreparedStatement pstmt = null;
+		int result = 0; 
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, guestBook.getSubject());
+			pstmt.setString(2, guestBook.getContent());
+			pstmt.setInt(3, guestBook.getIdx());
+			result = pstmt.executeUpdate();
+			System.out.println("result : "+ result);
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
+		
 	};
+	
 	
 	
 	

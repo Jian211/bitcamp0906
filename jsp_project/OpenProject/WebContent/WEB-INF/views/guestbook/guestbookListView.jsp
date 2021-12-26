@@ -30,7 +30,7 @@
 			<h3>${guestBook.writer}</h3>
 			<h3>${guestBook.regdate}</h3>
 			<c:if test="${guestBook.writer eq loginInfo.userName}">
-				<h3 class="userInfo-deleteAndEdit"><a href="javascript:editList(${guestBook.idx})">수정</a></h3>
+				<h3 class="userInfo-deleteAndEdit"><a href="edit.do?guestBook=${guestBook}">수정</a></h3>
 				<h3 class="userInfo-deleteAndEdit"><a href="javascript:deleteList(${guestBook.idx})">삭제</a></h3>
 			</c:if>
 		</div>
@@ -55,15 +55,9 @@
 
 	<!--  content 시작	-->
 
-	<!--  js 추가	-->
+	<!--  js 추가  -->
 	<%@ include file="/WEB-INF/views/frame/footerSet.jsp" %>
 	<script>
-		function editList(idx){
-			if(confirm("해당 게시글을 수정하시겠습니까?")){
-				location.href ='edit.do?idx='+idx;
-			}
-		}	
-	
 		function deleteList(idx){
 			if(confirm("해당 게시글을 삭제하시겠습니까?")){
 				location.href = 'delete.do?idx='+idx;
