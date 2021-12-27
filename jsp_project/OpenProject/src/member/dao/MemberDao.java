@@ -228,6 +228,35 @@ public class MemberDao {
 		
 		return result;
 	}
+
+	public int selectByIdCount(Connection conn, String userId) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select count(*) from member where userid=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			result = 1;	// 정상적인 체크가 되지 않았기 때문에 사용하지 못하도록 처리
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+		
+		
+		return result;
+	}
 	
 	
 	

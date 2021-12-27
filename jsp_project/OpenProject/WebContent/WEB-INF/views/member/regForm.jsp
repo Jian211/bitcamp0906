@@ -4,10 +4,62 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@ include file="/WEB-INF/views/frame/pageSet.jsp" %>
+<style>
+
+#msg{
+	display: none;
+}
+</style>
+<script>
+
+	$(document).ready(function(){
+		
+		$("#userid").focusin(function(){
+			$('#msg').css('display','none');
+			$('#msg').removeClass('text_blue');
+			$('#msg').removeClass('text_red');
+			$('#msg').text('');
+				
+		});
+		
+		$("#userid").focusout(function(){
+			
+			$.ajax({
+				url : 'checkid.do',
+				type : 'get',
+				data : {
+					userid : $('#userid').val()
+				},
+				success : function(data){
+					// Y or N
+					if(data == 'Y'){
+						// 사용 가능한 아이디
+						$('#msg').css('display','block');
+						$('#msg').text('멋진 아이디 입니다.');
+						$('#msg').addClass('text_blue');
+					} else {
+						// 사용 불가능한 아이디 	
+						$('#msg').css('display','block');
+						$('#msg').text('사용 불가능한 아이디입니다.');
+						$('#msg').addClass('text_red');
+						
+					}
+				},
+				error : function(){
+					console.log("비동기 통신 오류");
+				},
+			});
+		})
+		
+		
+	});
+
+</script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<%@ include file="/WEB-INF/views/frame/pageSet.jsp" %>
+
 
 </head>
 <body>
@@ -28,7 +80,8 @@
 			<table>
 				<tr>
 					<td>아이디</td>
-					<td><input type="text" name="userid"></td>
+					<td><input type="text" name="userid" id="userid" ></td>
+					<div id="msg"></div>
 				</tr>
 				<tr>
 					<td>비밀번호</td>
