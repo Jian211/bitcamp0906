@@ -25,6 +25,7 @@ public class LoginService {
 		Member member = null;
 		
 		// 데이터 받기
+		
 		String userId = req.getParameter("userid");
 		String pw = req.getParameter("pw");
 		String saveId = req.getParameter("saveid");

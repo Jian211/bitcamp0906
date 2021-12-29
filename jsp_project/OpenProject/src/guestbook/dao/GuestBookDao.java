@@ -39,28 +39,28 @@ public class GuestBookDao {
 		return result;
 	}
 
-	// 
-	public int selectById(String id,Connection conn) throws SQLException {
-		int memberidx = -1;
-		
-		String sql = "select * from member where userid=?;";
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				memberidx = rs.getInt(1);	// memberidx 값 받아오기
-			}
-		} finally {
-			JdbcUtil.close(pstmt);
-		}
-
-		return memberidx;
-	}
+//	// 
+//	public int selectById(String id,Connection conn) throws SQLException {
+//		int memberidx = -1;
+//		
+//		String sql = "select * from member where userid=?;";
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setString(1, id);
+//			rs = pstmt.executeQuery();
+//			
+//			if(rs.next()) {
+//				memberidx = rs.getInt(1);	// memberidx 값 받아오기
+//			}
+//		} finally {
+//			JdbcUtil.close(pstmt);
+//		}
+//
+//		return memberidx;
+//	}
 	
 	//  게시판의 총 갯수를 구하는 메소드
 	public int selectTotalCount(Connection conn) throws SQLException {
@@ -129,13 +129,15 @@ public class GuestBookDao {
 	}
 
 	// idx값 기준으로 게시판을 삭제 -> throw로 분기
-	public void deleteGuestBookByIdx(Connection conn, int idx) throws SQLException {
-		String sql ="delete from guestbook where idx = ?";
+	public void deleteGuestBookByIdx(Connection conn,int guestBookIdx, int memberIdx) throws SQLException {
+		
+		String sql ="delete from guestbook where idx=? and memberidx = ?";
 		PreparedStatement pstmt = null;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, idx);
+			pstmt.setInt(1, guestBookIdx);
+			pstmt.setInt(2, memberIdx);
 			pstmt.executeUpdate();
 			
 		} finally {
@@ -161,6 +163,40 @@ public class GuestBookDao {
 			JdbcUtil.close(pstmt);
 		}
 		
+	}
+
+	// 유저가 선택한 게시판 하나의 정보를 전달
+	public GuestBook selectBygGuestBookIdx(Connection conn, int guestBookIdx) throws SQLException {
+		GuestBook guestBook = null;
+		
+		String sql = "SELECT g.idx, g.subject, g.content, g.regdate, m.username, m.idx, m.photo FROM guestbook g join member m on g.memberidx = m.idx where g.idx = ?;";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, guestBookIdx);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				guestBook = new GuestBook(
+						rs.getInt(1),
+						rs.getString(2), 
+						rs.getString(3), 
+						rs.getString(4), 
+						rs.getString(5), 
+						rs.getInt(6),
+						rs.getString(7));
+			}
+			
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+			
+		}
+		
+		
+		return guestBook;
 	};
 	
 	

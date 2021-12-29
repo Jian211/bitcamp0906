@@ -11,6 +11,8 @@ public class GuestBook {
 
 	// jsp쪽에서 파라미터로 넘어온 String 형식으로 나열된 배열을 분해하여 생성하는 생성자 
 	public GuestBook(String listView) {
+		System.out.println("listView : "+listView);
+		System.out.println("여기서 오루냐냐");
 		int fir = listView.indexOf("[")+1;
 		int sec = listView.indexOf("]");
 		listView = listView.substring(fir, sec);
@@ -29,11 +31,22 @@ public class GuestBook {
 		this.photo = list[6];
 	};
 	
+	
+
 	//글 등록 전용 생성자 1
 	public GuestBook(String subject, String content, int memberidx) {
 		this.subject = subject;
 		this.content = content;
 		this.memberidx = memberidx;
+	}
+	
+	// 유저가 게시글 선택시 사용되는 생성자
+	public GuestBook(int idx, String subject, String content,String regdate, int memberidx) {
+		this.subject = subject;
+		this.content = content;
+		this.memberidx = memberidx;
+		this.idx = idx;
+		this.regdate = regdate;
 	}
 	
 	//글 수정 전용 생성자
@@ -52,7 +65,13 @@ public class GuestBook {
 		this.writer = writer;
 		this.photo = photo;
 	}
-
+	
+	// ListView 생성자
+	public GuestBook(int idx, String subject, String content, String regdate, String writer, int memberidx,
+			String photo) {
+		this(memberidx, subject, content, regdate, writer, photo);
+		this.idx = idx;
+	}
 	
 
 	public int getIdx() {

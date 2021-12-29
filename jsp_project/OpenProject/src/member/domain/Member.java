@@ -11,25 +11,25 @@ import java.sql.Timestamp;
 public class Member {
 	
 	private int idx;
-	private String userid;
+	private String userId;
 	private String pw;
-	private String username;
+	private String userName;
 //	private Timestamp regDate; // Java.sql.TimeStamp -> Java.util.Date
 	private String regDate; 
 	private String photo;
 	
 	
-	public Member(int idx, String userid, String pw, String username, String regDate, String photo) {
+	public Member(int idx, String userId, String pw, String userName, String regDate, String photo) {
 		this.idx = idx;
-		this.userid = userid;
+		this.userId = userId;
 		this.pw = pw;
-		this.username = username;
+		this.userName = userName;
 		this.regDate = regDate;
 		this.photo = photo;
 	}
 
 	public LoginInfo getLoginInfo() {
-		return new LoginInfo(this.userid, this.username, this.photo);
+		return new LoginInfo(this.idx, this.userId, this.userName, this.photo);
 	}
 	
 	
@@ -43,12 +43,12 @@ public class Member {
 		this.idx = idx;
 	}
 
-	public String getUserid() {
-		return userid;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getPw() {
@@ -59,12 +59,12 @@ public class Member {
 		this.pw = pw;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getRegDate() {
@@ -86,7 +86,7 @@ public class Member {
 	
 	@Override
 	public String toString() {
-		return "Member [idx=" + idx + ", userid=" + userid + ", pw=" + pw + ", username=" + username + ", regDate="
+		return "Member [idx=" + idx + ", userId=" + userId + ", pw=" + pw + ", userName=" + userName + ", regDate="
 				+ regDate + ", photo=" + photo + "]";
 	}
 	

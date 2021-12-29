@@ -43,7 +43,7 @@
 					<c:forEach items="${listView.list}" var="guestbookInfo">
 						<div class="guestBook-body_titles">
 							<span>${guestbookInfo.idx}</span>
-							<span><a href="listView.do?listView=${guestbookInfo}">${guestbookInfo.subject}</a></span>
+							<span><a href="${pageContext.request.contextPath}/guestbook/listView.do?guestBookIdx=${guestbookInfo.idx}">${guestbookInfo.subject}</a></span>
 					<%-- 	<span>${guestbookInfo.content}</span> --%>
 							<span>${guestbookInfo.regdate}</span>
 							<span>

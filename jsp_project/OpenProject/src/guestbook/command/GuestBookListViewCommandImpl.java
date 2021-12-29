@@ -5,28 +5,26 @@ import javax.servlet.http.HttpServletResponse;
 
 import command.Command;
 import guestbook.domain.GuestBook;
+import guestbook.service.GuestBookListViewService;
+import guestbook.service.ReplyListService;
 
 public class GuestBookListViewCommandImpl implements Command {
 
 	@Override
 	public String getPage(HttpServletRequest req, HttpServletResponse res) {
-		String viewPage = "";
+	
+		System.out.println(req.getMethod());
 		
-		if(req.getMethod().equals("GET")) {
-			req.setAttribute("guestBook", new GuestBook(req.getParameter("listView")));
-			
-			// 댓글 정보도 받아와야한다.
-			
-			
-			viewPage = "/WEB-INF/views/guestbook/guestbookListView.jsp";
-		} else if(req.getMethod().equals("POST")){
-			
-			
-		}
+		GuestBook guestBook = GuestBookListViewService.getInstance().getGuestBookInfo(req,res);
+		System.out.println(guestBook);
+		req.setAttribute("guestBook", guestBook);
 		
+	
+		// get list from service
+//		System.out.println(req.getParameter("idx")+"idx");
+//		req.setAttribute("replyList", ReplyListService.getInstance().getList(req));
 		
-		
-		return viewPage;
+		return "/WEB-INF/views/guestbook/guestbookListView.jsp";
 	}
 
 }

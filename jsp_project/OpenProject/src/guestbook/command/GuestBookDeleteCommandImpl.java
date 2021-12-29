@@ -7,23 +7,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import command.Command;
 import guestbook.service.GuestBookDeleteServie;
+import member.domain.LoginInfo;
 
 public class GuestBookDeleteCommandImpl implements Command {
 
 	@Override
 	public String getPage(HttpServletRequest req, HttpServletResponse res) {
-	
-		/*
-		 *  수정 만들기
-		 *  댓글만들기 
-		 *  클린코드 및 html & css좀 꾸미기 끗
-		 *  
-		 */
 		
+		//게시물 idx
 		int idx = Integer.parseInt(req.getParameter("idx"));
 		
+		// 현재 로그인 중인 사용자의 idx
+		int memberIdx = ((LoginInfo)req.getSession().getAttribute("loginInfo")).getIdx();
+		
 		try {
-			GuestBookDeleteServie.getInstance().deleteGuestBook(idx);
+			GuestBookDeleteServie.getInstance().deleteGuestBook(idx, memberIdx);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

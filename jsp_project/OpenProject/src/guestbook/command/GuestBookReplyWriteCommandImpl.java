@@ -4,18 +4,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import command.Command;
-import guestbook.service.GuestBookWriteService;
+import guestbook.service.GuestBookReplyWriteService;
 
-public class GuestBookWriteAjaxCommandImpl implements Command {
+public class GuestBookReplyWriteCommandImpl implements Command {
 
 	@Override
 	public String getPage(HttpServletRequest req, HttpServletResponse res) {
 
 		if(req.getMethod().equals("POST")) {
-			req.setAttribute("result", GuestBookWriteService.getInstance().insertGuestBook(req, res));
+			
+			req.setAttribute("result", GuestBookReplyWriteService.getInstance().writeReply(req, res));
 		}
 		
-		return "/WEB-INF/views/guestbook/result.jsp";
+		return "/WEB-INF/views/guestbook/reply/write.jsp";
 	}
 
 }

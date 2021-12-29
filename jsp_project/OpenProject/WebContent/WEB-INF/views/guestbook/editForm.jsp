@@ -23,22 +23,22 @@
 		<!--  헤더 끝	-->
 
 		<div class="listView-container">
-			<form method="post" >
+			<form method="post" id="listViewEditForm">
 				<div class="listView_subtitle">
-					<input type="text" name="editedGuestBook" value="${guestBook.subject}">
-					<input type="hidden" name="editedGuestBook" value="${guestBook.idx}">
+					<input type="text" name="editedGuestBook" id="subject" value="${guestBook.subject}">
+					<input type="hidden" name="editedGuestBook" id="idx" value="${guestBook.idx}">
 				</div>
 				<div class="listView_userInfo">
 					<img style="width: 30px; border-radius: 50%;" src="${pageContext.request.contextPath}/uploadfile/${guestBook.photo}"> 
 					<h3>${guestBook.writer}</h3>
 					<h3>${guestBook.regdate}</h3>
-					<c:if test="${guestBook.writer eq loginInfo.userName}">
+					<c:if test="${guestBook.idx eq loginInfo.idx}">
 						<input type="submit" value="수정완료" >
 						<h3 class="userInfo-deleteAndEdit"><a href="javascript:editCancle()">수정취소</a></h3>
 					</c:if>
 				</div>
 				<div class="listView_content-form">
-					<input type="text" name="editedGuestBook" value="${guestBook.content}">
+					<input type="text" name="editedGuestBook" id="content" value="${guestBook.content}">
 				</div>
 			</form>
 		</div>
@@ -49,7 +49,27 @@
 	<!--  js 추가	-->	
 	<%@ include file="/WEB-INF/views/frame/footerSet.jsp" %>
 	<script>
+		$('#listViewEditForm').click(function(){
+			alert('될까나');
+			
+			$.ajax({
+				url : 'edit.do',
+				type: 'POST',
+				data : $(this).serialize(),
+				success : function(data){
+					console.log(data);
+					
+					if(data == '1'){
+						console.log("dsfsdf")
+					}
+				}
+			});
+			
+		});
 	
+	</script>
+	
+	<script>
 		function editCancle(){
 			if(confirm("수정을 취소하시겠습니까?")){
 				history.go(-1);

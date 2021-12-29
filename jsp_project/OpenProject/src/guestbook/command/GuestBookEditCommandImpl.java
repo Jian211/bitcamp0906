@@ -15,6 +15,7 @@ public class GuestBookEditCommandImpl implements Command {
 	public String getPage(HttpServletRequest req, HttpServletResponse res) {
 		String viewPage = "";
 		
+		
 		if(req.getMethod().equals("GET")) {
 			req.setAttribute("guestBook", new GuestBook(req.getParameter("guestBook")));
 			viewPage = "/WEB-INF/views/guestbook/editForm.jsp";
@@ -32,7 +33,7 @@ public class GuestBookEditCommandImpl implements Command {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			req.setAttribute("msg", "성공적으로 수정되었습니다.");
+			req.setAttribute("msg", "1");
 			viewPage = "/WEB-INF/views/guestbook/edit.jsp";
 		}
 		

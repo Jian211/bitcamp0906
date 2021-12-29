@@ -28,7 +28,7 @@
 		<table>
 			<tr>
 				<td>아이디</td>
-				<td>${member.userid}</td>
+				<td>${member.userId}</td>
 			</tr>
 			<tr>
 				<td>비밀번호</td>
@@ -36,7 +36,7 @@
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td>${member.username}</td>
+				<td>${member.userName}</td>
 			</tr>
 			<tr>
 				<td>사진</td>

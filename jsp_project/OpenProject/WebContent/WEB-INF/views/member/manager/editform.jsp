@@ -32,7 +32,7 @@
 					<td>아이디</td>
 					<td>
 						<input type="hidden" name="idx" value="${member.idx}">
-						<input type="text" name="userid" value="${member.userid}" readonly>
+						<input type="text" name="userid" value="${member.userId}" readonly>
 					</td>
 				</tr>
 				<tr>
@@ -45,7 +45,7 @@
 				</tr>
 				<tr>
 					<td>이름</td>
-					<td><input type="text" name="username" value="${member.username}"></td>
+					<td><input type="text" name="username" value="${member.userName}"></td>
 				</tr>
 				<tr>
 					<td>사진</td>

@@ -45,9 +45,9 @@
 				<c:forEach items="${listView.list}" var="member">
 					<tr>
 						<td>${member.idx}</td>
-						<td>${member.userid}</td>
+						<td>${member.userId}</td>
 						<td>${member.pw}</td>
-						<td>${member.username}</td>
+						<td>${member.userName}</td>
 						<td>${member.photo}</td>
 						<td>${member.regDate}</td>
 						<td>

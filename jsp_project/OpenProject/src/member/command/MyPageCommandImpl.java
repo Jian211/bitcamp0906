@@ -20,7 +20,7 @@ public class MyPageCommandImpl implements Command {
 //			loginChk = true;
 //		
 			// 로그인 한 회원의  Member 객체 생성하고 결과 데이터 view로 전달
-			req.setAttribute("member", MyPageService.getInstance().myPageInfo(req));
+		req.setAttribute("member", MyPageService.getInstance().myPageInfo(req));
 		
 //		}
 		

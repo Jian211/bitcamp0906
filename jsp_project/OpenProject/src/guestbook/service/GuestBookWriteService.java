@@ -1,8 +1,6 @@
 package guestbook.service;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +10,6 @@ import guestbook.dao.GuestBookDao;
 import guestbook.domain.GuestBook;
 import jdbc.ConnectionProvider;
 import jdbc.util.JdbcUtil;
-import member.domain.LoginInfo;
 
 public class GuestBookWriteService {
 
@@ -27,8 +24,7 @@ public class GuestBookWriteService {
 		
 		try {
 			conn = ConnectionProvider.getConnection();
-
-			int memberidx = GuestBookDao.getInstance().selectById(((LoginInfo) req.getSession().getAttribute("loginInfo")).getUserId(),conn);
+			int memberidx = Integer.parseInt(req.getParameter("memberIdx"));
 			String subject = req.getParameter("subject");
 			String content = req.getParameter("content");
 
@@ -44,11 +40,6 @@ public class GuestBookWriteService {
 		return result;
 		
 	};
-	
-	
-
-	
-	
 	
 	
 }
