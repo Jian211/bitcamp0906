@@ -1,7 +1,5 @@
 package guestbook.command;
 
-import java.sql.SQLException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,15 +17,11 @@ public class GuestBookDeleteCommandImpl implements Command {
 		
 		// 현재 로그인 중인 사용자의 idx
 		int memberIdx = ((LoginInfo)req.getSession().getAttribute("loginInfo")).getIdx();
+		int result = GuestBookDeleteServie.getInstance().deleteGuestBook(idx, memberIdx);
 		
-		try {
-			GuestBookDeleteServie.getInstance().deleteGuestBook(idx, memberIdx);
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} 		
+		String msg = result > 0 ? "게시글이 삭제 되었습니다." : "삭제에 실패하였습니다.";
 		
-		req.setAttribute("msg", "게시글이 삭제되었습니다.");
+		req.setAttribute("msg", msg);
 		
 		return "/WEB-INF/views/guestbook/delete.jsp";
 	}

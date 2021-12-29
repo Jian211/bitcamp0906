@@ -129,7 +129,8 @@ public class GuestBookDao {
 	}
 
 	// idx값 기준으로 게시판을 삭제 -> throw로 분기
-	public void deleteGuestBookByIdx(Connection conn,int guestBookIdx, int memberIdx) throws SQLException {
+	public int deleteGuestBookByIdx(Connection conn,int guestBookIdx, int memberIdx) throws SQLException {
+		int result = 0;
 		
 		String sql ="delete from guestbook where idx=? and memberidx = ?";
 		PreparedStatement pstmt = null;
@@ -138,38 +139,48 @@ public class GuestBookDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, guestBookIdx);
 			pstmt.setInt(2, memberIdx);
-			pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 			
 		} finally {
 			JdbcUtil.close(pstmt);
 		}
+		
+		return result;
 	}
 
 
 	// 수정된 게시글 데이터를 DB에 삽입
-	public void editByGuestBook(Connection conn, GuestBook guestBook) throws SQLException {
-		String sql = "UPDATE guestbook SET subject = ?, content = ? WHERE idx = ?";
-		PreparedStatement pstmt = null;
+	public int editByGuestBook(Connection conn, GuestBook guestBook) throws SQLException {
 		int result = 0; 
+		String sql = "UPDATE guestbook SET subject = ?, content = ? WHERE idx = ? and memberidx = ?";
+		PreparedStatement pstmt = null;
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, guestBook.getSubject());
 			pstmt.setString(2, guestBook.getContent());
 			pstmt.setInt(3, guestBook.getIdx());
+			pstmt.setInt(4, guestBook.getMemberidx());
+			
 			result = pstmt.executeUpdate();
-			System.out.println("result : "+ result);
+			
 		} finally {
 			JdbcUtil.close(pstmt);
 		}
+		System.out.println(result);
 		
+		return result;
 	}
 
 	// 유저가 선택한 게시판 하나의 정보를 전달
 	public GuestBook selectBygGuestBookIdx(Connection conn, int guestBookIdx) throws SQLException {
 		GuestBook guestBook = null;
 		
-		String sql = "SELECT g.idx, g.subject, g.content, g.regdate, m.username, m.idx, m.photo FROM guestbook g join member m on g.memberidx = m.idx where g.idx = ?;";
+		String sql = "SELECT g.idx, g.subject, g.content, g.regdate, m.username, g.memberidx, m.photo \r\n" + 
+				"FROM guestbook g \r\n" + 
+				"join member m \r\n" + 
+				"on g.memberidx = m.idx \r\n" + 
+				"where g.idx = ?";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		

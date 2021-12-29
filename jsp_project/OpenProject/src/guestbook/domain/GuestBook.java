@@ -53,7 +53,8 @@ public class GuestBook {
 	public GuestBook(String[] editedGuestBook) {
 		this.subject = editedGuestBook[0];
 		this.idx = Integer.parseInt(editedGuestBook[1]);
-		this.content = editedGuestBook[2];
+		this.memberidx = Integer.parseInt(editedGuestBook[2]);
+		this.content = editedGuestBook[3];
 	}
 	
 	// List전용 생성자
@@ -69,8 +70,8 @@ public class GuestBook {
 	// ListView 생성자
 	public GuestBook(int idx, String subject, String content, String regdate, String writer, int memberidx,
 			String photo) {
-		this(memberidx, subject, content, regdate, writer, photo);
-		this.idx = idx;
+		this(idx, subject, content, regdate, writer, photo);
+		this.memberidx = memberidx;
 	}
 	
 

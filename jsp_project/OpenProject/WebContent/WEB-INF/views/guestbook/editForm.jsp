@@ -24,15 +24,18 @@
 
 		<div class="listView-container">
 			<form method="post" id="listViewEditForm">
+			
 				<div class="listView_subtitle">
 					<input type="text" name="editedGuestBook" id="subject" value="${guestBook.subject}">
 					<input type="hidden" name="editedGuestBook" id="idx" value="${guestBook.idx}">
+					<input type="hidden" name="editedGuestBook" id="memberidx" value="${guestBook.memberidx}">
 				</div>
+				
 				<div class="listView_userInfo">
 					<img style="width: 30px; border-radius: 50%;" src="${pageContext.request.contextPath}/uploadfile/${guestBook.photo}"> 
 					<h3>${guestBook.writer}</h3>
 					<h3>${guestBook.regdate}</h3>
-					<c:if test="${guestBook.idx eq loginInfo.idx}">
+					<c:if test="${guestBook.memberidx eq loginInfo.idx}">
 						<input type="submit" value="수정완료" >
 						<h3 class="userInfo-deleteAndEdit"><a href="javascript:editCancle()">수정취소</a></h3>
 					</c:if>
@@ -42,30 +45,42 @@
 				</div>
 			</form>
 		</div>
+		
 	</div>
 
-	<!--  content 시작	-->
+	<!--  content 끝	-->
 
 	<!--  js 추가	-->	
 	<%@ include file="/WEB-INF/views/frame/footerSet.jsp" %>
 	<script>
-		$('#listViewEditForm').click(function(){
-			alert('될까나');
+// 		$('#listViewEditForm').click(function(){
 			
-			$.ajax({
-				url : 'edit.do',
-				type: 'POST',
-				data : $(this).serialize(),
-				success : function(data){
-					console.log(data);
+// 			var params = {
+// 					idx : ${guestBook.idx},
+// 					subject : $('#subject').val(),
+// 					content : ${'#content'}.val(),
+// 					regdate : ${guestBook.regdate},
+// 					writer : ${guestBook.writer},
+// 					member : ${guestBook.memberidx},
+// 					photo : ${guestBook.photo}
+// 			};
+// 			console.log(params)
+			
+// 			$.ajax({
+// 				url : 'edit.do',
+// 				type: 'POST',
+// 				data : $(this).serialize(),
+// 				success : function(data){
+// 					console.log(data);
 					
-					if(data == '1'){
-						console.log("dsfsdf")
-					}
-				}
-			});
+// 					if(data == '1'){
+// 						console.log("dsfsdf")
+// 					}
+// 				},
+// 				error : function(){}
+// 			});
 			
-		});
+// 		});
 	
 	</script>
 	

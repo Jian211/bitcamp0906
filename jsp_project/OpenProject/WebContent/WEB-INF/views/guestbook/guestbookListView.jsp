@@ -34,9 +34,9 @@
 				<h3>${guestBook.writer}</h3>
 				<h3>${guestBook.regdate}</h3>
 				
-				<c:if test="${guestBook.writer eq loginInfo.userName}">
+				<c:if test="${guestBook.memberidx eq loginInfo.idx}">
 					<h3 class="userInfo-deleteAndEdit"><a href="edit.do?guestBook=${guestBook}">수정</a></h3>
-					<h3 class="userInfo-deleteAndEdit"><a href="javascript:deleteList(${guestBook.idx})">삭제</a></h3>
+					<h3 class="userInfo-deleteAndEdit"><a href="delete.do?idx=${guestBook.idx}">삭제</a></h3>
 				</c:if>
 				
 			</div>
@@ -99,10 +99,10 @@
 	<!--  js 추가  -->
 	<%@ include file="/WEB-INF/views/frame/footerSet.jsp" %>
 	<script>
-		function deleteList(idx){
-			if(confirm("해당 게시글을 삭제하시겠습니까?")){
-				location.href = 'delete.do?idx='+idx;
-			};
+// 		function deleteList(idx,memberidx){
+// 			if(confirm("해당 게시글을 삭제하시겠습니까?")){
+// 				location.href = 'delete.do?idx='+idx+'&memberidx='+memberidx;
+// 			};
 		
 			
 		function deleteReply(idx){

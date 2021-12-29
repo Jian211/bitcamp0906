@@ -15,16 +15,21 @@ public class GuestBookEditService {
 	public static GuestBookEditService getInstance() { return service; }
 	
 
-	public void editGuestBook(GuestBook guestBook) throws SQLException {
-		Connection conn = ConnectionProvider.getConnection();
+	public int editGuestBook(GuestBook guestBook) {
+		int result = 0;
+		Connection conn = null;
 		
 		try {
-			GuestBookDao.getInstance().editByGuestBook(conn,guestBook);
+			conn = ConnectionProvider.getConnection();
+			result = GuestBookDao.getInstance().editByGuestBook(conn,guestBook);
 
+		} catch (SQLException e) {
+			e.printStackTrace();
 		} finally {
 			JdbcUtil.close(conn);
 		}
 		
+		return result;
 	};
 	
 	
