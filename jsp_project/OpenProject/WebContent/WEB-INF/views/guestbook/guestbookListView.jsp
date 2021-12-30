@@ -36,7 +36,8 @@
 				
 				<c:if test="${guestBook.memberidx eq loginInfo.idx}">
 					<h3 class="userInfo-deleteAndEdit"><a href="edit.do?guestBook=${guestBook}">수정</a></h3>
-					<h3 class="userInfo-deleteAndEdit"><a href="delete.do?idx=${guestBook.idx}">삭제</a></h3>
+					<button class="view-delete" value="${guestBook.idx}">삭제</button>
+<%-- 					<a href="delete.do?idx=${guestBook.idx}">삭제</a> --%>
 				</c:if>
 				
 			</div>
@@ -103,7 +104,12 @@
 // 			if(confirm("해당 게시글을 삭제하시겠습니까?")){
 // 				location.href = 'delete.do?idx='+idx+'&memberidx='+memberidx;
 // 			};
-		
+		var viewDelete = $('.view-delete');
+		viewDelete.click(function(){
+			if(confirm("해당 게시글을 삭제하시겠습니까?")){
+				location.href = 'delete.do?idx='+ viewDelete.val();
+			}
+		})
 			
 		function deleteReply(idx){
 			if(confirm("해당 댓글을 삭제하시게습니까?")){
