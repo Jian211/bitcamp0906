@@ -1,30 +1,25 @@
 package mm.service;
 
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
 import mm.dao.Dao;
 import mm.domain.Member;
 import mm.domain.RegRequest;
 import mm.exception.DuplicateMemberException;
 
-public class MemberRegService {
+@Component("regService2")
+public class MemberRegService2 {
 	
-//	MemberDao dao = new MemberDao();	//	이것이 의존상태
-	
+//	@Autowired			// new MemberDao();
+//	@Qualifier("md")
+	@Resource(name = "guestDao")
 	private Dao dao;	
 	
-	// Dao type의 객체를 주입 받는 방법 : 생성자, Setter Method
-
-	// 1. 생성자
-	public MemberRegService() {};
-		
-	public MemberRegService(Dao dao) {
-		this.dao = dao;
-	}
-	
-	// 2. Setter Method
-//	public void setDao(Dao dao) {
-//		this.dao = dao;
-//	}
-	
+	public MemberRegService2() {};
 	
 	public void regMember(RegRequest regRequest) throws DuplicateMemberException {
 		

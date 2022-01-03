@@ -3,22 +3,26 @@ package mm.main;
 import java.util.Scanner;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import mm.assembler.Assembler;
-import mm.dao.MemberDao;
+import mm.config.JavaConfig;
 import mm.domain.RegRequest;
 import mm.exception.DuplicateMemberException;
 import mm.exception.IdPasswordNotMatchingException;
 import mm.exception.NotFoundMemberException;
 import mm.service.ChangePasswordService;
+import mm.service.ChangePasswordService2;
 import mm.service.MemberRegService;
+import mm.service.MemberRegService2;
 
-public class MemberManagerSpring {
+public class MemberManagerSpring5 {
 
-	static ApplicationContext ctx = new GenericXmlApplicationContext("classpath:appCtx1.xml");
+	static ApplicationContext ctx;
 	
 	public static void main(String[] args) {
+		
+		//ctx = new GenericXmlApplicationContext("classpath:appCtx5.xml");
+		ctx = new AnnotationConfigApplicationContext(JavaConfig.class);
 		
 		Scanner sc = new Scanner(System.in);
 		
@@ -52,13 +56,8 @@ public class MemberManagerSpring {
 	
 	private static void processChangePassword(String[] values) {
 		
-		//ChangePasswordService changePassword = assembler.getPasswordService();
 		ChangePasswordService changePassword = ctx.getBean("chageService", ChangePasswordService.class);
-		
-		// change 
-		// son@gmail.com 
-		// 123 
-		// 000
+
 		try {
 			
 			changePassword.changePassword(values[1], values[2], values[3]);
@@ -75,13 +74,8 @@ public class MemberManagerSpring {
 
 	private static void processNewMember(String[] values) {
 		
-		//MemberRegService regService = assembler.getRegService();
 		MemberRegService regService = ctx.getBean("regService", MemberRegService.class);
-		// new 0 
-		// son@gmail.com 1 
-		// 손흥민 2
-		// 123 3
-		// 123 4
+
 		RegRequest request = new RegRequest(values[1], values[3], values[4], values[2]);
 		
 		// 비밀번호와 비밀번호 확인 비교
@@ -91,7 +85,6 @@ public class MemberManagerSpring {
 		}
 		
 		try {
-			
 			regService.regMember(request);
 			
 		} catch (DuplicateMemberException e) {

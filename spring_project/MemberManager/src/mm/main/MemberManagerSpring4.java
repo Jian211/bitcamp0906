@@ -5,20 +5,21 @@ import java.util.Scanner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
-import mm.assembler.Assembler;
-import mm.dao.MemberDao;
 import mm.domain.RegRequest;
 import mm.exception.DuplicateMemberException;
 import mm.exception.IdPasswordNotMatchingException;
 import mm.exception.NotFoundMemberException;
-import mm.service.ChangePasswordService;
-import mm.service.MemberRegService;
+import mm.service.ChangePasswordService2;
+import mm.service.MemberRegService2;
 
-public class MemberManagerSpring {
+public class MemberManagerSpring4 {
 
-	static ApplicationContext ctx = new GenericXmlApplicationContext("classpath:appCtx1.xml");
+	static ApplicationContext ctx;
 	
 	public static void main(String[] args) {
+		
+		ctx = new GenericXmlApplicationContext("classpath:appCtx5.xml");
+//		MemberDao dao = ctx.getBean("memberDao", MemberDao.class);
 		
 		Scanner sc = new Scanner(System.in);
 		
@@ -53,7 +54,7 @@ public class MemberManagerSpring {
 	private static void processChangePassword(String[] values) {
 		
 		//ChangePasswordService changePassword = assembler.getPasswordService();
-		ChangePasswordService changePassword = ctx.getBean("chageService", ChangePasswordService.class);
+		ChangePasswordService2 changePassword = ctx.getBean("chageService2", ChangePasswordService2.class);
 		
 		// change 
 		// son@gmail.com 
@@ -76,7 +77,7 @@ public class MemberManagerSpring {
 	private static void processNewMember(String[] values) {
 		
 		//MemberRegService regService = assembler.getRegService();
-		MemberRegService regService = ctx.getBean("regService", MemberRegService.class);
+		MemberRegService2 regService = ctx.getBean("regService2", MemberRegService2.class);
 		// new 0 
 		// son@gmail.com 1 
 		// 손흥민 2

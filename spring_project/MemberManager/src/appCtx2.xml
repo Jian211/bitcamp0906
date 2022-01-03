@@ -15,7 +15,6 @@
 	
 	<bean id="memberDao"  class="mm.dao.MemberDao"/>
 	
-	
 	<!-- 생성자 주입 방식  2가지 생성자 또는 메소드 활용 -->
 	<bean id="regService"  class="mm.service.MemberRegService" p:dao-ref="memberDao"/>
 	<bean id="chageService" class="mm.service.ChangePasswordService" p:dao-ref="memberDao" />
