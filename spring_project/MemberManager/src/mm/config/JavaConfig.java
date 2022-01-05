@@ -8,7 +8,7 @@ import mm.dao.MemberDao;
 import mm.service.ChangePasswordService;
 import mm.service.MemberRegService;
 
-@Configuration
+@Configuration  // == xml
 public class JavaConfig {
 
 	// MemberDao
