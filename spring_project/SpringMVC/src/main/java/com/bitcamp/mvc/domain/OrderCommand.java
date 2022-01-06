@@ -6,6 +6,8 @@ public class OrderCommand {
 	private List<OrderItem> orderItems;
 	private Address address;
 	
+	
+	
 	public List<OrderItem> getOrderItems() {
 		return orderItems;
 	}
