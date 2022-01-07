@@ -19,8 +19,6 @@ public class FileUploadService {
 		}
 		
 		// 전달받은 웹경로를 시스템 경로로 변환
-		System.out.println(req.getSession());		
-		System.out.println(req.getSession().getServletContext());		
 		String savePath = req.getSession().getServletContext().getRealPath(uri);
 		
 				

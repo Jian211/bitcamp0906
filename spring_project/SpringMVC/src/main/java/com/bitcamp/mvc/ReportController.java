@@ -41,7 +41,7 @@ public class ReportController {
 		model.addAttribute("report", report.getOriginalFilename());
 		
 		// 중복된 파일을 방지하기위해
-		//String newFileName = sno +"_"+report.getOriginalFilename();
+		String newFileName = sno +"_"+report.getOriginalFilename();
 		
 		System.out.println(sno);
 		System.out.println(sname);

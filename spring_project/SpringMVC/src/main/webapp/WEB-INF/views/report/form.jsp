@@ -9,8 +9,8 @@
 <body>
 	
 	<h1>리포트 등록 : MultipartHttpServletRequest 객체를 이용</h1>
-	
 	<!-- action="/mvc/report/submit3" -->
+	
 	<form action="submit3" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
