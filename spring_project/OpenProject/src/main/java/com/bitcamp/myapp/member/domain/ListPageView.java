@@ -1,4 +1,4 @@
-package com.bitcamp.op.member.domain;
+package com.bitcamp.myapp.member.domain;
 
 import java.util.List;
 
@@ -9,6 +9,8 @@ public class ListPageView {
 	private int countPerPage;
 	private List<Member> list;
 	private int pageTotalCount;
+	
+	public ListPageView() {};
 
 	public ListPageView(int totalCount, int currentPage, int countPerPage, List<Member> list) {
 		this.totalCount = totalCount;
@@ -68,5 +70,4 @@ public class ListPageView {
 		return "ListPageView [totalCount=" + totalCount + ", currentPage=" + currentPage + ", countPerPage="
 				+ countPerPage + ", list=" + list + ", pageTotalCount=" + pageTotalCount + "]";
 	}
-
 }

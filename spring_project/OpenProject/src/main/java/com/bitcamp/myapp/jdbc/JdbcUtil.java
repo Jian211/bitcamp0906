@@ -1,4 +1,4 @@
-package com.bitcamp.op.jdbc;
+package com.bitcamp.myapp.jdbc;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -6,7 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class JdbcUtil {
-	// Connection, Statement, PreparedStatement, ResultSet 을 close하는 메소드
+	
+	// Connection, Statement, PreparedStatment, ResultSet
 	
 	public static void close(Connection conn) {
 		if(conn != null) {
@@ -27,7 +28,7 @@ public class JdbcUtil {
 			}
 		}
 	}
-
+	
 	public static void close(ResultSet rs) {
 		if(rs != null) {
 			try {

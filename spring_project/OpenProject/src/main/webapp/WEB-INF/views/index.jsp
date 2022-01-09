@@ -4,11 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-
-<title>Insert title here</title>
-<%@ include file="/WEB-INF/views/frame/pageSet.jsp" %>
-
+	<meta charset="UTF-8">
+	<%@ include file="/WEB-INF/views/frame/pageSet.jsp" %>
+	<title>처음 홈페이지</title>
 </head>
 <body>
 	<!--  네비 시작	-->

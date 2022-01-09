@@ -1,4 +1,4 @@
-package com.bitcamp.op.member.controller;
+package com.bitcamp.myapp.member.controller;
 
 import java.sql.SQLException;
 
@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.bitcamp.op.member.service.MemberListService;
+import com.bitcamp.myapp.member.service.MemberListService;
 
 @Controller
 public class MemberListController {

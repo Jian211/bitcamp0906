@@ -1,4 +1,4 @@
-package com.bitcamp.op.member.controller;
+package com.bitcamp.myapp.member.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.bitcamp.op.member.domain.MemberRegRequest;
-import com.bitcamp.op.member.service.MemberRegService;
+import com.bitcamp.myapp.member.domain.MemberRegRequest;
+import com.bitcamp.myapp.member.service.MemberRegService;
 
 @Controller
 @RequestMapping("/member/reg")
@@ -29,10 +29,7 @@ public class MemberRegController {
 	
 	@PostMapping
 	public void memberReg(
-			MemberRegRequest regRequest,
-			Model model,
-			HttpServletRequest request
-			) throws IllegalStateException, IOException, SQLException {
+			MemberRegRequest regRequest, Model model, HttpServletRequest request ) throws IllegalStateException, IOException, SQLException {
 		//System.out.println(regRequest);
 		model.addAttribute("result", regService.insertMember(regRequest, request));
 	}
