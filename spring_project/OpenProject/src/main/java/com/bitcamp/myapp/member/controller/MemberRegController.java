@@ -1,7 +1,5 @@
 package com.bitcamp.myapp.member.controller;
 
-import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,14 +22,14 @@ public class MemberRegController {
 	
 	@GetMapping
 	public String getRegForm() {
-		return "member/regform";
+		return "member/regForm";
 	}
 	
 	@PostMapping
-	public void memberReg(
-			MemberRegRequest regRequest, Model model, HttpServletRequest request ) throws IllegalStateException, IOException, SQLException {
-		//System.out.println(regRequest);
+	public void memberReg(MemberRegRequest regRequest, Model model, HttpServletRequest request ) throws Exception {
 		model.addAttribute("result", regService.insertMember(regRequest, request));
+		
+		
 	}
 
 }

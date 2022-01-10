@@ -1,27 +1,23 @@
 package com.bitcamp.myapp.member.service;
 
 import java.io.File;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bitcamp.myapp.dao.MemberDao;
-import com.bitcamp.myapp.jdbc.ConnectionProvider;
+import com.bitcamp.myapp.dao.JdbcTemplateMemberDao;
 import com.bitcamp.myapp.member.domain.MemberRegRequest;
 
 @Service
 public class MemberRegService {
 
 	@Autowired
-	private MemberDao dao;
-
+	private JdbcTemplateMemberDao dao;
+	
 	public int insertMember(MemberRegRequest regRequest, HttpServletRequest request)
-			throws IllegalStateException, IOException, SQLException {
+			throws Exception {
 
 		int resultCnt = 0;
 
@@ -43,16 +39,12 @@ public class MemberRegService {
 			regRequest.setFileName(newFileName);
 		}
 
-		// DAO 를 이용해서 데이터 베이스 처리
-		Connection conn = null;
-
 		try {
-			conn = ConnectionProvider.getConnection();
-			resultCnt = dao.insertMember(conn, regRequest);
+			//resultCnt = dao.insertMember(regRequest);
+			resultCnt = dao.insert(regRequest);
 			
 			
-			
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// 파일이 저장된 후 DB관련 예외가 발생했을 때 : 저장했던 파일을 삭제 
 			if(newFile != null && newFile.exists()) {
 				newFile.delete();

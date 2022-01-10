@@ -28,15 +28,15 @@
 		<table>
 			<tr>
 				<td>아이디</td>
-				<td>${member.userId}</td>
+				<td>${member.userid}</td>
 			</tr>
 			<tr>
 				<td>비밀번호</td>
-				<td>${member.pw}</td>
+				<td>${member.password}</td>
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td>${member.userName}</td>
+				<td>${member.username}</td>
 			</tr>
 			<tr>
 				<td>사진</td>
@@ -44,7 +44,7 @@
 			</tr>
 			<tr>
 				<td>가입일</td>
-				<td>${member.regDate}</td>
+				<td>${member.regdate}</td>
 			</tr>
 		</table>
 		

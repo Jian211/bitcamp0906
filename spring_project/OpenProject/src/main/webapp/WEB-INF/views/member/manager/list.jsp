@@ -45,13 +45,13 @@
 				<c:forEach items="${listView.list}" var="member">
 					<tr>
 						<td>${member.idx}</td>
-						<td>${member.userId}</td>
+						<td>${member.userid}</td>
 						<td>${member.password}</td>
-						<td>${member.userName}</td>
+						<td>${member.username}</td>
 						<td>${member.photo}</td>
-						<td>${member.regDate}</td>
+						<td>${member.regdate}</td>
 						<td>
-							<a href="edit.do?idx=${member.idx}">수정</a>
+							<a href="edit?idx=${member.idx}">수정</a>
 							<a href="javasript:delMember(${member.idx})">삭제</a>
 						</td>
 					</tr>
@@ -61,7 +61,7 @@
 		<div id="paging">
 			<c:if test="${listView.pageTotalCount > 0}">
 				<c:forEach begin="1" end="${listView.pageTotalCount}" var="pnum">
-					<a href="list.do?p=${pnum}">${pnum}</a>
+					<a href="list?p=${pnum}">${pnum}</a>
 				 </c:forEach>
 			</c:if>
 		</div>		
@@ -74,7 +74,7 @@
 	<script>
 		function delMember(idx){
 			if(confirm("해당 회원 정보를 삭제하시겠습니까?")){
-				location.href = 'delete.do?idx='+idx;
+				location.href = 'delete?idx='+idx;
 			};
 		}
 	</script>

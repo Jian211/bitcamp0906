@@ -3,6 +3,8 @@ package com.bitcamp.myapp.member.domain;
 import org.springframework.web.multipart.MultipartFile;
 
 public class MemberRegRequest {
+	
+	private int idx;
 	private String userid;
 	private String pw;
 	private String username;
@@ -39,9 +41,15 @@ public class MemberRegRequest {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
+	
+	public int getIdx() {
+		return idx;
+	}
+	public void setIdx(int idx) {
+		this.idx = idx;
+	}
 	public MemberRegRequest() {};
 	public MemberRegRequest(String userid, String pw, String username, MultipartFile photo, String fileName) {
-		super();
 		this.userid = userid;
 		this.pw = pw;
 		this.username = username;

@@ -26,7 +26,7 @@
 		$("#userid").focusout(function(){
 			
 			$.ajax({
-				url : 'checkid.do',
+				url : 'checkid',
 				type : 'get',
 				data : {
 					userid : $('#userid').val()
@@ -62,9 +62,9 @@
 			// 파라미터 이름과 전송할 데이터를 설정해준다.
 			
 			var formData = new FormData();
-			formData.append('userId',$('#userId').val());
+			formData.append('userid',$('#userid').val());
 			formData.append('pw',$('#pw').val());
-			formData.append('userName',$('#userName').val());
+			formData.append('username',$('#username').val());
 			
 			// 사진처리는 
 			var photoFile = $('#photo');
@@ -72,7 +72,7 @@
 			formData.append('photo',file);
 			
 			$.ajax({
-				url : 'reg2.do',
+				url : 'reg2',
 				type : 'POST',
 				enctype : 'multipart/form-data',
 				processData : false,
@@ -82,7 +82,7 @@
 				success : function(data){
 					if(data == '1'){
 						alert('회원가입 성공');
-						location.href = 'login.do';
+						location.href = 'login';
 					} else {
 						alert('회원가입 실패!');
 						history.go(-1);
@@ -122,7 +122,7 @@
 			<table>
 				<tr>
 					<td>아이디</td>
-					<td><input type="text" name="userId" id="userId" ></td>
+					<td><input type="text" name="userid" id="userid" ></td>
 					<div id="msg"></div>
 				</tr>
 				<tr>
@@ -135,7 +135,7 @@
 				</tr>
 				<tr>
 					<td>이름</td>
-					<td><input type="text" name="userName" id="userName"></td>
+					<td><input type="text" name="username" id="username"></td>
 				</tr>
 				<tr>
 					<td>사진</td>

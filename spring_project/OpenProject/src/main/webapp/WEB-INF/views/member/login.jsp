@@ -10,6 +10,6 @@
 <c:if test="${loginChk}">
 	<script>
 		alert('${msg}');
-		location.href='${pageContext.request.contextPath}/member/index.do';
+		location.href='${pageContext.request.contextPath}/member/index';
 	</script>
 </c:if>

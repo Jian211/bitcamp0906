@@ -4,7 +4,7 @@
 <c:if test="${result eq 1 }">
 	<script>
 		alert("수정되었습니다.");
-		location.href = "${pageContext.request.contextPath}/member/manger/list.do";
+		location.href = "${pageContext.request.contextPath}/member/manger/list";
 	</script>
 </c:if>
 
