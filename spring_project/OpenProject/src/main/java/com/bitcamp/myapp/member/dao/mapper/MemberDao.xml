@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <!--	 namespace에는 interface의 전체 이름	 -->
+ <mapper namespace="com.bitcamp.myapp.member.dao.MemberDao">
+ 	
+ 	<!-- select의 결과를 매핑해주는 설정 -->
+ 	<resultMap type="com.bitcamp.myapp.member.domain.Member" id="memberResult">
+ 		<id column="idx"  property="idx" />
+ 		<result column="userid"   property="userid"/>
+ 		<result column="username" property="username"/>
+ 		<result column="photo"	  property="photo"/>
+ 		<result column="regdate"  property="regdate"/>
+ 	</resultMap>
+ 	
+ 	<!-- interface의 추상메소드 이름을 id의 속성값으로 사용 -->
+ 	<!--  
+ 	<select id="selectById"
+ 			parameterType="com.bitcamp.myapp.member.domain.LoginParams"
+ 			resultType="com.bitcamp.myapp.member.domain.Member"
+ 	>
+		select * from member where userid = #{uid} and password = #{pw}
+ 	</select> 
+ 	-->
+	<!--  파라미터의 값의 구분은 매개변수 순서에 따라 구분 -->
+	<!--  
+ 	<select id="selectById"	
+ 			resultType="com.bitcamp.myapp.member.domain.Member">
+		    select * from member 
+		    where userid = #{param1} and password = #{param2}
+ 	</select>
+ 	-->
+ 	<select id="selectById"	
+ 			resultType="com.bitcamp.myapp.member.domain.Member">
+		    select * from member 
+		    where userid = #{param1} and password = #{param2}
+ 	</select>
+	 	
+ 	
+ 	<select id="selectTotalCount"
+ 			resultType="int">
+ 			select count(*) from member
+ 	</select>
+ 	
+ 	
+ 	<select id="selectList" 
+ 			resultType="com.bitcamp.myapp.member.domain.Member">
+ 			select * from member 
+ 			order by idx desc 
+ 			limit #{param1},#{parma2}
+ 	</select>
+ 	
+ 	
+ 	<insert id="insertMember"
+ 			parameterType="com.bitcamp.myapp.member.domain.MemberRegRequest"
+ 			useGeneratedKeys="true"
+ 			keyProperty="idx">
+ 			insert into member (userid, password,username,photo)
+ 			values (#{userid},#{pw},#{username},#{photo})
+ 	</insert>
+
+
+ </mapper>
+ 

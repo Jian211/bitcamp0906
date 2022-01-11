@@ -4,17 +4,26 @@ import java.io.File;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bitcamp.myapp.dao.JdbcTemplateMemberDao;
+import com.bitcamp.myapp.member.dao.JdbcTemplateMemberDao;
+import com.bitcamp.myapp.member.dao.MemberDao;
+import com.bitcamp.myapp.member.dao.MybatisMemberDao;
 import com.bitcamp.myapp.member.domain.MemberRegRequest;
 
 @Service
 public class MemberRegService {
 
+	//@Autowired
+	//private JdbcTemplateMemberDao dao;
+	//private MybatisMemberDao dao;
+	
+	private MemberDao dao;
+	
 	@Autowired
-	private JdbcTemplateMemberDao dao;
+	private SqlSessionTemplate template;
 	
 	public int insertMember(MemberRegRequest regRequest, HttpServletRequest request)
 			throws Exception {
@@ -41,7 +50,8 @@ public class MemberRegService {
 
 		try {
 			//resultCnt = dao.insertMember(regRequest);
-			resultCnt = dao.insert(regRequest);
+			dao = template.getMapper(MemberDao.class);
+			resultCnt = dao.insertMember(regRequest);
 			
 			
 		} catch (Exception e) {

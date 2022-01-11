@@ -43,6 +43,8 @@ public class MemberLoginRequest {
 		this.saveid = saveid;
 	}
 	
-	
+	public LoginParams getLoginParam() {
+		return new LoginParams(this.userid, this.pw);
+	}
 	
 }

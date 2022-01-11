@@ -1,4 +1,4 @@
-package com.bitcamp.myapp.dao;
+package com.bitcamp.myapp.member.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -75,8 +75,6 @@ public class JdbcTemplateMemberDao {
 		return resultCnt;
 		
 	}
-	
-	
 	
 	// MyPage를 위한 Member 객체를 구하는 Select
 	public Member selectByIdx(int idx) {

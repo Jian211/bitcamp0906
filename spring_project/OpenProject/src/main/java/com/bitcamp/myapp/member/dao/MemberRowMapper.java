@@ -1,4 +1,4 @@
-package com.bitcamp.myapp.dao;
+package com.bitcamp.myapp.member.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
