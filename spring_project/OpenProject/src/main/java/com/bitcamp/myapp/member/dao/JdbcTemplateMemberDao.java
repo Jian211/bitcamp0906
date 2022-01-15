@@ -17,7 +17,7 @@ import com.bitcamp.myapp.member.domain.MemberRegRequest;
 
 @Repository
 public class JdbcTemplateMemberDao {
-	
+	/*
 	@Autowired
 	private JdbcTemplate template;
 	
@@ -81,5 +81,5 @@ public class JdbcTemplateMemberDao {
 		String sql = "select * from member where idx = ?";
 		List<Member> members = template.query(sql, new MemberRowMapper(), idx);
 		return members.isEmpty() ? null : members.get(0);
-	}
+	}*/
 }

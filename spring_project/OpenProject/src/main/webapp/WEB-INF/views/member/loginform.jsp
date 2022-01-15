@@ -10,42 +10,32 @@
 
 </head>
 <body>
-	<!-- 네비게이션 시작 -->
-	<%@ include file="/WEB-INF/views/frame/nav.jsp"%>
-	<!-- 네비게이션 끝 -->
-
-
+	<%-- 	<%@ include file="/WEB-INF/views/frame/nav.jsp"%> --%>
 
 	<!-- content 시작 -->
 	<div class="main-contanier">
-		<!-- 해더 시작 -->
-		<%@ include file="/WEB-INF/views/frame/header.jsp"%>
-		<!-- 해더 끝 -->
 	
-		<h3>로그인</h3>
-		<hr>
-		<!-- form 경로와 처리 경로가 동일 -> method 로 구분 -->
-		<form method="post">
-			<input type="hidden" name="url" value="${param.referer}">
-			<table>
-				<tr>
-					<td>아이디</td>
-					<td><input type="text" name="userid" value="${cookie.saveId != null ? cookie.saveId.value : ''}"></td>
-				</tr>
-				<tr>
-					<td>비밀번호</td>
-					<td><input type="password" name="pw"></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td> <input type="checkbox" name="saveid" value="on" ${cookie.saveId != null ? 'checked' : ''}> 아이디 저장하기</td>
-				</tr>				
-				<tr>
-					<td></td>
-					<td> <input type="submit" value="로그인"> <input type="reset"> </td>
-				</tr>			
-			</table>
+		<!-- Header -->
+		<%@ include file="/WEB-INF/views/frame/header.jsp"%>
 		
+		
+		<form method="post" class="form-signin">
+			<input type="hidden" name="url" value="${param.referer}">
+			<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+			
+			<label for="inputEmail" class="sr-only">ID</label>
+			<input type="text" id="inputEmail" name="userid" class="form-control"  placeholder="your ID" value="${cookie.saveId != null ? cookie.saveId.value : ''}"  required autofocus>
+			<label for="inputPassword"  class="sr-only">Password</label>
+			<input type="password" id="inputPassword" name="pw" class="form-control" placeholder="Password" required>
+			<div class="checkbox mb-3">
+				<label>
+				    <input type="checkbox" name="saveid" value="on" ${cookie.saveId != null ? 'checked' : ''}> Remember me
+				</label>
+			</div>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+			<button class="btn btn-lg btn-primary btn-block" type="reset">reset</button>
+			<p class="mt-5 mb-3 text-muted">&copy; 2022-{{< year >}}</p>
+	
 		</form>
 	
 	</div>

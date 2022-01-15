@@ -1,4 +1,4 @@
-package com.bitcamp.myapp.member;
+package com.bitcamp.myapp.member.interceptor;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

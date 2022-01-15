@@ -18,11 +18,12 @@ public class MemberMyPageService {
 	//@Autowired
 	//private JdbcTemplateMemberDao dao;
 	
-	@Autowired
-	private MybatisMemberDao dao;
+//	@Autowired
+//	private MybatisMemberDao dao;
 	
 	public Member getMember(HttpSession session) throws SQLException {
 		int memberIdx = ((LoginInfo) session.getAttribute("loginInfo")).getIdx();
-		return dao.selectByIdx(memberIdx);
+//		dao.selectByIdx(memberIdx);
+		return new Member(); // 객ㅊ체지우기
 	}
 }

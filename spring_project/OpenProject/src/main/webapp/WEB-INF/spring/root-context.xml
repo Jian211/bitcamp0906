@@ -2,8 +2,11 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:p="http://www.springframework.org/schema/p"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
+
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
 	<bean id="dataSource" 
@@ -13,23 +16,24 @@
 		  p:username="bit"
 		  p:password="bit"
 	></bean>	
-	
-	<!-- JDBC 템플릿 등록 -->
-	<bean id="jdbcTemplate"
-		  class="org.springframework.jdbc.core.JdbcTemplate"
-		  p:dataSource-ref="dataSource"
-	></bean>
 
-	<!-- SqlSessionFactory : Mybatis + Spring 연동 -->
+	<!-- JdbcTemplate 등록 -->
+	<bean id="jdbcTemplate"
+			class="org.springframework.jdbc.core.JdbcTemplate"
+			p:dataSource-ref="dataSource"
+	/>
+	
+	<!--SqlSessionFactory : Mybatis + Spring 연동 -->
 	<bean
-		id="splSessionFactory"
+		id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean"
 		p:dataSource-ref="dataSource"
-		p:mapperLocations="classpath:com/bitcamp/op/member/dao/mapper/*.xml"
-	></bean>
+		p:mapperLocations="classpath:com/bitcamp/myapp/member/dao/mapper/*.xml">
+	</bean>
 	
-	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg ref="splSessionFactory"/>
+	<bean id="sqlSession" 
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
 	</bean>
 		
 </beans>

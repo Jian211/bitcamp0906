@@ -3,11 +3,12 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
- <mapper namespace="com.bitcamp.myapp.member.dao.mapper.MemberMapper">
- 	<select id="selectByIdPw" 
- 			resultType="com.bitcamp.myapp.member.domain.Member"
- 			parameterType="com.bitcamp.myapp.member.domain.LoginParams"
- 	> select * from member where userid = #{uid} and password = #{pw} 
+ <mapper namespace="com.bitcamp.myapp.member.dao.MemberDao">		<!-- mapper의 namespace는 interface name경로가 와야한다. -->
+ 
+ 	<select   id="selectByIdPw" 
+ 			  resultType="com.bitcamp.myapp.member.domain.Member"
+ 			  parameterType="com.bitcamp.myapp.member.domain.LoginParams">
+ 			  select * from member where userid = #{uid} and password = #{pw} 
  	</select>
 
  	<!-- int => 별칭  == Integer -->
@@ -29,7 +30,7 @@
  			keyProperty="idx"
  	>
 		insert into member (userid, password, username, photo) 
-		values (#{userid},#{pw},#{username},#{photo}) 	
+		values (#{userid},#{pw},#{username},#{fileName}) 	
  	</insert>
  	
  	

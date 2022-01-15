@@ -2,7 +2,6 @@ package com.bitcamp.myapp.member.dao;
 
 import java.util.List;
 
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +12,7 @@ import com.bitcamp.myapp.member.domain.SearchParams;
 
 @Repository
 public class MybatisMemberDao {
-
+/*
 	@Autowired
 	private SqlSessionTemplate session;
 	
@@ -38,6 +37,6 @@ public class MybatisMemberDao {
 	public Member selectByIdx(int idx) {
 		return session.selectOne(NAME_SPACE+".selectByIdx",idx);
 	}
-	
+	*/
 	
 }

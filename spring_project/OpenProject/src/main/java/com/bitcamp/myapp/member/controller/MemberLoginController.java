@@ -27,17 +27,7 @@ public class MemberLoginController {
 	}
 
 	@PostMapping
-	public String login(
-			MemberLoginRequest loginRequest,
-			HttpSession session,
-			HttpServletResponse response
-			) throws Exception {
-		//System.out.println(loginRequest);
-		
-		// service의 메소드는 view의 정보를 반환
-		// 실패 했을 때 view
-		// 성공 했을 때 view : redirect
-		
+	public String login(MemberLoginRequest loginRequest,HttpSession session,HttpServletResponse response) throws Exception {
 		return loginService.login(loginRequest, session, response);
 	}
 	

@@ -10,8 +10,7 @@
 </head>
 <body>
 	<!--  네비 시작	-->
-	<%@ include file="/WEB-INF/views/frame/nav.jsp" %>
-	<!--  네비 끝	-->
+	<%-- <%@ include file="/WEB-INF/views/frame/nav.jsp" %> --%>
 
 	<div class="main-contanier" >
 		<!--  헤더 시작	 -->

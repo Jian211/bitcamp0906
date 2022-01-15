@@ -6,6 +6,7 @@ public class MemberLoginRequest {
 	private String userid;
 	private String pw;
 	private String saveid;
+	
 	@Override
 	public String toString() {
 		return "MemberLoginRequest [url=" + url + ", userid=" + userid + ", pw=" + pw + ", saveid=" + saveid + "]";
