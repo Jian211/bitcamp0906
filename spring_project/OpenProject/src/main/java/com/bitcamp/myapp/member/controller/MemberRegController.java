@@ -22,14 +22,12 @@ public class MemberRegController {
 	
 	@GetMapping
 	public String getRegForm() {
-		return "member/regForm";
+		return "member/regform";
 	}
 	
 	@PostMapping
-	public void memberReg(MemberRegRequest regRequest, Model model, HttpServletRequest request ) throws Exception {
-		model.addAttribute("result", regService.insertMember(regRequest, request));
-		
-		
+	public String memberReg(MemberRegRequest regRequest, HttpServletRequest request ) throws Exception {
+		return "redirect:/" + regService.insertMember(regRequest, request);
 	}
 
 }

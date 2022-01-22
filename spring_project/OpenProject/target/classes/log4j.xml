@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.bitcamp.myapp">
+	<logger name="com.bitcamp.op">
 		<level value="info" />
 	</logger>
 	

@@ -4,30 +4,30 @@ import java.io.File;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.bitcamp.myapp.member.dao.JdbcTemplateMemberDao;
 import com.bitcamp.myapp.member.dao.MemberDao;
-import com.bitcamp.myapp.member.dao.MybatisMemberDao;
 import com.bitcamp.myapp.member.domain.MemberRegRequest;
 
 @Service
 public class MemberRegService {
-
-//	@Autowired
-//	private JdbcTemplateMemberDao dao;
-	//private MybatisMemberDao dao;
 	
-	private MemberDao dao;
-//	
-//	@Autowired
-//	private SqlSessionTemplate template;
+	@Autowired
+	private SqlSessionTemplate template;
 	
-	public int insertMember(MemberRegRequest regRequest, HttpServletRequest request)
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+	
+	@Autowired
+	private MailSenderService senderService;
+	
+	public String insertMember(MemberRegRequest regRequest, HttpServletRequest request)
 			throws Exception {
-
 		int resultCnt = 0;
+		String url = "";
 
 		// 기본 이미지 설정
 		regRequest.setFileName("starwars.png");
@@ -46,12 +46,19 @@ public class MemberRegService {
 			regRequest.getPhoto().transferTo(newFile);
 			regRequest.setFileName(newFileName);
 		}
-
+		
+		// 비밀번호 암호화
+		regRequest.setPw(encoder.encode(regRequest.getPw()));	
+		
 		try {
-			//resultCnt = dao.insertMember(regRequest);
-//			dao = template.getMapper(MemberDao.class);
-			resultCnt = dao.insertMember(regRequest);
+			resultCnt = template.getMapper(MemberDao.class).insertMember(regRequest);
 			
+			// 가입 메일 전송
+			if(senderService.send(regRequest.getUserid(), regRequest.getUsername()) > 0) {
+				System.out.println("메일 발송 완료");
+			} else {
+				System.out.println("메일 발송 실패!");
+			}
 			
 		} catch (Exception e) {
 			// 파일이 저장된 후 DB관련 예외가 발생했을 때 : 저장했던 파일을 삭제 
@@ -61,8 +68,11 @@ public class MemberRegService {
 			e.printStackTrace();
 			throw e;
 		}
-
-		return resultCnt;
+		
+		if(resultCnt == 0) {
+			url = "member/reg";
+		}
+		return url;
 
 	}
 

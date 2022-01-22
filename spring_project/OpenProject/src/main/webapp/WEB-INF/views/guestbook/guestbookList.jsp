@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Guest Book List </title>
-<%@ include file="/WEB-INF/views/frame/pageSet.jsp" %>
+<%-- <%@ include file="/WEB-INF/views/frame/pageSet.jsp" %> --%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/guestBook/guestBookStyle.css">
 
 </head>
@@ -64,7 +64,7 @@
 	<!--  content 시작	-->
 
 	<!--  js 추가	-->
-	<%@ include file="/WEB-INF/views/frame/footerSet.jsp" %>
+<%-- 	<%@ include file="/WEB-INF/views/frame/footerSet.jsp" %> --%>
 	
 </body>
 </html>

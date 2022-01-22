@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../css/guestBook/guestBookListView.css">
 <title>Guest Book List View </title>
-<%@ include file="/WEB-INF/views/frame/pageSet.jsp" %>
+<%-- <%@ include file="/WEB-INF/views/frame/pageSet.jsp" %> --%>
 
 </head>
 <body>
@@ -98,7 +98,7 @@
 	<!--  content 시작	-->
 
 	<!--  js 추가  -->
-	<%@ include file="/WEB-INF/views/frame/footerSet.jsp" %>
+<%-- 	<%@ include file="/WEB-INF/views/frame/footerSet.jsp" %> --%>
 	<script>
 // 		function deleteList(idx,memberidx){
 // 			if(confirm("해당 게시글을 삭제하시겠습니까?")){

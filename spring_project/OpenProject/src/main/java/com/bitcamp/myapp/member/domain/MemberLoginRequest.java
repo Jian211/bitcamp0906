@@ -4,21 +4,22 @@ public class MemberLoginRequest {
 
 	private String url;
 	private String userid;
-	private String pw;
+	private String password;
 	private String saveid;
 	
 	@Override
 	public String toString() {
-		return "MemberLoginRequest [url=" + url + ", userid=" + userid + ", pw=" + pw + ", saveid=" + saveid + "]";
+		return "MemberLoginRequest [url=" + url + ", userid=" + userid + ", password=" + password + ", saveid=" + saveid + "]";
 	}
 	public MemberLoginRequest() {};
-	public MemberLoginRequest(String url, String userid, String pw, String saveid) {
-		super();
+	
+	public MemberLoginRequest(String url, String userid, String password, String saveid) {
 		this.url = url;
 		this.userid = userid;
-		this.pw = pw;
+		this.password = password;
 		this.saveid = saveid;
 	}
+	
 	public String getUrl() {
 		return url;
 	}
@@ -31,11 +32,11 @@ public class MemberLoginRequest {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
-	public String getPw() {
-		return pw;
+	public String getPassword() {
+		return password;
 	}
-	public void setPw(String pw) {
-		this.pw = pw;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getSaveid() {
 		return saveid;
@@ -43,9 +44,8 @@ public class MemberLoginRequest {
 	public void setSaveid(String saveid) {
 		this.saveid = saveid;
 	}
-	
 	public LoginParams getLoginParam() {
-		return new LoginParams(this.userid, this.pw);
+		return new LoginParams(this.userid, this.password);
 	}
 	
 }

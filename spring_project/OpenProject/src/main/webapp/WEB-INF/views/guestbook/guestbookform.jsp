@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Guest Book List </title>
-<%@ include file="/WEB-INF/views/frame/pageSet.jsp" %>
+	<meta charset="UTF-8">
+	<title>Guest Book List </title>
+<%-- 	<%@ include file="/WEB-INF/views/frame/pageSet.jsp" %> --%>
 
 
 </head>
@@ -51,7 +51,6 @@
 	<!--  content 시작	-->
 
 	<!--  js 추가	-->
-	<%@ include file="/WEB-INF/views/frame/footerSet.jsp" %>
 <script>
 // 	$(document).ready(function(){});
 	$('#btnAjax').click(function(){

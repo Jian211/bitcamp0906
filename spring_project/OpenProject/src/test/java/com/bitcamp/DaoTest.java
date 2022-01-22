@@ -38,17 +38,17 @@ public class DaoTest {
 		
 		dao = template.getMapper(MemberDao.class);
 		
-		int cnt = dao.selectTotalCount(new HashMap<String, String>());
+	//	int cnt = dao.selectTotalCount(new HashMap<String, String>());
 		
-		assertEquals("전체 회원수 확인 : 6", 6 ,cnt);
+		//assertEquals("전체 회원수 확인 : 6", 6 ,cnt);
 		
 		// 전체회
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("searchType","uid");
 		map.put("keyword","cool");
 		
-		cnt = dao.selectTotalCount(map);
-		assertEquals("아이디가  cool문자열을 포함하는 회원의 수", 3 ,cnt);
+		//cnt = dao.selectTotalCount(map);
+		//assertEquals("아이디가  cool문자열을 포함하는 회원의 수", 3 ,cnt);
 		
 		
 		fail("Not yet implemented");

@@ -8,6 +8,21 @@ public class Member {
 	private String username;
 	private String regdate;
 	private String photo;
+	
+	public Member () {};
+	
+	public Member(int idx, String userid, String password, String username, String regdate, String photo) {
+		this.idx = idx;
+		this.userid = userid;
+		this.password = password;
+		this.username = username;
+		this.regdate = regdate;
+		this.photo = photo;
+	}
+
+	public LoginInfo getLoginInfo() {
+		return new LoginInfo(idx, userid, username, photo);
+	}
 
 	public int getIdx() {
 		return idx;
@@ -45,17 +60,5 @@ public class Member {
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
-	public Member () {};
-	public Member(int idx, String userid, String password, String username, String regdate, String photo) {
-		this.idx = idx;
-		this.userid = userid;
-		this.password = password;
-		this.username = username;
-		this.regdate = regdate;
-		this.photo = photo;
-	}
-
-	public LoginInfo getLoginInfo() {
-		return new LoginInfo(idx, userid, username, photo);
-	}
+	
 }
