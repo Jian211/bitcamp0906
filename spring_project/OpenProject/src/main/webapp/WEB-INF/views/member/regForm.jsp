@@ -122,6 +122,7 @@
 					<label for="userid" class="col-sm-2 col-form-label">아이디</label>
 					<div class="col-sm-10">
 						<input type="email" name="userid" id="userid" class="form-control" required>
+						<div id="msg"></div>
 					</div>
 				</div>
 				
